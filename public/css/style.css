@@ -8,7 +8,7 @@
     --masodik: #53a8b6;
     --harmadik: #79c2d0;
     --negyedik: #bbe4e9;
-    ---feher: white;
+    --feher: white;
     --fekete: black;
 
 }
@@ -16,7 +16,7 @@
 body{
      background: rgb(85,133,181);
      background: linear-gradient(180deg, rgba(85,133,181,1) 20%, rgba(83,168,182,1) 40%, rgba(121,194,208,1) 60%, rgba(187,228,233,1) 80%);
-     color: var(---feher);
+     color: var(--feher);
      background-repeat: no-repeat;
      background-attachment: fixed;
 }
@@ -90,9 +90,6 @@ body{
 }
 
 /*Main oldal*/
-
-/*Keresés*/
-
 
 /*Kártyák*/
 .container{
@@ -277,7 +274,7 @@ body{
  .login-btn {
      width: 68%;
      padding: 10px;
-     color: white;
+     color: var(--feher);
      background: linear-gradient( to left, rgba(85,133,181,1) 20%, rgba(83,168,182,1) 40%, rgba(121,194,208,1) 60%, rgba(187,228,233,1) 80%);
      border: none;
      border-radius: 20px;
@@ -303,3 +300,14 @@ body{
          display: block;
      }
  }
+
+/*Admin oldal*/
+
+.edit, .delete{
+     border: var(--negyedik) 2px solid;
+     border-radius: 100%;
+     background: var(--harmadik);
+     padding: 3px;
+     font-size: 13px !important;
+     color: var(--feher) !important;
+}

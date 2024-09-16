@@ -9,10 +9,10 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URLROOT (Dynamic links)
-    define('URLROOT', 'http://localhost/pollakidopontfoglalas');
+    define('URLROOT', 'http://localhost/pollak-idopontfoglalo');
     // define('URLROOT', 'https://pollakbufe.hu');
 
     //Sitename
-    define('SITENAME', 'PollakIdopontFoglalas');
+    define('SITENAME', 'pollak-idopontfoglalo');
 
     error_reporting(E_ALL ^ E_DEPRECATED);

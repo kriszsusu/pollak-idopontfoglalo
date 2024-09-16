@@ -6,17 +6,8 @@ class Main extends Controller {
         $this->mainModel = $this->model('MainModel');
     }
 
+    // A főoldal megjelenítése
     public function index() {
-        /*
-        if (!isLoggedIn()) {
-            echo "Nem vagy bejelentkezve.";
-            die;
-        }
-
-        if (isAdmin()) {
-            header('location:' . URLROOT . '/admin');
-        }
-        */
 
         $data = [
             'main' => $this->mainModel->kartyaLekerdezes()

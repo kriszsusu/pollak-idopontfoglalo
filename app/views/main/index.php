@@ -3,9 +3,9 @@
   require APPROOT . '/views/includes/navigation.php';
 ?>
 <div class="container">
-     <?php if (count($data) > 0) : ?>
+     <?php if (count($data["main"]) > 0) : ?>
           <?php foreach ($data["main"] as $sor): ?>
-               <a href="" class="box">
+               <a href="<?php echo URLROOT . "/reszletek/" . $sor->esemeny_id; ?>" class="box">
                     <div class="kep-box">
                          <img src="" alt="" class="kep">
                     </div>
