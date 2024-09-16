@@ -7,4 +7,12 @@ class MainModel {
         $this->db = new Database;
     }
 
+    // Főoldal adatainak lekérdezése
+    public function kartyaLekerdezes() {
+        $this->db->query('SELECT * FROM esemenyek INNER JOIN users ON esemenyek.tanarID = users.id WHERE users.torolt = 0');
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
 }

@@ -1,9 +1,9 @@
 ﻿<?php
     //Database params
     define('DB_HOST', 'localhost');
-    define('DB_USER', 'user');
-    define('DB_PASS', 'jelszo');
-    define('DB_NAME', 'adatbazisnev');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+    define('DB_NAME', 'pollakidopontfoglalas');
 
     //APPROOT
     define('APPROOT', dirname(dirname(__FILE__)));

@@ -19,7 +19,7 @@ class Main extends Controller {
         */
 
         $data = [
-            // 'melegEtelek' => $this->mainModel->melegEtelekLekerdezese()
+            'main' => $this->mainModel->kartyaLekerdezes()
         ];
 
         $this->view('main/index', $data);
