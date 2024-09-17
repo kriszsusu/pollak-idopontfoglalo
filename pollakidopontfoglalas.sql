@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Sze 16. 12:56
+-- Létrehozás ideje: 2024. Sze 17. 14:48
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -35,6 +35,7 @@ CREATE TABLE `esemenyek` (
   `datum` datetime NOT NULL,
   `feltoltesDatuma` datetime NOT NULL DEFAULT current_timestamp(),
   `tanarID` int(11) NOT NULL,
+  `tanteremID` int(11) NOT NULL,
   `torolt` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
@@ -42,8 +43,9 @@ CREATE TABLE `esemenyek` (
 -- A tábla adatainak kiíratása `esemenyek`
 --
 
-INSERT INTO `esemenyek` (`id`, `cim`, `leiras`, `kep`, `datum`, `feltoltesDatuma`, `tanarID`, `torolt`) VALUES
-(1, '1111', 'wsdkfhbsjdhfgbsjhkgbfjkdhsfbgjsdhfbgkjsdhfbgsdhfjgfdgdfgdsfghdgfjfhgjfhjkfjhfgjfghjfgjh', '1121', '2024-09-16 12:24:10', '2024-09-16 12:24:19', 2, 0);
+INSERT INTO `esemenyek` (`id`, `cim`, `leiras`, `kep`, `datum`, `feltoltesDatuma`, `tanarID`, `tanteremID`, `torolt`) VALUES
+(1, '1111', 'wsdkfhbsjdhfgbsjhkgbfjkdhsfbgjsdhfbgkjsdhfbgsdhfjgfdgdfgdsfghdgfjfhgjfhjkfjhfgjfghjfgjh', '1121', '2024-09-16 12:24:10', '2024-09-16 12:24:19', 2, 1, 0),
+(2, '1', '1', '66e977039d6bb.gif', '2024-09-03 14:32:00', '2024-09-17 14:33:07', 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -71,8 +73,17 @@ INSERT INTO `tanarok` (`id`, `nev`) VALUES
 
 CREATE TABLE `tanterem` (
   `id` int(11) NOT NULL,
-  `neve` varchar(50) NOT NULL
+  `neve` varchar(50) NOT NULL,
+  `ferohely` int(11) NOT NULL,
+  `torolt` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `tanterem`
+--
+
+INSERT INTO `tanterem` (`id`, `neve`, `ferohely`, `torolt`) VALUES
+(1, '8. as', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -93,7 +104,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nev`, `felhasznalonev`, `jelszo`, `torolt`) VALUES
-(2, 'teszt', '1', '$2y$10$3HRvS4hNIZUU8BOUQfA5q.8ha9j1Imoi.D9scs6fc/JOHEGu7o4zq', 0);
+(2, 'teszt', '1', '$2y$10$3HRvS4hNIZUU8BOUQfA5q.8ha9j1Imoi.D9scs6fc/JOHEGu7o4zq', 0),
+(3, 'pista', '1', '1', 0);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -104,7 +116,8 @@ INSERT INTO `users` (`id`, `nev`, `felhasznalonev`, `jelszo`, `torolt`) VALUES
 --
 ALTER TABLE `esemenyek`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tanarID` (`tanarID`);
+  ADD KEY `tanarID` (`tanarID`),
+  ADD KEY `tanteremID` (`tanteremID`);
 
 --
 -- A tábla indexei `tanarok`
@@ -132,7 +145,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `esemenyek`
 --
 ALTER TABLE `esemenyek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `tanarok`
@@ -144,13 +157,13 @@ ALTER TABLE `tanarok`
 -- AUTO_INCREMENT a táblához `tanterem`
 --
 ALTER TABLE `tanterem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -160,7 +173,8 @@ ALTER TABLE `users`
 -- Megkötések a táblához `esemenyek`
 --
 ALTER TABLE `esemenyek`
-  ADD CONSTRAINT `esemenyek_ibfk_1` FOREIGN KEY (`tanarID`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `esemenyek_ibfk_1` FOREIGN KEY (`tanarID`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `esemenyek_ibfk_2` FOREIGN KEY (`tanteremID`) REFERENCES `tanterem` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
