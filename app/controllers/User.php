@@ -62,8 +62,7 @@ class User extends Controller {
     public function createUserSession($user) {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['felhasznalonev'] = $user->felhasznalonev;
-        $_SESSION['admin'] = $user->admin == "1" ? true : false;
-        header('location:' . URLROOT . '/admin/index');
+        header('location:' . URLROOT . '/admin');
     }
 
     public function logout() {
@@ -76,7 +75,6 @@ class User extends Controller {
 		
         unset($_SESSION['user_id']);
         unset($_SESSION['felhasznalonev']);
-        unset($_SESSION['admin']);
 
         header('location:' . URLROOT);
     }

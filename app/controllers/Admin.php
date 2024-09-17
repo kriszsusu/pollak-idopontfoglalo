@@ -14,10 +14,6 @@ class Admin extends Controller {
             header('location:' . URLROOT . '/user/login');
         }
 
-        if (isAdmin()) {
-            header('location:' . URLROOT . '/admin');
-        }
-        
         $data = [
             'main' => $this->adminModel->kartyaLekerdezes()
         ];
@@ -27,16 +23,15 @@ class Admin extends Controller {
 
     // Esemény hozzáadása
     public function hozzaadas() {
-        if (isAdmin()) {
+        if (isLoggedIn()) {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
 
                 $cim = trim($_POST['cim']);
                 $leiras = trim($_POST['leiras']);
                 $datum = trim($_POST['datum']);
-                $tanar = trim($_POST['tanar']);
                 $terem = trim($_POST['terem']);
-    
+
                 // Feltölés...
                 if ( $_FILES['kep']['tmp_name'] ) {
                     // Feltöltjük a képfájlt a szerverre (public/img mappába), és visszakapjuk a fájl nevét (vagy false-t, ha nem sikerült a feltöltés).
@@ -64,11 +59,10 @@ class Admin extends Controller {
                 // Ha nem POST metódussal érkezik a kérés, akkor az új klíma hozzáadása oldalra irányítjuk a felhasználót.
 
                 $data = [
-                    'tanarok' => $this->adminModel->tanarok(),
-                    'termek' => $this->adminModel->termek()
+                    'terem' => $this->adminModel->terem()
                 ];
 
-                $this->view('admin/hozzadas/index', $data);
+                $this->view('admin/hozzaadas/index', $data);
             }  
         }  
 
@@ -78,6 +72,25 @@ class Admin extends Controller {
 
             $this->view('user/login');
         }    
+    }
+
+    public function torles($id){
+        if (isLoggedIn()){
+            if ( $this->adminModel->torles($id) ) {
+                // A törlés sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin');
+            }
+            else {
+                // A törlés nem sikerült
+                header('location:' . URLROOT . '/admin');
+            }
+        }
+        else{
+            $data = [
+            ];
+    
+            $this->view('user/login');
+        }
     }
 }
 
