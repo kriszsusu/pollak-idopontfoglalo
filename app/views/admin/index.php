@@ -21,8 +21,8 @@
                         <p class="leiras"><?php echo $sor->leiras?></p>
                         <br>
                         <p class="idopont">Esemény időpontja: <?php echo $sor->datum?></p>
+                        <a class="edit" href="<?php echo URLROOT ?>/admin/szerkesztes/<?php echo $sor->esemeny_id ?>" ><i class='bx bxs-edit-alt'></i></a>
                         <a class="delete" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/torles/<?php echo $sor->esemeny_id ?>"><i class='bx bxs-trash' ></i></a>
-                        <a class="edit" ><i class='bx bxs-edit-alt'></i></a>
                     </div>
 
                 </div>
