@@ -22,26 +22,26 @@
                     <i class="ri-user-fill"></i>
                     <input type="text" name="cim" placeholder="Cím" value="<?php echo $data['esemeny']->cim ?>">
                </div>
-               <div class="">
-                    <i class="ri-user-fill"></i>
-                    <textarea name="leiras" id="" cols="30" rows="10"><?php echo $data['esemeny']->leiras ?></textarea>
-               </div>
+
                <div class="text-input">
                     <i class="ri-lock-fill"></i>
-                    <input type="file" name="kep" placeholder="Kép">
+                    <input type="file" name="kep" placeholder="Kép" value="<?php echo $data['esemeny']->kep ?>" >
                </div>
                <div class="text-input">
                     <i class="ri-lock-fill"></i>
                     <input type="datetime-local" name="datum" placeholder="Időpont" value="<?php echo $data['esemeny']->datum ?>">
                </div>
 
-               <div class="text-input">
-               <i class="ri-lock-fill"></i>
+               <div>
                     <select name="tanteremID" id="id-tanterem">
                         <?php foreach ($data['terem'] as $fajta): ?>
                             <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->neve; ?></option>
                         <?php endforeach; ?>
                     </select>
+               </div>
+
+               <div>
+                    <textarea name="leiras" id="" cols="40" rows="8"><?php echo $data['esemeny']->leiras ?></textarea>
                </div>
 
 

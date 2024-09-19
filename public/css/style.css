@@ -157,7 +157,7 @@ body{
 }
 
 .idopont{
-     font-size: larger;
+     font-size: medium;
 }
 
 /*Bejelentkezés oldal*/ 
@@ -253,7 +253,50 @@ body{
      padding: 0 15px;
      margin: 5px 0;
  }
+
+ textarea{
+     background: #e6e6e6;
+     border-radius: 10px;
+     resize: none;
+     padding: 5px;
+     margin-left: auto;
+     margin-right: auto;
+     display: block;
+     border: none;
+     margin-top: 12px;
  
+ }
+
+ textarea:focus{
+     outline: none;
+}   
+
+select:focus{
+     outline: none;
+} 
+
+.bx-current-location{
+     color: #686868;
+}
+
+input[type="file"]{
+   margin-top: 20px;
+   color: var(--fekete);  
+}
+
+select{
+     background: #e6e6e6;
+     width: 320px;
+     height: 40px;
+     border-radius: 10px;
+     padding: 5px;
+     margin-left: auto;
+     margin-right: auto;
+     display: block;
+     border: none;
+     margin-top: 6px;
+     
+}
  .text-input input {
      background: none;
      border: none;
@@ -301,13 +344,110 @@ body{
      }
  }
 
+ @media screen and (max-width:1900px){ 
+     select, textarea{
+          width: 310px;
+     }
+}
+
+@media screen and (max-width:1800px){ 
+     select, textarea{
+          width: 300px;
+     }
+}
+
+@media screen and (max-width: 1700px){ 
+     select, textarea{
+          width: 280px;
+     }
+}
+
+@media screen and (max-width: 1600px){ 
+     select, textarea{
+          width: 260px;
+     }
+}
+
+@media screen and (max-width: 1500px){ 
+     select, textarea{
+          width: 240px;
+     }
+}
+
+@media screen and (max-width: 1300px){ 
+     select, textarea{
+          width: 220px;
+     }
+}
+
+@media screen and (max-width: 1100px){ 
+     select, textarea{
+          width: 190px;
+     }
+}
+
+@media screen and (max-width: 770px){ 
+     select, textarea{
+          width: 240px;
+     }
+}
+
+@media screen and (max-width: 500px){ 
+     select, textarea{
+          width: 160px;
+     }
+}
+
+@media screen and (max-width: 376px){ 
+     select, textarea{
+          width: 145px;
+     }
+}
+
 /*Admin oldal*/
 
 .edit, .delete{
      border: var(--negyedik) 2px solid;
      border-radius: 100%;
      background: var(--harmadik);
-     padding: 3px;
+     padding: 5px;
      font-size: 13px !important;
      color: var(--feher) !important;
+     float: right;
+     margin-top: 50px;
+}
+
+.delete{
+     margin-right: 5px;
+}
+
+.hozzadas{
+     width: 150px;
+     height: 150px;
+     margin: 20px;
+     margin-top: 190px;
+     box-sizing: border-box;
+     background-color: var(--elso);
+     border:  none;
+     outline: none;
+     border: 2px solid rgba(255, 255, 255, .2);
+     border-radius: 8px;
+}
+
+.tovabb{
+     border: var(--negyedik) 2px solid;
+     border-radius: 8px;
+     background: var(--harmadik);
+     padding: 5px;
+     font-size: 13px !important;
+     color: var(--feher) !important;
+     margin-top: 100px;
+     margin-left: auto;
+     margin-right: auto;
+     display: block;
+}
+
+.bx-plus{
+     font-size: 150px;
+     align-items: center;
 }

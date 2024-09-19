@@ -16,24 +16,20 @@
 
                <h3 class="title">Esemény hozzáadása</h3>
                <div class="text-input">
-                    <i class="ri-user-fill"></i>
+                    <i class='bx bxs-captions'></i>
                     <input type="text" name="cim" placeholder="Cím">
-               </div>
-               <div class="">
-                    <i class="ri-user-fill"></i>
-                    <textarea name="leiras" id="" cols="30" rows="10"></textarea>
-               </div>
-               <div class="text-input">
-                    <i class="ri-lock-fill"></i>
-                    <input type="file" name="kep" placeholder="Kép">
-               </div>
-               <div class="text-input">
-                    <i class="ri-lock-fill"></i>
-                    <input type="datetime-local" name="datum" placeholder="Időpont">
                </div>
 
                <div class="text-input">
-               <i class="ri-lock-fill"></i>
+                    <i class='bx bxs-photo-album'></i>
+                    <input type="file" name="kep" placeholder="Kép">
+               </div>
+               <div class="text-input">
+                    <i class='bx bxs-time' ></i>
+                    <input type="datetime-local" name="datum" placeholder="Időpont">
+               </div>
+
+               <div>
                     <select name="terem" id="id-tanterem">
                         <?php foreach ($data['terem'] as $fajta): ?>
                             <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->neve; ?></option>
@@ -41,8 +37,10 @@
                     </select>
                </div>
 
+               <div>
+                    <textarea name="leiras" id="" cols="40" rows="8" placeholder="Leírás"></textarea>
+               </div>
 
-               
                <button type="submit" class="login-btn">Feltöltés</button>
           </div>
      </div>
