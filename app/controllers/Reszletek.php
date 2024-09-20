@@ -15,7 +15,4 @@ class Reszletek extends Controller {
 
         $this->view('reszletek/index', $data);
     }
-
-    $blockedEmails file_get_contents(././emailblock.json);
-    json_decode($blockedEmails)
 }
