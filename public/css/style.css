@@ -451,3 +451,157 @@ select{
      font-size: 150px;
      align-items: center;
 }
+
+/* reszletek oldal */
+.main{
+
+width: 100dvw;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.kismain {
+display: flex;
+flex-direction: row-reverse;
+justify-content: space-between;
+gap: 25px;
+padding-left:250px;
+padding-right: 250px;
+}
+.text {
+width: calc(50% - 40px);
+border-radius: 50px;
+text-align:justify;
+}
+.image {
+width: calc(50% - 40px);
+border-radius: 50px;
+}
+hr {
+border: 2px solid black;
+margin-bottom: 10px;
+}
+.esemeny {
+font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+text-align: center;
+padding: 5%;
+font-size: 50px;
+}
+#img {
+width: 40%;
+}
+p{
+font-size: 20px;
+font-style: italic;
+font-weight:620;
+}
+#teszt{
+display: flex;
+gap: 70px;
+}
+.buttony{
+font-family: monospace;
+margin-left: 45px;
+padding: 5px;
+height: 30px;
+width: 180px;
+background-color: #C2b280;
+border-radius: 5px;
+justify-content: center ;
+}
+.modal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 1; /* Sit on top */
+padding-top: 100px; /* Location of the box */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+text-align: center;
+background-color: #add8e6;
+margin: auto;
+padding: 20px;
+border: 1px solid #888; 
+width: 80%;
+}
+
+/* The Close Button */
+.close {
+color: #aaaaaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: #000;
+text-decoration: none;
+cursor: pointer;
+}
+#bottanya {
+position: absolute;
+top: 0;
+left: 0;
+background: 0;
+border: 0;
+}
+.terem{
+padding-right: 10px;
+float: left;
+border-right: 2px solid rgb(0, 0, 0);
+}
+.oktato{
+padding-left: 10px;
+padding-right: 10px;
+float: left;
+border-right: 2px solid rgb(0, 0, 0);
+}
+.idopont{
+padding-left: 10px;
+float: left;
+}
+.input{
+font-family: monospace;
+background-color: transparent;
+height: 25px;
+padding-left: 2px;
+padding-right: 97px;
+border-radius: 5px;
+margin-bottom: 7px;
+}
+.input:focus{
+outline: none !important;
+}
+
+
+@media only screen and (max-width: 976px){
+.kismain {
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+}
+body {
+     overflow-y: auto;
+     height: auto;
+}
+#img {
+     width: 80%;
+     padding-left: 18%;
+}
+.buttony {
+     width: 360px;
+     height: 60px;
+     font-size: large;
+}
+}
