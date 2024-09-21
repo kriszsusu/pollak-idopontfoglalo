@@ -15,8 +15,10 @@
     
 
     //URLROOT (Dynamic links)
-    define('URLROOT', 'http://localhost/pollak-idopontfoglalo');
-    // define('URLROOT', 'https://pollakbufe.hu');
+    if(!getenv('PRODUCTION'))
+        define('URLROOT', 'http://localhost/pollak-idopontfoglalo');
+    else
+        define('URLROOT', 'https://foglalas.pollak.info');
 
     //Sitename
     define('SITENAME', 'pollak-idopontfoglalo');
