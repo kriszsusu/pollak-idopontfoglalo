@@ -1,12 +1,17 @@
 ﻿<?php
-    //Database params
-    define('DB_HOST', 'localhost');
-    define('DB_USER', 'root');
-    define('DB_PASS', '');
-    define('DB_NAME', 'pollakidopontfoglalas');
-
     //APPROOT
     define('APPROOT', dirname(dirname(__FILE__)));
+
+    //Load .env file
+    (new DotEnv(dirname(APPROOT) . '/.env'))->load();
+
+    //Database params
+    define('DB_HOST', getenv('DB_HOST'));
+    define('DB_USER', getenv('DB_USER'));
+    define('DB_PASS', getenv('DB_PASS'));
+    define('DB_NAME', getenv('DB_NAME'));
+
+    
 
     //URLROOT (Dynamic links)
     define('URLROOT', 'http://localhost/pollak-idopontfoglalo');
