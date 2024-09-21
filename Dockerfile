@@ -14,10 +14,11 @@ ADD . /var/www/html
 # COPY ./app/my-site.conf /etc/apache2/sites-available/my-site.conf
 
 # Add the environment variables to the apache configuration
-RUN echo 'SetEnv DB_HOST ${MYSQL_DB_CONNECTION}' >> /etc/apache2/conf-enabled/environment.conf
-RUN echo 'SetEnv DB_NAME ${MYSQL_DB_NAME}' >> /etc/apache2/conf-enabled/environment.conf
-RUN echo 'SetEnv DB_USER ${MYSQL_USER}' >> /etc/apache2/conf-enabled/environment.conf
-RUN echo 'SetEnv DB_PASS ${MYSQL_PASSWORD}' >> /etc/apache2/conf-enabled/environment.conf
+RUN echo 'SetEnv DB_HOST ${DB_HOST}' >> /etc/apache2/conf-enabled/environment.conf
+RUN echo 'SetEnv DB_NAME ${DB_NAME}' >> /etc/apache2/conf-enabled/environment.conf
+RUN echo 'SetEnv DB_USER ${DB_USER}' >> /etc/apache2/conf-enabled/environment.conf
+RUN echo 'SetEnv DB_PASS ${DB_PASS}' >> /etc/apache2/conf-enabled/environment.conf
+RUN echo 'SetEnv PRODUCTION ${PRODUCTION}' >> /etc/apache2/conf-enabled/environment.conf
 RUN echo 'SetEnv SITE_URL ${SITE_URL}' >> /etc/apache2/conf-enabled/environment.conf
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf &&\
     a2enmod rewrite &&\
