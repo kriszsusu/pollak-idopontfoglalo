@@ -1,20 +1,23 @@
 # Tells the image to use the latest version of PHP
 FROM php:apache
 
-# Creates a directory called "app"
-RUN mkdir /app  
+# Update the image to the latest packages
+RUN apt-get update && apt-get upgrade -y
 
-# Sets that directory as your working directory
-WORKDIR /app  
+# Install any needed packages specified in requirements.txt
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
-# Changes uid and gid of apache to docker user uid/gid
-RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
+# Copy the current directory contents into the container at /var/www/html
+ADD . /var/www/html
 
-# Sets Apache to run via the app directory
-RUN sed -i -e "s/var\/www/app/g" /etc/apache2/apache2.conf && sed -i -e "s/html/public/g" /etc/apache2/apache2.conf
+# Write ServerName localhost to apache2.conf
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf &&\
+    a2enmod rewrite &&\
+    a2enmod headers &&\
+    a2enmod rewrite &&\
+    a2dissite 000-default &&\
+    a2ensite my-site &&\
+    service apache2 restart
 
-# Copies your code to the image
-COPY . /app  
-
-# Sets permissions for the web user
-RUN chown -R www-data:www-data
+# Expose the port the app runs in
+EXPOSE 80
