@@ -20,7 +20,7 @@
                 <div>
                     <div class="mt-3">
                         <div class="mt-3">
-                            <label for="id-emailcim">Mi az email címmel regisztráltál?</label>
+                            <label for="id-emailcim">Mi az email cím amivel regisztráltál?</label>
                             <input class="form-control" type="text" placeholder="" name="emailcim" id="id-emailcim" autocomplete="off" value="" placeholder="">
 
                             <span class="invalidFeedback">
