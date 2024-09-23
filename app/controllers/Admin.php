@@ -12,7 +12,6 @@ class Admin extends Controller {
         
         if (!isLoggedIn()) {
             header('location:' . URLROOT . '/user/login');
-            exit();
         }
 
         $data = [
@@ -40,7 +39,6 @@ class Admin extends Controller {
                         if ($this->adminModel->ujEsemenyHozzadasa($_POST, $eredmeny)) {
                             // Az adatbázisba mentés sikerült
                             header('location:' . URLROOT . '/admin');
-                            exit();
                         }
                         else {
                             echo "Az adatbázisba mentés nem sikerült.";
@@ -93,7 +91,6 @@ class Admin extends Controller {
                         if ($this->adminModel->esemenySzerkesztese($id, $eredmeny, $cim, $leiras, $datum, $tanteremID)) {
                             // Az adatbázisba mentés sikerült
                             header('location:' . URLROOT . '/admin');
-                            exit();
                         }
                         else {
                             echo "Az adatbázisba mentés nem sikerült.";
@@ -131,12 +128,10 @@ class Admin extends Controller {
             if ( $this->adminModel->torles($id) ) {
                 // A törlés sikerült, átirányítjuk a felhasználót az adminfőoldalra
                 header('location:' . URLROOT . '/admin');
-                exit();
             }
             else {
                 // A törlés nem sikerült
                 header('location:' . URLROOT . '/admin');
-                exit();
             }
         }
         else{
