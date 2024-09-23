@@ -63,6 +63,7 @@ class User extends Controller {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['felhasznalonev'] = $user->felhasznalonev;
         header('location:' . URLROOT . '/admin');
+        exit();
     }
 
     public function logout() {
@@ -77,5 +78,6 @@ class User extends Controller {
         unset($_SESSION['felhasznalonev']);
 
         header('location:' . URLROOT);
+        exit();
     }
 }
