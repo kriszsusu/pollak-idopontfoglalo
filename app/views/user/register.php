@@ -48,7 +48,18 @@
                     <div class="mt-3">
                         <label for="id-emailcim">Mi az email címed?</label>
                         <input class="form-control" type="text" placeholder="" name="emailcim" id="id-emailcim" autocomplete="off" value="<?php echo $data['emailcim']; ?>">
-
+                        
+                    <!--A tiltott email-ek JSON file-ját beolvassuk-->    
+                        <?php $json = file_get_contents('emailBlock.json');
+                        if ($json === false){
+                            die('Nem sikerült beolvasni a JSON file-t');
+                        }
+                        $json_data = json_decode($json, true);
+                        if ($json_data === null){
+                            die('Nem sikerült dekódolni a JSON file-t');
+                        }
+                    //Ellenőrizzük, hogy a beírt email ne legyen benne a listában
+                        ?>
                         <span class="invalidFeedback">
                             <?php echo $data['emailHiba']; ?>
                         </span>
