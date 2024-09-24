@@ -8,13 +8,16 @@
         <h2 class="esemeny"><?php echo $data["reszletek"]->cim; ?></h2>
         <div class="kismain">
             <div class="image">
-                <img id="img" src="<?php echo URLROOT ?>/public/img/<?php echo $data["reszletek"]->kep; ?>" alt="">
-                <div>
-                <input type="text" class="input" onkeyup="submit()" id="input" placeholder="példa@példa.com">
-                </div>
-                <div id="teszt">
-                    <button disabled id="myBtn" class="buttony">Jelentkezés</button>
-                </div>
+                <form action="" method="post">
+                    <img id="img" src="<?php echo URLROOT ?>/public/img/<?php echo $data["reszletek"]->kep; ?>" alt="">
+                    <div>
+                        <input type="hidden" name="esemenyID" value="<?php echo $data['reszletek']->esemeny_id ?>">
+                        <input type="text" class="input" onkeyup="validate()" id="input" name="email" placeholder="példa@példa.com">
+                    </div>
+                    <div id="teszt">
+                        <button type="submit" disabled id="myBtn" class="buttony">Jelentkezés</button>
+                    </div>
+                </form>
             </div> 
             <div class="text">
 

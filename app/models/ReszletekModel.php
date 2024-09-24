@@ -16,4 +16,18 @@ class ReszletekModel {
         return $results;
     }
 
+    public function emailHozzadas($esemenyID, $email){
+        $this->db->query('INSERT INTO jelentkezok (esemenyID, email) VALUES (:esemenyID, :email)');
+        $this->db->bind(':esemenyID', $esemenyID);
+        $this->db->bind(':email', $email);
+
+
+        if ($this->db->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
