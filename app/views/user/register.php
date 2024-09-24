@@ -58,7 +58,10 @@
                         if ($json_data === null){
                             die('Nem sikerült dekódolni a JSON file-t');
                         }
-                    //Ellenőrizzük, hogy a beírt email ne legyen benne a listában
+                    //Ellenőrizzük, hogy a beírt email ne legyen benne a listában ! Nem biztos, hogy müködik ! 
+                        if (in_array($_POST['emailcim'],$json_data)){
+                        echo "Ezt az email-t nem használhatod!";
+                        }
                         ?>
                         <span class="invalidFeedback">
                             <?php echo $data['emailHiba']; ?>
