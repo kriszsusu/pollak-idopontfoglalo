@@ -17,6 +17,21 @@ class ReszletekModel {
     }
 
     public function emailHozzadas($esemenyID, $email){
+
+        // Kis segítség a validáláshoz
+        // Lekérdezzük, hogy az adott email cím már szerepel-e az adatbázisban
+        // Ha igen, akkor nem engedjük hozzáadni
+        // Ha nem, akkor hozzáadjuk
+        $this->db->query('SELECT * FROM jelentkezok WHERE email = :email AND esemenyID = :esemenyID');
+        $this->db->bind(':email', $email);
+        $this->db->bind(':esemenyID', $esemenyID);
+
+        $row = $this->db->resultSet();
+
+        if (count($row) > 0) {
+            return false;
+        }
+
         $this->db->query('INSERT INTO jelentkezok (esemenyID, email) VALUES (:esemenyID, :email)');
         $this->db->bind(':esemenyID', $esemenyID);
         $this->db->bind(':email', $email);

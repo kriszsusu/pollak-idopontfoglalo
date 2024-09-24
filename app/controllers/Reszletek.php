@@ -24,12 +24,12 @@ class Reszletek extends Controller {
             $email = trim($_POST['email']);
 
             if ($this->reszletekModel->emailHozzadas($esemenyID, $email)) {
-                // A hozzáadás sikerült, átirányítjuk a felhasználót a főoldalra
-                header('location:' . URLROOT . '/main');
+                // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
+                header('location:' . URLROOT . '/reszletek/' . $esemenyID . '?msg=0');
             }
             else {
-                // A hozzáadás nem sikerült ezért vissza irányítjuk a főoldlra
-                header('location:' . URLROOT . '/main');
+                // A hozzáadás nem sikerült ezért beállítjuk az üzenetet 1-re
+                header('location:' . URLROOT . '/reszletek/' . $esemenyID . '?msg=1');
             }
         }
     }
