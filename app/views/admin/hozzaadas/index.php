@@ -3,6 +3,11 @@
   require APPROOT . '/views/includes/adminNavigation.php';
 ?>
 
+<!-- telefon kártya padding
+     count back
+     font-family
+-->
+
 <form action="" method="post" enctype="multipart/form-data">
      <div class="kontener">
      
