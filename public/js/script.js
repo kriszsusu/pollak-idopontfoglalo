@@ -42,6 +42,7 @@ function validate() {
   var input = document.getElementById("input").value;
   let validemail = validateEmail(input);
   document.getElementById("myBtn").disabled = !validemail;
+  document.getElementById("myBtn").classList.toggle("buttony-disabled", !validemail);
 }
 
 function back() {

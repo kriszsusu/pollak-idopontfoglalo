@@ -10,6 +10,13 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mys
 # Copy the current directory contents into the container at /var/www/html
 ADD . /var/www/html
 
+# Create the public/img folder if it doesn't exist
+RUN mkdir -p /var/www/html/public/img
+
+# Set permissions for the public/img folder to allow Apache (www-data) to write to it
+RUN chown -R www-data:www-data /var/www/html/public/img && \
+    chmod -R 775 /var/www/html/public/img
+
 # Copy the apache configuration file to the sites-available directory
 # COPY ./app/my-site.conf /etc/apache2/sites-available/my-site.conf
 

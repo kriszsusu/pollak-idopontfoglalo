@@ -5,6 +5,7 @@
 /* Színek*/
 :root{
     --elso: #5585b5;
+    --elso-w-opacity: #5585b5af;
     --masodik: #53a8b6;
     --harmadik: #79c2d0;
     --negyedik: #bbe4e9;
@@ -19,6 +20,7 @@ body{
      color: var(--feher);
      background-repeat: no-repeat;
      background-attachment: fixed;
+     overflow-x: hidden;
 }
 
 /* Navbár */
@@ -455,32 +457,45 @@ select{
 
 /* reszletek oldal */
 .main{
-width: 100dvw;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-overflow-x: hidden;
+     width: 100dvw;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     overflow-x: hidden;
 }
 
 .kismain {
-display: flex;
-flex-direction: row-reverse;
-justify-content: space-between;
-gap: 25px;
-padding-left:250px;
-padding-right: 250px;
+     display: flex;
+     flex-direction: row-reverse;
+     justify-content: center;
+     gap: 25px;
+     width: 90%;
+     margin-bottom: 15px;
+     overflow-x: hidden;
+     /* padding-left:250px;
+     padding-right: 250px; */
+     background-color: var(--elso-w-opacity);
+     border: #000 solid 1px;
+     border-radius: 25px;
+     padding: 15px;
 }
 
 .text {
-width: calc(70% - 40px);
+width: 45%;
 border-radius: 50px;
 text-align:justify;
 }
 
 .image {
-width: calc(50% - 40px);
+width: 45%;
 border-radius: 50px;
+display: flex;
+flex-direction: column;
+align-items: center;
+align-content: flex-start;
+flex-wrap: wrap;
+gap: 10px;
 }
 
 hr {
@@ -491,12 +506,12 @@ border-radius: 40px ;
 
 .esemeny {
 text-align: center;
-padding: 5%;
+padding: 50px;
 font-size: 50px;
 }
 
 #img {
-width: 40%;
+width: 60%;
 }
 
 .text  .leiras{
@@ -511,16 +526,21 @@ gap: 70px;
 }
 
 .buttony{
-margin-left: 45px;
-padding: 5px;
-height: 30px;
-width: 180px;
-background-color: var(--harmadik);
-border-radius: 5px;
-justify-content: center ;
-border: var(--negyedik) 2px solid;
-border-radius: 8px;
-color: var(--feher) !important;
+     cursor: pointer;
+     padding: 5px;
+     height: 30px;
+     width: 120px;
+     background-color: var(--harmadik);
+     border-radius: 5px;
+     justify-content: center ;
+     border: var(--negyedik) 2px solid;
+     border-radius: 8px;
+     color: var(--feher) !important;
+}
+
+.buttony-disabled {
+     background-color: #686868;
+     cursor: not-allowed;
 }
 
 .modal {
@@ -593,8 +613,7 @@ font-size: larger !important;
 font-family: monospace;
 background-color: transparent;
 height: 25px;
-padding-left: 2px;
-padding-right: 97px;
+width: 250px;
 border-radius: 5px;
 margin-bottom: 7px;
 }
@@ -608,24 +627,34 @@ outline: none !important;
      flex-direction: column;
      justify-content: center;
      align-items: center;
-
+     width: 85%;
 }
 body {
      overflow-y: auto;
      height: auto;
 }
 #img {
-     width: 80%;
-     padding-left: 18%;
+     width: 100%;
 }
 .buttony {
-     width: 460px;
+     width: 150px;
      height: 30px;
      margin-left: auto;
      margin-right: auto;
 }
+.image {
+     width: 85%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     gap: 10px;
+}
+.text {
+     width: 85%;
+}
 .image input{
-     width: 183px;
+     width: 250px;
      padding-right: 0;
 }
 .text .terem, .text .oktato, .text .idopont{
