@@ -4,20 +4,27 @@
 }
 /* Színek*/
 :root{
-    --elso: #5585b5;
+     --background: #e9e5db;
+     --main: #e1d7c6;
+     --bezs: #f8f4ea;
+     --fekete: black;
+     --kek: #579bb1;
+
+
     --elso-w-opacity: #5585b5af;
-    --masodik: #53a8b6;
+    
+
+
     --harmadik: #79c2d0;
     --negyedik: #bbe4e9;
     --feher: white;
-    --fekete: black;
+
 
 }
 
 body{
-     background: rgb(85,133,181);
-     background: linear-gradient(180deg, rgba(83,168,182,1) 40%, rgba(121,194,208,1) 60%, rgba(187,228,233,1) 80%);
-     color: var(--feher);
+     background: var(--background);
+     color: var(--fekete);
      background-repeat: no-repeat;
      background-attachment: fixed;
      overflow-x: hidden;
@@ -25,7 +32,7 @@ body{
 
 /* Navbár */
 .navbar {
-     background-color: var(--harmadik);
+     background-color: var(--kek);
      overflow: hidden;
      border: 2px solid var(--harmadik);
      border-bottom: #eae9ee solid 2px;
@@ -108,11 +115,15 @@ body{
      height: 420px;
      margin: 20px;
      box-sizing: border-box;
-     background-color: var(--elso);
+     background-color: var(--main);
      border:  none;
      outline: none;
-     border: 2px solid rgba(255, 255, 255, .2);
+ 
      border-radius: 8px;
+}
+
+.box{
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .container a{
@@ -438,12 +449,12 @@ select{
 }
 
 .tovabb{
-     border: var(--negyedik) 2px solid;
      border-radius: 8px;
-     background: var(--harmadik);
-     padding: 5px;
-     font-size: 13px !important;
+     background: #6a9ab0;
      color: var(--feher) !important;
+     padding: 6px;
+     text-align: center;
+     font-size: 15px !important;
      margin-top: 100px;
      margin-left: auto;
      margin-right: auto;
@@ -463,6 +474,7 @@ select{
      justify-content: center;
      align-items: center;
      overflow-x: hidden;
+     margin-top: 150px;
 }
 
 .kismain {
@@ -470,195 +482,205 @@ select{
      flex-direction: row-reverse;
      justify-content: center;
      gap: 25px;
-     width: 90%;
+     width: 70%;
      margin-bottom: 15px;
      overflow-x: hidden;
-     /* padding-left:250px;
-     padding-right: 250px; */
-     background-color: var(--elso-w-opacity);
-     border: #000 solid 1px;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+     background-color: var(--main);
      border-radius: 25px;
      padding: 15px;
 }
 
 .text {
-width: 45%;
-border-radius: 50px;
-text-align:justify;
+     width: 45%;
+     border-radius: 50px;
+     text-align:justify;
 }
 
-.image {
-width: 45%;
-border-radius: 50px;
-display: flex;
-flex-direction: column;
-align-items: center;
-align-content: flex-start;
-flex-wrap: wrap;
-gap: 10px;
-}
-
-hr {
-border: 2px solid black;
-margin-bottom: 10px;
-border-radius: 40px ;
-}
-
-.esemeny {
-text-align: center;
-padding: 50px;
-font-size: 50px;
+.kepBox{
+     width: 500px;
+     height: 500px;
 }
 
 #img {
-width: 60%;
+     width: 100%;
+     height: 100%;
+}
+
+.image {
+     width: 45%;
+     border-radius: 50px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     align-content: center;
+     justify-content: center;
+     flex-wrap: wrap;
+     gap: 10px;
+}
+
+hr {
+     border: 2px solid black;
+     margin-bottom: 10px;
+     border-radius: 40px ;
+}
+
+.esemeny {
+     text-align: center;
+     font-size: 50px;
+     margin-bottom: 10px;
 }
 
 .text  .leiras{
-font-size: 20px;
-font-style: italic;
-font-weight:620;
+     font-size: 20px;
 }
 
-#teszt{
-display: flex;
-gap: 70px;
+.modal {
+     display: none;
+     position: fixed;
+     z-index: 1;
+     padding-top: 100px;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     overflow: auto;
+     background-color: rgb(0,0,0);
+     background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+     text-align: center;
+     background-color: #add8e6;
+     margin: auto;
+     padding: 20px;
+     border: 1px solid #888; 
+     width: 80%;
+}
+
+
+.close {
+     color: #aaaaaa;
+     float: right;
+     font-size: 28px;
+     font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+     color: #000;
+     text-decoration: none;
+     cursor: pointer;
+}
+
+#bottanya {
+     position: absolute;
+     top: 0;
+     left: 0;
+     background: 0;
+     border: 0;
+}
+
+.terem{
+     padding-right: 10px;
+     float: left;
+     border-right: 2px solid rgb(0, 0, 0);
+}
+
+.text .oktato{
+     padding-left: 10px;
+     padding-right: 10px;
+     float: left;
+     border-right: 2px solid rgb(0, 0, 0); 
+}
+
+.text .idopont{
+     padding-left: 10px;
+     float: left;
+     font-size: larger !important;
+}
+
+.input{
+     color: var(--fekete);
+     background-color: transparent;
+     height: 25px;
+     width: 280px;
+     border-radius:30px 0 0 30px; 
+     padding: 5px;
+     border: none;
+     background: #f0eee9;
 }
 
 .buttony{
      cursor: pointer;
      padding: 5px;
-     height: 30px;
+     height: 35px;
      width: 120px;
      background-color: var(--harmadik);
-     border-radius: 5px;
-     justify-content: center ;
-     border: var(--negyedik) 2px solid;
-     border-radius: 8px;
+     border-radius: 0 30px 30px 0;
+     border: none;
      color: var(--feher) !important;
+     margin-right: 20px;
 }
 
 .buttony-disabled {
-     background-color: #686868;
+     background-color: var(--kek);
      cursor: not-allowed;
 }
 
-.modal {
-display: none;
-position: fixed;
-z-index: 1;
-padding-top: 100px;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgb(0,0,0);
-background-color: rgba(0,0,0,0.4);
+.jelentkezes{
+     display: flex;
+     justify-content: center;
+     flex-wrap: wrap;
+     flex-direction: row;
+     align-items: center;
+     align-content: center;
+     margin-top: 35px;
+     margin-bottom: 35px;
 }
 
-
-.modal-content {
-text-align: center;
-background-color: #add8e6;
-margin: auto;
-padding: 20px;
-border: 1px solid #888; 
-width: 80%;
-}
-
-
-.close {
-color: #aaaaaa;
-float: right;
-font-size: 28px;
-font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-color: #000;
-text-decoration: none;
-cursor: pointer;
-}
-
-#bottanya {
-position: absolute;
-top: 0;
-left: 0;
-background: 0;
-border: 0;
-}
-
-.terem{
-padding-right: 10px;
-float: left;
-border-right: 2px solid rgb(0, 0, 0);
-}
-
-.text .oktato{
-padding-left: 10px;
-padding-right: 10px;
-float: left;
-border-right: 2px solid rgb(0, 0, 0); 
-}
-
-.text .idopont{
-padding-left: 10px;
-float: left;
-font-size: larger !important;
-}
-
-.input{
-font-family: monospace;
-background-color: transparent;
-height: 25px;
-width: 250px;
-border-radius: 5px;
-margin-bottom: 7px;
-}
 .input:focus{
-outline: none !important;
+     outline: none !important;
 }
 
 
 @media only screen and (max-width: 976px){
-.kismain {
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     width: 85%;
+     .kismain {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 85%;
+     }
+     body {
+          overflow-y: auto;
+          height: auto;
+     }
+     #img {
+          width: 100%;
+     }
+     .buttony {
+          width: 150px;
+          height: 30px;
+     }
+     .image {
+          width: 85%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+     }
+     .text {
+          width: 85%;
+     }
+     .image input{
+          width: 250px;
+          padding-right: 0;
+     }
+     .text .terem, .text .oktato, .text .idopont{
+          border: none;
+          padding-left: 0 !important;
+     }
 }
-body {
-     overflow-y: auto;
-     height: auto;
-}
-#img {
-     width: 100%;
-}
-.buttony {
-     width: 150px;
-     height: 30px;
-     margin-left: auto;
-     margin-right: auto;
-}
-.image {
-     width: 85%;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     gap: 10px;
-}
-.text {
-     width: 85%;
-}
-.image input{
-     width: 250px;
-     padding-right: 0;
-}
-.text .terem, .text .oktato, .text .idopont{
-     border: none;
-     padding-left: 0 !important;
-}
-}
+
