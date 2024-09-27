@@ -15,7 +15,7 @@ class ReszletekModel {
         
         return $results;
     }
-
+    //Tiltott email ellenőrzés
     public function emailHozzadas($esemenyID, $email){
         $emailprovider = explode("@", $email)[1];
         $this->db->query('SELECT email from tiltottemail where email = :emailprovider');
