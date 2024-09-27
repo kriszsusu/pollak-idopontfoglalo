@@ -5,27 +5,29 @@
 
 <!-- A reszletek oldal tartalma -->
 <div class="main">
-        <h2 class="esemeny"><?php echo $data["reszletek"]->cim; ?></h2>
+
         <div class="kismain">
             <form action="" method="post" class="image">
-                <img id="img" src="<?php echo URLROOT ?>/public/img/<?php echo $data["reszletek"]->kep; ?>" alt="">
-                <div>
-                    <input type="hidden" name="esemenyID" value="<?php echo $data['reszletek']->esemeny_id ?>">
-                    <input type="text" class="input" onkeyup="validate()" id="input" name="email" placeholder="példa@példa.com">
+                <div class="kepBox">
+                    <img id="img" src="<?php echo URLROOT ?>/public/img/<?php echo $data["reszletek"]->kep; ?>" alt="">
                 </div>
-                <div id="teszt">
-                    <button type="submit" disabled id="myBtn" class="buttony buttony-disabled">Jelentkezés</button>
-                </div>
+
+
             </form>
             <div class="text">
-
+                <h2 class="esemeny"><?php echo $data["reszletek"]->cim; ?></h2>
                 <hr>
-                <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["reszletek"]->leiras));  ?></p>
-                <br>
                 <h3 class="terem">Tanterem: <?php echo $data["reszletek"]->neve; ?></h3>
                 <h3 class="oktato">Oktató neve: <?php echo $data["reszletek"]->nev; ?></h3>
                 <h3 class="idopont"><?php echo $data["reszletek"]->datum; ?></h3>
+                <br><br><br>
+                <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["reszletek"]->leiras));  ?></p>
 
+                <div  class="jelentkezes" id="teszt">
+                    <input type="hidden" name="esemenyID" value="<?php echo $data['reszletek']->esemeny_id ?>">
+                    <input type="text" class="input" onkeyup="validate()" id="input" name="email" placeholder="példa@példa.com">
+                    <button type="submit" disabled id="myBtn" class="buttony buttony-disabled">Jelentkezés</button>
+                </div>
             </div>
             
         </div>
