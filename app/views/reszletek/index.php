@@ -7,13 +7,13 @@
 <div class="main">
 
         <div class="kismain">
-            <form action="" method="post" class="image">
+            <div action="" method="post" class="image">
                 <div class="kepBox">
                     <img id="img" src="<?php echo URLROOT ?>/public/img/<?php echo $data["reszletek"]->kep; ?>" alt="">
                 </div>
 
 
-            </form>
+            </div>
             <div class="text">
                 <h2 class="esemeny"><?php echo $data["reszletek"]->cim; ?></h2>
                 <hr>
@@ -23,11 +23,11 @@
                 <br><br><br>
                 <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["reszletek"]->leiras));  ?></p>
 
-                <div  class="jelentkezes" id="teszt">
+                <form  class="jelentkezes" id="teszt" method="post">
                     <input type="hidden" name="esemenyID" value="<?php echo $data['reszletek']->esemeny_id ?>">
-                    <input type="text" class="input" onkeyup="validate()" id="input" name="email" placeholder="példa@példa.com">
+                    <input type="email" class="input" onkeyup="validate()" id="input" name="email" placeholder="példa@példa.com">
                     <button type="submit" disabled id="myBtn" class="buttony buttony-disabled">Jelentkezés</button>
-                </div>
+            </form>
             </div>
             
         </div>

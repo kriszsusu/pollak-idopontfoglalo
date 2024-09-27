@@ -9,7 +9,7 @@
 <div class="mySlides fade">
 
   <img src="<?php echo URLROOT ?>/public/img/asd.jpg" style="width:100%">
-  <div class="text"><span class="dot" onclick="currentSlide(1)"></span> 
+  <div class="slide_text"><span class="dot" onclick="currentSlide(1)"></span> 
   <span class="dot" onclick="currentSlide(2)"></span> 
   <span class="dot" onclick="currentSlide(3)"></span></div>
 </div>
@@ -17,7 +17,7 @@
 <div class="mySlides fade">
 
   <img src="<?php echo URLROOT ?>/public/img/asd.jpg" style="width:100%">
-   <div class="text"><span class="dot" onclick="currentSlide(1)"></span> 
+   <div class="slide_text"><span class="dot" onclick="currentSlide(1)"></span> 
   <span class="dot" onclick="currentSlide(2)"></span> 
   <span class="dot" onclick="currentSlide(3)"></span></div>
 </div>
@@ -25,7 +25,7 @@
 <div class="mySlides fade">
 
   <img src="<?php echo URLROOT ?>/public/img/asd.jpg" style="width:100%">
-	<div class="text"><span class="dot" onclick="currentSlide(1)"></span> 
+	<div class="slide_text"><span class="dot" onclick="currentSlide(1)"></span> 
   <span class="dot" onclick="currentSlide(2)"></span> 
   <span class="dot" onclick="currentSlide(3)"></span></div>
 </div>
@@ -47,11 +47,11 @@
                     </div>
                     <br>
                     <div class="adatok">
-                        <p class="cim"><?php echo $sor->cim?></p>
+                        <h1 class="cim"><?php echo $sor->cim?></h1>
                         <br>
-                        <p class="oktato">Oktató neve: <?php echo $sor->nev?></p>
+                        <p class="oktato">Oktató neve: <b><?php echo $sor->nev?></b></p>
                         <br>
-                        <p class="idopont">Esemény időpontja: <br> <?php echo $sor->datum?></p>
+                        <p class="idopont">Esemény időpontja: <br> <?php echo str_replace("-", " ", $sor->datum)?></p>
                         <a class="tovabb"  href="<?php echo URLROOT . "/reszletek/" . $sor->esemeny_id; ?>">Tovább</a>
                     </div>
                 </div>
