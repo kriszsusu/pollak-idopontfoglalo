@@ -7,7 +7,10 @@
 <div class="main">
 
         <div class="kismain">
-            <div action="" method="post" class="image">
+            <div class="image">
+                <div class="jelentkezok">
+                    <h3 class="jelentkezokszama"> Hátralévő helyek: <?php echo $data["reszletek"]->ferohely - $data["reszletek"]->jelentkezok; ?></h3>
+                </div>
                 <div class="kepBox">
                     <img id="img" src="<?php echo URLROOT ?>/public/img/<?php echo $data["reszletek"]->kep; ?>" alt="">
                 </div>

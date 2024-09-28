@@ -9,7 +9,13 @@ class ReszletekModel {
 
     // Egy adott esemény részleteinek lekérdezése
     public function egyAdottEsemenyReszletei($id) {
-        $this->db->query('SELECT *, esemenyek.id AS "esemeny_id" FROM esemenyek INNER JOIN users ON esemenyek.tanarID = users.id INNER JOIN tanterem ON esemenyek.tanteremID = tanterem.id WHERE esemenyek.id = :id AND esemenyek.torolt = 0');
+        $this->db->query('SELECT e.cim, e.leiras, e.kep, e.datum, e.id AS "esemeny_id", u.nev, t.neve, t.ferohely, count(j.email) as "jelentkezok"
+                          FROM esemenyek e
+                          INNER JOIN users u ON e.tanarID = u.id
+                          INNER JOIN tanterem t ON e.tanteremID = t.id
+                          LEFT JOIN jelentkezok j ON e.id = j.esemenyID
+                          WHERE e.id = :id AND e.torolt = 0'
+                        );
         $this->db->bind(':id', $id);
         $results = $this->db->single();
         
@@ -17,20 +23,21 @@ class ReszletekModel {
     }
     //Tiltott email ellenőrzés
     public function emailHozzadas($esemenyID, $email){
+
+        //Tiltott email ellenőrzés
         $emailprovider = explode("@", $email)[1];
         $this->db->query('SELECT email from tiltottemail where email = :emailprovider');
         $this->db->bind(':emailprovider', $emailprovider);
         $tiltasrow = $this->db->resultSet();
+
         if (count($tiltasrow) > 0) {
             return false;
         }
-        
         
         // Kis segítség a validáláshoz
         // Lekérdezzük, hogy az adott email cím már szerepel-e az adatbázisban
         // Ha igen, akkor nem engedjük hozzáadni
         // Ha nem, akkor hozzáadjuk
-
         $this->db->query('SELECT * FROM jelentkezok WHERE email = :email AND esemenyID = :esemenyID');
         $this->db->bind(':email', $email);
         $this->db->bind(':esemenyID', $esemenyID);
