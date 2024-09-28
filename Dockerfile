@@ -15,7 +15,7 @@ RUN mkdir -p /var/www/html/public/img
 
 # Set permissions for the public/img folder to allow Apache (www-data) to write to it
 RUN chown -R www-data:www-data /var/www/html/public/img && \
-    chmod -R 775 /var/www/html/public/img
+    chmod -R 777 /var/www/html/public/img
 
 # Copy the apache configuration file to the sites-available directory
 # COPY ./app/my-site.conf /etc/apache2/sites-available/my-site.conf
