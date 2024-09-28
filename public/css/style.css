@@ -97,7 +97,7 @@ body {
 
 /*Main oldal*/
 .slide {
-  width: 100%;
+  width: 90%;
   height: 45%;
   margin-top: 30px;
   display: flex;
@@ -234,14 +234,15 @@ img {
 }
 
 .container .box {
-  width: 14%;
-  height: 420px;
+  /* width: 14%; */
+  height: 550px;
   margin: 20px;
   box-sizing: border-box;
   background-color: var(--main);
   border: none;
   outline: none;
   border-radius: 8px;
+  min-width: 320px;
 }
 
 .box {
@@ -253,11 +254,11 @@ img {
   color: var(--black);
 }
 
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
   .container .box {
     width: 40%;
   }
-}
+} */
 
 @media screen and (max-width: 600px) {
   .container .box {
