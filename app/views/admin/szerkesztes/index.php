@@ -20,16 +20,16 @@
 
                <div class="text-input">
                     <i class="ri-user-fill"></i>
-                    <input type="text" name="cim" placeholder="Cím" value="<?php echo $data['esemeny']->cim ?>">
+                    <input type="text" name="cim" placeholder="Cím" maxlength="30" required value="<?php echo $data['esemeny']->cim ?>">
                </div>
 
                <div class="text-input">
                     <i class="ri-lock-fill"></i>
-                    <input type="file" name="kep" placeholder="Kép" value="<?php echo $data['esemeny']->kep ?>" >
+                    <input type="file" name="kep" placeholder="Kép" maxlength="500" required value="<?php echo $data['esemeny']->kep ?>" >
                </div>
                <div class="text-input">
                     <i class="ri-lock-fill"></i>
-                    <input type="datetime-local" name="datum" placeholder="Időpont" value="<?php echo $data['esemeny']->datum ?>">
+                    <input type="datetime-local" name="datum" placeholder="Időpont" required value="<?php echo $data['esemeny']->datum ?>">
                </div>
 
                <div>
@@ -41,7 +41,7 @@
                </div>
 
                <div>
-                    <textarea name="leiras" id="" cols="40" rows="8"><?php echo $data['esemeny']->leiras ?></textarea>
+                    <textarea name="leiras" id="" cols="40" rows="8" required><?php echo $data['esemeny']->leiras ?></textarea>
                </div>
 
 

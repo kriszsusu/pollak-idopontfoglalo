@@ -4,62 +4,58 @@
 }
 /* Színek*/
 :root {
-  --background: #e9e5db;
-  --main: #e1d7c6;
-  --bezs: #f8f4ea;
-  --fekete: black;
-  --kek: #579bb1;
-
-  --elso-w-opacity: #5585b5af;
-
-  --harmadik: #79c2d0;
-  --negyedik: #bbe4e9;
-  --feher: white;
+    --background: #e9e5db;
+    --main: #e1d7c6;
+    --bezs: #f8f4ea;
+    --fekete: black;
+    --feher: white;
+    --kek: #579bb1;
+    --hover: #bbe4e9;
+    --input: #e6e6e6;
+    --elso-w-opacity: #5585b5af;
 }
 
 body {
-  background: var(--background);
-  color: var(--fekete);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  overflow-x: hidden;
+    background: var(--background);
+    color: var(--fekete);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
 }
 
 /* Navbár */
 .navbar {
-  background-color: var(--kek);
-  overflow: hidden;
-  border: 2px solid var(--harmadik);
-  border-bottom: #eae9ee solid 2px;
-  border-left: none;
-  border-right: none;
-  border-top: none;
+    background-color: var(--kek);
+    overflow: hidden;
+    border-left: none;
+    border-right: none;
+    border-top: none;
 }
 
 .navbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  transition: 0.3s;
+    float: left;
+    display: block;
+    color: var(--feher);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.3s;
 }
 
 .navbar a:hover {
-  background-color: var(--negyedik);
-  color: black;
-  transition: 0.3s;
+    background-color: var(--hover);
+    color: var(--fekete);
+    transition: 0.3s;
 }
 
 .bejelentkezes {
-  float: right !important;
+    float: right !important;
 }
 
 .navbar a.active {
-  background-color: var(--elso);
-  color: white;
+    background-color: var(--elso-w-opacity);
+    color: var(--feher);
 }
 
 .navbar .icon {
@@ -67,786 +63,808 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .navbar a:not(:first-child) {
-    display: none;
-  }
-  .navbar a.icon {
-    float: right;
-    display: block;
-  }
-  .bejelentkezes {
-    float: none !important;
-  }
+    .navbar a:not(:first-child) {
+        display: none;
+    }
+    .navbar a.icon {
+        float: right;
+        display: block;
+    }
+    .bejelentkezes {
+        float: none !important;
+    }
 }
 
 @media screen and (max-width: 600px) {
-  .navbar.responsive {
-    position: relative;
-  }
-  .navbar.responsive a.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .navbar.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
+    .navbar.responsive {
+        position: relative;
+    }
+    .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
 }
 
 /*Main oldal*/
 .slide {
-  width: 90%;
-  height: 45%;
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
+    width: 90%;
+    height: 45%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
 }
 main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .mySlides {
-  display: none;
+    display: none;
 }
 img {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 /* Slideshow container */
 .slideshow-container {
-  width: 75%;
-  height: 50%;
-  position: relative;
-  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+    width: 75%;
+    height: 50%;
+    position: relative;
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .slideshow-img-box {
-  width: 100%;
-  height: 480px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px;
+    width: 100%;
+    height: 480px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
 }
 
-/* Next & previous buttons */
 .prev,
 .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: var(--feher);
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
-/* Position the "next button" to the right */
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Caption text */
 .slide_text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
+    color: var(--feher);
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
 }
 
-/* Number text (1/3 etc) */
 .numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
+    color: var(--feher);
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
 }
 
-/* The dots/bullets/indicators */
+
 .dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
 }
 
 .active,
 .dot:hover {
-  background-color: #717171;
+    background-color: #717171;
 }
 
-/* Fading animation */
 .fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
 @keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-/* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
-  .prev,
-  .next,
-  .slide_text {
-    font-size: 11px;
-  }
+    .prev,
+    .next,
+    .slide_text {
+        font-size: 11px;
+    }
 }
 
 /*Kártyák*/
 .container {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .container .box {
-  /* width: 14%; */
-  height: 550px;
-  margin: 20px;
-  box-sizing: border-box;
-  background-color: var(--main);
-  border: none;
-  outline: none;
-  border-radius: 8px;
-  min-width: 320px;
+    height: 550px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color: var(--main);
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    min-width: 320px;
 }
 
 .box {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: 0.2s;
+}
+
+.box:hover{
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
 }
 
 .container a {
-  text-decoration: none;
-  color: var(--black);
+    text-decoration: none;
+    color: var(--black);
 }
 
-/* @media screen and (max-width: 1200px) {
-  .container .box {
-    width: 40%;
-  }
-} */
-
 @media screen and (max-width: 600px) {
-  .container .box {
-    width: 90%;
-  }
+    .container .box {
+        width: 90%;
+    }
 }
 
 .kep-box {
-  width: 100%;
-  height: 30%;
+    width: 100%;
+    height: 30%;
 }
 
 .kep-box .kep {
-  width: 100%;
-  height: 100%;
-  border-radius: 8px 8px 0 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px 8px 0 0;
 }
 
 .cim {
-  text-align: center;
-  font-size: x-large;
+    text-align: center;
+    font-size: x-large;
 }
 
 .leiras {
-  text-align: justify;
-  word-break: break-word;
+    text-align: justify;
+    word-break: break-word;
 }
 
 .adatok {
-  margin: 15px;
-  margin-top: 0 !important;
-  font-size: large;
+    margin: 15px;
+    margin-top: 0 !important;
+    font-size: large;
 }
 
 .idopont {
-  font-size: large;
+    font-size: large; 
 }
 
 /*Bejelentkezés oldal*/
 .kontener {
-  width: 50vw;
-  height: 60vh;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-areas: "login";
-  box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
-  border-radius: 20px;
-  background: white;
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 50px;
+    width: 50vw;
+    height: 60vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas: "login";
+    box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
+    border-radius: 20px;
+    background: var(--feher);
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
 }
 
 .pirulak {
-  grid-area: pirulak;
-  display: none;
-  position: relative;
+    grid-area: pirulak;
+    display: none;
+    position: relative;
 }
 
 .rotate-45 {
-  transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 
 .pirulak .pill-1 {
-  bottom: 0;
-  left: -40px;
-  position: absolute;
-  width: 80px;
-  height: 200px;
-  background: linear-gradient(
-    180deg,
-    rgba(85, 133, 181, 1) 20%,
-    rgba(83, 168, 182, 1) 40%,
-    rgba(121, 194, 208, 1) 60%,
-    rgba(187, 228, 233, 1) 80%
-  );
-  border-radius: 40px;
+    bottom: 0;
+    left: -40px;
+    position: absolute;
+    width: 80px;
+    height: 200px;
+    background: linear-gradient(
+        180deg,
+        rgb(145, 132, 98) 20%,
+        rgb(184, 171, 147) 40%,
+        rgb(230, 222, 209) 60%,
+        rgba(248, 244, 234, 1) 80%
+    );
+    border-radius: 40px;
 }
 
 .pirulak .pill-2 {
-  top: -100px;
-  left: -80px;
-  position: absolute;
-  height: 450px;
-  width: 220px;
-  background: linear-gradient(
-    200deg,
-    rgba(85, 133, 181, 1) 20%,
-    rgba(83, 168, 182, 1) 40%,
-    rgba(121, 194, 208, 1) 60%,
-    rgba(187, 228, 233, 1) 80%
-  );
-  border-radius: 200px;
-  border: 30px solid var(--masodik);
+    top: -100px;
+    left: -80px;
+    position: absolute;
+    height: 450px;
+    width: 220px;
+    background: linear-gradient(
+        200deg,
+        rgb(145, 132, 98) 20%,
+        rgb(184, 171, 147) 40%,
+        rgb(230, 222, 209) 60%,
+        rgba(248, 244, 234, 1) 80%
+    );
+    border-radius: 200px;
+    border: 30px solid var(--background);
 }
 
 .pirulak .pill-3 {
-  top: -100px;
-  left: 160px;
-  position: absolute;
-  height: 200px;
-  width: 100px;
-  background: linear-gradient(
-    200deg,
-    rgba(85, 133, 181, 1) 20%,
-    rgba(83, 168, 182, 1) 40%,
-    rgba(121, 194, 208, 1) 60%,
-    rgba(187, 228, 233, 1) 80%
-  );
-  border-radius: 70px;
+    top: -100px;
+    left: 160px;
+    position: absolute;
+    height: 200px;
+    width: 100px;
+    background: linear-gradient(
+        200deg,
+        rgb(145, 132, 98) 20%,
+        rgb(184, 171, 147) 40%,
+        rgb(230, 222, 209) 60%,
+        rgba(248, 244, 234, 1) 80%
+    );
+    border-radius: 70px;
 }
 
 .pirulak .pill-4 {
-  bottom: -180px;
-  left: 220px;
-  position: absolute;
-  height: 300px;
-  width: 120px;
-  background: linear-gradient(
-    300deg,
-    rgba(85, 133, 181, 1) 20%,
-    rgba(83, 168, 182, 1) 40%,
-    rgba(121, 194, 208, 1) 60%,
-    rgba(187, 228, 233, 1) 80%
-  );
-  border-radius: 70px;
+    bottom: -180px;
+    left: 220px;
+    position: absolute;
+    height: 300px;
+    width: 120px;
+    background: linear-gradient(
+        70deg,
+        rgb(145, 132, 98) 20%,
+        rgb(184, 171, 147) 40%,
+        rgb(230, 222, 209) 60%,
+        rgba(248, 244, 234, 1) 80%
+    );
+    border-radius: 70px;
 }
 
 .login {
-  grid-area: login;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: white;
+    grid-area: login;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--feher);
 }
 
 .login h3.title {
-  margin: 15px 0;
-  color: var(--fekete);
+    margin: 15px 0;
+    color: var(--fekete);
 }
 
 .text-input {
-  background: #e6e6e6;
-  height: 40px;
-  display: flex;
-  width: 60%;
-  align-items: center;
-  border-radius: 10px;
-  padding: 0 15px;
-  margin: 5px 0;
+    background: var(--input);
+    height: 40px;
+    display: flex;
+    width: 60%;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0 15px;
+    margin: 5px 0;
 }
 
 textarea {
-  background: #e6e6e6;
-  border-radius: 10px;
-  resize: none;
-  padding: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  border: none;
-  margin-top: 12px;
+    background: var(--input);
+    border-radius: 10px;
+    resize: none;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: none;
+    margin-top: 12px;
 }
 
 textarea:focus {
-  outline: none;
+     outline: none;
 }
 
 select:focus {
-  outline: none;
+     outline: none;
 }
 
 .bx-current-location {
-  color: #686868;
+    color: #686868;
 }
 
 input[type="file"] {
-  margin-top: 20px;
-  color: var(--fekete);
+    margin-top: 20px;
+    color: var(--fekete);
 }
 
 select {
-  background: #e6e6e6;
-  width: 320px;
-  height: 40px;
-  border-radius: 10px;
-  padding: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  border: none;
-  margin-top: 6px;
+    background: var(--input);
+    width: 320px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: none;
+    margin-top: 6px;
 }
 .text-input input {
-  background: none;
-  border: none;
-  outline: none;
-  width: 100%;
-  height: 100%;
-  margin-left: 10px;
-}
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+    }
 
 .text-input i {
-  color: #686868;
+     color: #686868;
 }
 
 ::placeholder {
-  color: #9a9a9a;
+    color: #9a9a9a;
 }
 
 .login-btn {
-  width: 68%;
-  padding: 10px;
-  color: var(--feher);
-  background: linear-gradient(
-    to left,
-    rgba(85, 133, 181, 1) 20%,
-    rgba(83, 168, 182, 1) 40%,
-    rgba(121, 194, 208, 1) 60%,
-    rgba(187, 228, 233, 1) 80%
-  );
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  margin-top: 10px;
+    width: 68%;
+    padding: 10px;
+    color: var(--feher);
+    background: linear-gradient(
+        to left,
+        rgb(145, 132, 98) 20%,
+        rgb(184, 171, 147) 40%,
+        rgb(231, 223, 202) 80%,
+        rgb(231, 223, 202) 80%
+    );
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.login-btn:hover{
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2); 
+    transition: 0.2s;
 }
 
 a {
-  font-size: 12px;
-  color: #9a9a9a;
-  cursor: pointer;
-  user-select: none;
-  text-decoration: none;
+    font-size: 12px;
+    color: #9a9a9a;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
 }
 
 @media (min-width: 768px) {
-  .kontener {
-    grid-template-columns: 50% 50%;
-    grid-template-areas: "pirulak login";
-  }
+    .kontener {
+        grid-template-columns: 50% 50%;
+        grid-template-areas: "pirulak login";
+    }
 
-  .pirulak {
-    display: block;
-  }
+    .pirulak {
+        display: block; 
+    }
 }
 
 @media screen and (max-width: 1900px) {
-  select,
-  textarea {
-    width: 310px;
-  }
+    select,
+    textarea {
+        width: 310px;
+    }
 }
 
 @media screen and (max-width: 1800px) {
-  select,
-  textarea {
-    width: 300px;
-  }
+    select,
+    textarea {
+        width: 300px;
+    }
 }
 
 @media screen and (max-width: 1700px) {
-  select,
-  textarea {
-    width: 280px;
-  }
+    select,
+    textarea {
+        width: 280px;
+    }
 }
 
 @media screen and (max-width: 1600px) {
-  select,
-  textarea {
-    width: 260px;
-  }
+    select,
+    textarea {
+        width: 260px;
+    }
 }
 
 @media screen and (max-width: 1500px) {
-  select,
-  textarea {
-    width: 240px;
-  }
+    select,
+    textarea {
+        width: 240px;
+    }
 }
 
 @media screen and (max-width: 1300px) {
-  select,
-  textarea {
-    width: 220px;
-  }
+    select,
+    textarea {
+        width: 220px;
+    }
 }
 
 @media screen and (max-width: 1100px) {
-  select,
-  textarea {
-    width: 190px;
-  }
+    select,
+    textarea {
+        width: 190px;
+    }
 }
 
 @media screen and (max-width: 770px) {
-  select,
-  textarea {
-    width: 240px;
-  }
+    select,
+    textarea {
+        width: 240px;
+    }
+
+    .kontener{
+        width: 80vw !important;
+    }
 }
 
 @media screen and (max-width: 500px) {
-  select,
-  textarea {
-    width: 160px;
-  }
+    select,
+    textarea {
+        width: 160px;
+    }
 }
 
 @media screen and (max-width: 376px) {
-  select,
-  textarea {
-    width: 145px;
-  }
+    select,
+    textarea {
+        width: 145px;
+    }
 }
 
 /*Admin oldal*/
 
 .edit,
 .delete {
-  border: var(--negyedik) 2px solid;
-  border-radius: 100%;
-  background: var(--harmadik);
-  padding: 5px;
-  font-size: 13px !important;
-  color: var(--feher) !important;
-  float: right;
-  margin-top: 50px;
+    border-radius: 100%;
+    background: var(--kek);
+    padding: 5px;
+    font-size: 13px !important;
+    color: var(--feher) !important;
+    float: right;
+    margin-top: 50px;
+    transition: 0.2s;
 }
 
 .delete {
-  margin-right: 5px;
+     margin-right: 5px;
+}
+
+.edit:hover,
+.delete:hover{
+    background-color: #456472;
+    transition: 0.2s;
 }
 
 .hozzadas {
-  width: 150px;
-  height: 150px;
-  margin: 20px;
-  margin-top: 190px;
-  box-sizing: border-box;
-  background-color: var(--elso);
-  border: none;
-  outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    margin-top: 190px;
+    box-sizing: border-box;
+    background-color: var(--main);
+    border: none;
+    outline: none;
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+    border-radius: 8px;
+}
+
+.hozzadas:hover{
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
 }
 
 .tovabb {
-  border-radius: 8px;
-  background-color: #6a9ab0;
-  color: var(--feher) !important;
-  padding: 6px;
-  text-align: center;
-  font-size: 15px !important;
-  margin-top: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+    border-radius: 8px;
+    background-color: #6a9ab0;
+    color: var(--feher) !important;
+    padding: 6px;
+    text-align: center;
+    font-size: 15px !important;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    transition: 0.2s;
 }
 
 .tovabb:hover {
-  background-color: #456472;
+    background-color: #456472;
+    transition: 0.2s;
 }
 
 .bx-plus {
-  font-size: 150px;
-  align-items: center;
+    font-size: 150px;
+    align-items: center;
 }
 
 /* reszletek oldal */
 .main {
-  width: 100dvw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-  margin-top: 150px;
+    width: 100dvw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    margin-top: 150px;
 }
 
 .kismain {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  gap: 25px;
-  width: 70%;
-  margin-bottom: 15px;
-  overflow-x: hidden;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-color: var(--main);
-  border-radius: 25px;
-  padding: 15px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 25px;
+    width: 70%;
+    margin-bottom: 15px;
+    overflow-x: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: var(--main);
+    border-radius: 25px;
+    padding: 15px;
 }
 
 .text {
-  width: 45%;
-  border-radius: 50px;
-  text-align: justify;
+    width: 45%;
+    border-radius: 50px;
+    text-align: justify;
 }
 
 .kepBox {
-  width: 500px;
-  height: 500px;
+    width: 500px;
+    height: 500px;
 }
 
 #img {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .image {
-  width: 45%;
-  border-radius: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
+    width: 45%;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 hr {
-  border: 2px solid black;
-  margin-bottom: 10px;
-  border-radius: 40px;
+    border: 2px solid black;
+    margin-bottom: 10px;
+    border-radius: 40px;
 }
 
 .esemeny {
-  text-align: center;
-  font-size: 50px;
-  margin-bottom: 10px;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 10px;
 }
 
 .text .leiras {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-  text-align: center;
-  background-color: #add8e6;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+    text-align: center;
+    background-color: #add8e6;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
 }
 
 .close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #bottanya {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: 0;
-  border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: 0;
+    border: 0;
 }
 
 .terem {
-  padding-right: 10px;
-  float: left;
-  border-right: 2px solid rgb(0, 0, 0);
+    padding-right: 10px;
+    float: left;
+    border-right: 2px solid rgb(0, 0, 0);
 }
 
 .text .oktato {
-  padding-left: 10px;
-  padding-right: 10px;
-  float: left;
-  border-right: 2px solid rgb(0, 0, 0);
+    padding-left: 10px;
+    padding-right: 10px;
+    float: left;
+    border-right: 2px solid rgb(0, 0, 0);
 }
 
 .text .idopont {
-  padding-left: 10px;
-  float: left;
-  font-size: larger !important;
+    padding-left: 10px;
+    float: left;
+    font-size: larger !important;
 }
 
 .input {
-  color: var(--fekete);
-  background-color: transparent;
-  height: 25px;
-  width: 280px;
-  border-radius: 30px 0 0 30px;
-  padding: 5px;
-  border: none;
-  background: #f0eee9;
+    color: var(--fekete);
+    background-color: transparent;
+    height: 25px;
+    width: 280px;
+    border-radius: 30px 0 0 30px;
+    padding: 5px;
+    border: none;
+    background: #f0eee9;
 }
 
 .buttony {
-  cursor: pointer;
-  padding: 5px;
-  height: 35px;
-  width: 120px;
-  background-color: var(--harmadik);
-  border-radius: 0 30px 30px 0;
-  border: none;
-  color: var(--feher) !important;
-  margin-right: 20px;
+    cursor: pointer;
+    padding: 5px;
+    height: 35px;
+    width: 120px;
+    background-color: #c2a373;
+    border-radius: 0 30px 30px 0;
+    border: none;
+    color: var(--feher) !important;
+    margin-right: 20px;
 }
 
 .buttony-disabled {
-  background-color: var(--kek);
-  cursor: not-allowed;
+    background-color: var(--kek);
+    cursor: not-allowed;
 }
 
 .jelentkezes {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-  margin-top: 35px;
-  margin-bottom: 35px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    margin-top: 35px;
+    margin-bottom: 35px;
 }
 
 .input:focus {
-  outline: none !important;
+     outline: none !important;
 }
 
 @media only screen and (max-width: 1200px) {
-  .kismain {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 85%;
-  }
-  body {
-    overflow-y: auto;
-    height: auto;
-  }
-  #img {
-    width: 100%;
-  }
-  .buttony {
-    width: 150px;
-    height: 30px;
-  }
-  .image {
-    width: 85%;
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  .text {
-    width: 85%;
-  }
-  .image input {
-    width: 250px;
-    padding-right: 0;
-  }
-  .text .terem,
-  .text .oktato,
-  .text .idopont {
-    border: none;
-    padding-left: 0 !important;
-  }
-  .slideshow-container {
-    width: 95%;
-  }
+    .kismain {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 85%;
+    }
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+    #img {
+        width: 100%;
+    }
+    .image {
+        width: 85%;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    .text {
+        width: 85%;
+    }
+    .image input {
+        width: 250px;
+        padding-right: 0;
+    }
+    .text .terem,
+    .text .oktato,
+    .text .idopont {
+        border: none;
+        padding-left: 0 !important;
+    }
+    .slideshow-container {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .input{
+        width: 140px;
+    }
+
+    .buttony{
+        width: 100px;
+    }
 }
