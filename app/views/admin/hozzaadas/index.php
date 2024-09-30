@@ -22,16 +22,16 @@
                <h3 class="title">Esemény hozzáadása</h3>
                <div class="text-input">
                     <i class='bx bxs-captions'></i>
-                    <input type="text" name="cim" placeholder="Cím">
+                    <input type="text" name="cim" placeholder="Cím" maxlength="30" required>
                </div>
 
                <div class="text-input">
                     <i class='bx bxs-photo-album'></i>
-                    <input type="file" name="kep" placeholder="Kép">
+                    <input type="file" name="kep" placeholder="Kép" maxlength="500" required>
                </div>
                <div class="text-input">
                     <i class='bx bxs-time' ></i>
-                    <input type="datetime-local" name="datum" placeholder="Időpont">
+                    <input type="datetime-local" name="datum" placeholder="Időpont" required>
                </div>
 
                <div>
@@ -43,7 +43,7 @@
                </div>
 
                <div>
-                    <textarea name="leiras" id="" cols="40" rows="8" placeholder="Leírás"></textarea>
+                    <textarea name="leiras" id="" cols="40" rows="8" placeholder="Leírás" required></textarea>
                </div>
 
                <button type="submit" class="login-btn">Feltöltés</button>
