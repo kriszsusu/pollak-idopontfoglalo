@@ -14,7 +14,7 @@
           </div>
           <div class="login">
 
-               <h3 class="title">Esemény hozzáadása</h3>
+               <h3 class="title">Esemény szerkesztése</h3>
 
                <input type="hidden" name="id" value="<?php echo $data['esemeny']->$id ?>">
 
