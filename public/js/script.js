@@ -29,6 +29,9 @@ window.onload = function () {
       window.location.replace(window.location.href.split("?")[0]);
     }, 3000);
   }
+  setInterval(()=>{
+    plusSlides(1)
+  },4000)
 };
 
 // When the user clicks anywhere outside of the modal, close it
@@ -86,4 +89,6 @@ function showSlides(n) {
   }
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].className += " active";
+  dots[slideIndex+3 - 1].className += " active";
+  dots[slideIndex+6 - 1].className += " active";
 }
