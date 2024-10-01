@@ -36,6 +36,42 @@
       <a class="next" onclick="plusSlides(1)">❯</a>
     </div>
   </div>
+
+  <h2>Szűrők</h2>
+  <ul>
+
+  <li>
+    <div class="dropdown">
+      <button class="dropbtn" onclick="dropdown()">Kezdési Időpont</button>
+      <div class="dropdown-content" id="dropdown">
+      <a href="">asdasd</a>
+    </div>
+    </div>
+  </li>
+
+  <li>
+    <div class="dropdown">
+    <button class="dropbtn" onclick="dropdown()">Szak</button>
+    <div class="dropdown-content" id="dropdown">
+    </div>
+  </li>
+
+  <li>
+  <div class="dropdown">
+  <button class="dropbtn" onclick="dropdown()">Oktató</button>
+  <div class="dropdown-content" id="dropdown">
+  </div>
+  </li>
+
+  <li>
+  <div class="dropdown">
+  <button class="dropbtn" onclick="dropdown()">Terem</button>
+  <div class="dropdown-content" id="dropdown">
+  </div>
+  </li>
+  </ul>
+</div>
+
   <div class="container">
       
       
