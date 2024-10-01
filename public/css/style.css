@@ -696,7 +696,7 @@ a {
     gap: 10px;
 }
 
-hr {
+.main .kismain .text hr {
     border: 2px solid black;
     margin-bottom: 10px;
     border-radius: 40px;
@@ -866,6 +866,102 @@ hr {
 
     .buttony{
         width: 100px;
+    }
+}
+
+/*Kapcsolat oldal*/
+
+.container .elerhetosegek{
+    height: 550px;
+    width: 950px;
+    margin: 20px;
+    margin-top: 50px;
+    box-sizing: border-box;
+    background-color: var(--main);
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    min-width: 320px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: 0.2s;
+    padding: 10px;
+    display: flex;
+    align-content: space-around;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.elerhetosegek:hover{
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+}
+
+.kapcsolatok{
+    width: 50%;
+}
+
+.container .elerhetosegek .kapcsolatok h1{
+    margin-bottom: 50px;
+}
+
+.container .elerhetosegek .kapcsolatok p{
+    padding: 7px;
+}
+
+
+.container .elerhetosegek .kapcsolatok i{
+    font-size: 25px;
+}
+
+.container .elerhetosegek .kapcsolatok b{
+    margin-left: 10px;
+    text-decoration:bold;
+    font-size: 20px;
+}
+
+.container .elerhetosegek .kapcsolatok .datas{
+    float: right;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+
+.container .elerhetosegek .kapcsolatok hr{
+   border: 1px solid var(--background) !important;
+   border-radius: 10px;
+}
+
+@media screen and (max-width: 980px) {
+    .container .elerhetosegek{
+        width: 450px;
+        height: 1000px;
+    }
+
+    .kapcsolatok{
+        width: 100% ;
+    }
+
+    .container .elerhetosegek .kapcsolatok h1{
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .container .elerhetosegek .kapcsolatok b{
+        font-size: 13px;
+    }
+
+    .container .elerhetosegek .kapcsolatok h1{
+        margin-bottom: 20px;
+    }
+    
+    .container .elerhetosegek .kapcsolatok .datas{
+        margin-top: 12px;
+        font-size: 13px;
+    }
+
+    .container .elerhetosegek .kapcsolatok h1{
+        font-size: 25px !important;
     }
 }
 .dropdown-content {

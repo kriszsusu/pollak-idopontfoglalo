@@ -1,18 +1,18 @@
 <?php
 #[AllowDynamicProperties]
 
-class Main extends Controller {
+class Kapcsolat extends Controller {
     public function __construct() {
-        $this->mainModel = $this->model('MainModel');
+        $this->kapcsolatModel = $this->model('KapcsolatModel');
     }
 
-    // A főoldal megjelenítése
+    // A kapcsolat megjelenítése
     public function index() {
 
         $data = [
-            'main' => $this->mainModel->kartyaLekerdezes()
+            
         ];
 
-        $this->view('main/index', $data);
+        $this->view('kapcsolat/index', $data);
     }
 }
