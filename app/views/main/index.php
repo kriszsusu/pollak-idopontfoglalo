@@ -43,43 +43,47 @@
         </div>
     </div>
   <h2>Szűrők</h2>
-  <ul>
 
-  <li>
-    <div class="dropdown">
-      <button class="dropbtn" onclick="dropdown()">Kezdési Időpont</button>
-      <div class="dropdown-content" id="dropdown">
-      <a href="">asdasd</a>
+    <div class="szures">
+        <select name="" onchange="szures(this)" id="idopontok">
+            <option value="0">Válassz időpontot!</option>
+            <?php foreach ($data['idopontok'] as $fajta): ?>
+                <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->datum; ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <select name="" onchange="szures(this)" id="szak">
+            <option value="0">Válassz Eseményt!</option>
+            <?php foreach ($data['szak'] as $fajta): ?>
+                <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->cim; ?></option>
+            <?php endforeach; ?>
+        </select>
+
+
+
+        <select name="" onchange="szures(this)" id="oktatok">
+            <option value="0">Válassz Oktatót!</option>
+            <?php foreach ($data['oktatok'] as $fajta): ?>
+                <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->nev; ?></option>
+            <?php endforeach; ?>
+        </select>
+
+
+   
+        <select name="" onchange="szures(this)" id="termek">
+            <option value="0">Válassz termet!</option>
+            <?php foreach ($data['termek'] as $fajta): ?>
+                <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->neve; ?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
-    </div>
-  </li>
 
-  <li>
-    <div class="dropdown">
-    <button class="dropbtn" onclick="dropdown()">Szak</button>
-    <div class="dropdown-content" id="dropdown">
-    </div>
-  </li>
 
-  <li>
-  <div class="dropdown">
-  <button class="dropbtn" onclick="dropdown()">Oktató</button>
-  <div class="dropdown-content" id="dropdown">
-  </div>
-  </li>
-
-  <li>
-  <div class="dropdown">
-  <button class="dropbtn" onclick="dropdown()">Terem</button>
-  <div class="dropdown-content" id="dropdown">
-  </div>
-  </li>
-  </ul>
 
   <span id="keresesiEredmenyek"></span>
 </div>
 
-  <div class="container">
+  <div class="container" id="torles">
 
       <?php if (count($data["main"]) > 0) : ?>
               <?php foreach ($data["main"] as $sor): ?>

@@ -93,24 +93,6 @@ function showSlides(n) {
   dots[slideIndex+6 - 1].className += " active";
 }
 
-function teremDropdown() {
-  document.getElementById("dropdown").classList.toggle("show");
-}
-
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-
-
 function kereses() {
   var keresendo = $("#searchBox").val();
 
@@ -123,6 +105,7 @@ function kereses() {
           },
           success: function(data){
               document.getElementById("keresesiEredmenyek").innerHTML = data;
+              document.getElementById("torles").style.display = "none";
           },
           error: function(){
               console.log("hiba történt a keresés során!");
@@ -131,6 +114,7 @@ function kereses() {
   }
   else {
       document.getElementById("keresesiEredmenyek").innerHTML = '';
+      document.getElementById("torles").style.display = "flex";
   }
 }
 
@@ -141,3 +125,31 @@ $(document).ready(function(){
       kereses();
   });
 });
+
+function szures(selectobject){
+
+  var keresendo = selectobject.value
+  var szuro = selectobject.id;
+  console.log(keresendo);
+  if(keresendo != 0){
+      $.ajax({
+          url: "./kereses/termekekszurese",
+          method: "POST",
+          data: {
+              keresendo: keresendo,
+              szuro: szuro
+          },
+          success: function(data){
+              document.getElementById("keresesiEredmenyek").innerHTML = data;
+              document.getElementById("torles").style.display = "none";
+          },
+          error: function(){
+              console.log("hiba történt a keresés során!");
+          }
+      });
+  }
+  else {
+      document.getElementById("keresesiEredmenyek").innerHTML = '';
+      document.getElementById("torles").style.display = "flex";
+  }
+}
