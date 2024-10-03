@@ -112,6 +112,19 @@ img {
     vertical-align: middle;
 }
 
+.kereses{
+    width: 550px;
+    padding: 12px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    border: 2px solid var(--background);
+}
+
+.kereses:focus{
+    outline: 2px solid var(--bezs)  !important;
+}
+
 /* Slideshow container */
 .slideshow-container {
     width: 75%;

@@ -37,9 +37,9 @@
     </div>
   </div>
 
-  <div class="search_wrap search_wrap_3">
-        <div class="search_box">
-            <input id="searchBox" type="text" class="input" placeholder="Keresés...">
+  <div class="">
+        <div>
+            <input id="searchBox" type="text" class="kereses" placeholder="Keresés...">
         </div>
     </div>
   <h2>Szűrők</h2>
