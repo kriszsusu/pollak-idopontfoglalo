@@ -15,4 +15,18 @@ class Main extends Controller {
 
         $this->view('main/index', $data);
     }
+
+    /* AJAX híváskor betölti a talált termékek listáját */
+    public function termekekkeresese() {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $keresendo = $_POST['keresendo'];
+
+        $termekek = $this->mainModel->termekekKeresese($keresendo);
+        
+        $data = [
+            'termekek' => $termekek
+        ];
+
+        $this->view('main/termekek', $data);
+    }
 }

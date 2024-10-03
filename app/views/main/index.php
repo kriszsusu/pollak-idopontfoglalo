@@ -37,6 +37,11 @@
     </div>
   </div>
 
+  <div class="search_wrap search_wrap_3">
+        <div class="search_box">
+            <input id="searchBox" type="text" class="input" placeholder="Keresés...">
+        </div>
+    </div>
   <h2>Szűrők</h2>
   <ul>
 
@@ -70,11 +75,12 @@
   </div>
   </li>
   </ul>
+
+  <span id="keresesiEredmenyek"></span>
 </div>
 
   <div class="container">
-      
-      
+
       <?php if (count($data["main"]) > 0) : ?>
               <?php foreach ($data["main"] as $sor): ?>
                   <div class="box">

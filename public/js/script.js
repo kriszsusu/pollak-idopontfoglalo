@@ -19,7 +19,7 @@ window.onload = function () {
     setTimeout(() => {
       modal.style.display = "none";
       window.location.replace(window.location.href.split("?")[0]);
-    }, 3000);
+    }, 1000);
   } else if (window.location.search === "?msg=1") {
     modal.children[0].children[0].innerHTML =
       "A megadott email cím nem megfelelő vagy már regisztrálva van!";
@@ -27,7 +27,7 @@ window.onload = function () {
     setTimeout(() => {
       modal.style.display = "none";
       window.location.replace(window.location.href.split("?")[0]);
-    }, 3000);
+    }, 2000);
   }
   setInterval(()=>{
     plusSlides(1)
@@ -109,3 +109,35 @@ window.onclick = function(event) {
     }
   }
 }
+
+
+function kereses() {
+  var keresendo = $("#searchBox").val();
+
+  if(keresendo != '' && keresendo.length > 2){
+      $.ajax({
+          url: "./kereses/termekekkeresese",
+          method: "POST",
+          data: {
+              keresendo: keresendo
+          },
+          success: function(data){
+              document.getElementById("keresesiEredmenyek").innerHTML = data;
+          },
+          error: function(){
+              console.log("hiba történt a keresés során!");
+          }
+      });
+  }
+  else {
+      document.getElementById("keresesiEredmenyek").innerHTML = '';
+  }
+}
+
+$(document).ready(function(){
+  kereses();
+
+  $('#searchBox').keyup(function(){
+      kereses();
+  });
+});
