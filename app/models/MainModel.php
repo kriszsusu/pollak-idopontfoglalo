@@ -135,13 +135,13 @@ class MainModel {
                     AND (:szak = '' OR s.id = :szak)
                     AND (:tanar = '' OR u.id = :tanar)
                     AND (:terem = '' OR t.id = :terem)
-                    AND (:nap = '' OR DATE(e.datum) = :nap)
+                    AND (:nap IS NULL OR DATE(e.datum) = :nap)
                     AND (:ora = '' OR TIME_FORMAT(e.datum, '%H:%i') >= :ora)
                 GROUP BY 
                     e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;
             ");
 
-            $this->db->bind(':nap', $szuroObj['nap']);
+            $this->db->bind(':nap', empty($szuroObj['nap']) ? null : $szuroObj['nap']);
             $this->db->bind(':ora', $szuroObj['ora']);
             $this->db->bind(':tanar', $szuroObj['oktatok']);
             $this->db->bind(':szak', $szuroObj['szak']);
