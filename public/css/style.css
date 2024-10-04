@@ -616,6 +616,52 @@ a {
 
 /*Admin oldal*/
 
+.keret{
+    margin-top: 30px;
+    height: auto;
+    width: 30%;
+    box-sizing: border-box;
+    background-color: var(--main);
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+    transition: 0.2s;
+    padding: 20px;
+    padding-top: 10px !important;
+}
+
+.keret h3{
+    text-align: center;
+    padding: 10px;
+}
+
+.keret hr{
+    border: 2px solid var(--fekete);
+    border-radius: 40px;
+}
+
+.keret .lista hr{
+    border: 1px solid var(--background) !important;
+    border-radius: 10px;
+}
+
+.keret:hover{
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+}
+
+.keret h1{
+    text-align: center;
+}
+
+.keret .lista{
+ text-align: center;
+}
 .edit,
 .delete {
     border-radius: 100%;

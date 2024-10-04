@@ -21,6 +21,19 @@ class Admin extends Controller {
         $this->view('admin/index', $data);
     }
 
+    public function reszletek($id){
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
+
+        $data = [
+            'reszletek' => $this->adminModel->egyAdottEsemenyReszletei($id),
+            'jelentkezok' => $this->adminModel->jelentkezokLekerzdezese($id)
+        ];
+
+        $this->view('admin/reszletek/index', $data);
+    }
+
     // Esemény hozzáadása
     public function hozzaadas() {
         if (isLoggedIn()) {
