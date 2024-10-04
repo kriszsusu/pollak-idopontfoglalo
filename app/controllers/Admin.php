@@ -101,6 +101,16 @@ class Admin extends Controller {
                         echo "A feltöltés nem sikerült.";
                     }
                 }
+                else{
+                    if ($this->adminModel->esemenySzerkesztese($id, false, $cim, $leiras, $datum, $tanteremID)) {
+                        // Az adatbázisba mentés sikerült
+                        header('location:' . URLROOT . '/admin');
+                    }
+                    else {
+                        echo "Az adatbázisba mentés nem sikerült.";
+                        die;
+                    }
+                }
             }
             else {
                 // Ha nem POST metódussal érkezik a kérés, akkor az admin hozzáadása oldalra irányítjuk a felhasználót.

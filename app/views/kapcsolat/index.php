@@ -20,7 +20,7 @@
             <hr>
             <p><i class='bx bxs-envelope'></i><b>E-mail cím:</b><span class="datas">pollak@pollakszentes.hu</span></p>
             <hr>
-            <p><i class='bx bxs-building-house'></i><b>Székely:</b><span class="datas">6600 Szentes, Apponyi Tér 1.</span></p>
+            <p><i class='bx bxs-building-house'></i><b>Székhely:</b><span class="datas">6600 Szentes, Apponyi Tér 1.</span></p>
             <hr>
             <p><i class='bx bxs-package'></i><b>Postacím:</b><span class="datas">6600 Szentes, Apponyi Tér 1.</span></p>
             <hr>

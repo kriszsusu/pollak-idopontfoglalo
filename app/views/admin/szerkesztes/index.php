@@ -25,7 +25,7 @@
 
                <div class="text-input">
                     <i class="ri-lock-fill"></i>
-                    <input type="file" name="kep" placeholder="Kép" maxlength="500" required value="<?php echo $data['esemeny']->kep ?>" >
+                    <input type="file" name="kep" placeholder="Kép" maxlength="500" value="<?php echo URLROOT; ?>/public/img/<?php echo $data['esemeny']->kep ?>" >
                </div>
                <div class="text-input">
                     <i class="ri-lock-fill"></i>

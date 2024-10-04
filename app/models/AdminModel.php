@@ -57,14 +57,24 @@ class AdminModel {
     }
 
     public function esemenySzerkesztese($id, $kep, $cim, $leiras, $datum, $tanteremID) {
-        $this->db->query('UPDATE esemenyek SET kep = :kep, cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID WHERE id = :id');
-        $this->db->bind(':id', $id);
-        $this->db->bind(':kep', $kep);
-        $this->db->bind(':cim', $cim);
-        $this->db->bind(':leiras', $leiras);
-        $this->db->bind(':datum', $datum);
-        $this->db->bind(':tanteremID', $tanteremID);
-
+        if ($kep) {
+            $this->db->query('UPDATE esemenyek SET kep = :kep, cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID WHERE id = :id');
+            $this->db->bind(':id', $id);
+            $this->db->bind(':kep', $kep);
+            $this->db->bind(':cim', $cim);
+            $this->db->bind(':leiras', $leiras);
+            $this->db->bind(':datum', $datum);
+            $this->db->bind(':tanteremID', $tanteremID);
+        }
+        else{
+            $this->db->query('UPDATE esemenyek SET cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID WHERE id = :id');
+            $this->db->bind(':id', $id);
+            $this->db->bind(':cim', $cim);
+            $this->db->bind(':leiras', $leiras);
+            $this->db->bind(':datum', $datum);
+            $this->db->bind(':tanteremID', $tanteremID);
+        }
+        
         if ($this->db->execute()) {
             return true;
         } else {
