@@ -80,7 +80,8 @@ class Admin extends Controller {
                 // Ha nem POST metódussal érkezik a kérés, akkor az admin hozzáadása oldalra irányítjuk a felhasználót.
 
                 $data = [
-                    'terem' => $this->adminModel->terem()
+                    'terem' => $this->adminModel->terem(),
+                    'szak' => $this->adminModel->szak()
                 ];
 
                 $this->view('admin/hozzaadas/index', $data);
@@ -114,7 +115,7 @@ class Admin extends Controller {
                         echo "A feltöltés sikerült, a fájl neve: " . $eredmeny;
 
                         // Adatbázisba mentés: a FORM összes adata a $_POST tömbben van, a kép neve pedig az $eredmeny változóban.
-                        if ($this->adminModel->esemenySzerkesztese($id, $eredmeny, $cim, $leiras, $datum, $tanteremID)) {
+                        if ($this->adminModel->esemenySzerkesztese($id, $eredmeny, $cim, $leiras, $datum, $tanteremID, $szakID)) {
                             // Az adatbázisba mentés sikerült
                             header('location:' . URLROOT . '/admin');
                         }
@@ -128,7 +129,7 @@ class Admin extends Controller {
                     }
                 }
                 else{
-                    if ($this->adminModel->esemenySzerkesztese($id, false, $cim, $leiras, $datum, $tanteremID)) {
+                    if ($this->adminModel->esemenySzerkesztese($id, false, $cim, $leiras, $datum, $tanteremID, $szakID)) {
                         // Az adatbázisba mentés sikerült
                         header('location:' . URLROOT . '/admin');
                     }
@@ -143,8 +144,8 @@ class Admin extends Controller {
 
                 $data = [
                     'esemeny' => $this->adminModel->esemeny($id),
-                    'terem' => $this->adminModel->terem()
-
+                    'terem' => $this->adminModel->terem(),
+                    'szak' => $this->adminModel->szak()
                 ];
 
                 $this->view('admin/szerkesztes/index', $data);

@@ -43,6 +43,14 @@
                </div>
 
                <div>
+                    <select name="szak" id="id-tanterem">
+                        <?php foreach ($data['szak'] as $fajta): ?>
+                            <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->neve; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+               </div>
+
+               <div>
                     <textarea name="leiras" id="" cols="40" rows="8" placeholder="Leírás" required></textarea>
                </div>
 

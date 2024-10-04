@@ -11,7 +11,8 @@ class Main extends Controller {
 
         $data = [
             'main' => $this->mainModel->kartyaLekerdezes(),
-            'idopontok' => $this->mainModel->idopontokLekerdezes(),
+            'idopontokNap' => $this->mainModel->idopontokLekerdezesNap(),
+            'idopontokOra' => $this->mainModel->idopontokLekerdezesOra(),
             'szak' => $this->mainModel->szakokLekerdezes(),
             'oktatok' => $this->mainModel->oktatokLekerdezes(),
             'termek' => $this->mainModel->teremLekerdezes()
@@ -36,10 +37,12 @@ class Main extends Controller {
 
     public function termekekszurese() {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $keresendo = $_POST['keresendo'];
-        $szuro = $_POST['szuro'];
+        // $keresendo = $_POST['keresendo'];
+        // $szuro = $_POST['szuro'];
+        // $szuroObj = json_decode($_POST['szuroObj']);
 
-        $termekek = $this->mainModel->termekekSzurese($keresendo, $szuro);
+        $termekek = $this->mainModel->termekekSzurese($_POST['szuroObj']);
+        // $termekek = $this->mainModel->termekekSzurese($keresendo, $szuro);
         
         $data = [
             'termekek' => $termekek

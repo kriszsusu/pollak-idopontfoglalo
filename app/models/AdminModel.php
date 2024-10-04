@@ -32,6 +32,14 @@ class AdminModel {
         return $results;
     }
 
+    // Szak lekérdezése
+    public function szak() {
+        $this->db->query('SELECT * FROM szakok');
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
     // Esemény lekérdezése id alapján
     public function esemeny($id) {
         $this->db->query('SELECT * FROM esemenyek WHERE id = :id AND torolt = 0');
@@ -56,6 +64,7 @@ class AdminModel {
                           FROM esemenyek e
                           INNER JOIN users u ON e.tanarID = u.id
                           INNER JOIN tanterem t ON e.tanteremID = t.id
+                          INNER JOIN szakok s ON e.szakID = s.id
                           LEFT JOIN jelentkezok j ON e.id = j.esemenyID
                           WHERE e.id = :id AND e.torolt = 0'
                         );
@@ -67,12 +76,13 @@ class AdminModel {
 
     // Új esemény hozzáadása
     public function ujEsemenyHozzadasa($data, $kep) {
-        $this->db->query('INSERT INTO esemenyek (kep, cim, leiras, datum, tanteremID, tanarID) VALUES (:kep, :cim, :leiras, :datum, :tanteremID, :tanarID)');
+        $this->db->query('INSERT INTO esemenyek (kep, cim, leiras, datum, tanteremID, tanarID, szakID) VALUES (:kep, :cim, :leiras, :datum, :tanteremID, :tanarID, :szakID)');
         $this->db->bind(':kep', $kep);
         $this->db->bind(':cim', $data['cim']);
         $this->db->bind(':leiras', $data['leiras']);
         $this->db->bind(':datum', $data['datum']);
         $this->db->bind(':tanteremID', $data['terem']);
+        $this->db->bind(':szakID', $data['szak']);
         $this->db->bind(':tanarID', $_SESSION['user_id']);
         
         if ($this->db->execute()) {
@@ -86,21 +96,23 @@ class AdminModel {
     // Esemény szerkesztése
     public function esemenySzerkesztese($id, $kep, $cim, $leiras, $datum, $tanteremID) {
         if ($kep) {
-            $this->db->query('UPDATE esemenyek SET kep = :kep, cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID WHERE id = :id');
+            $this->db->query('UPDATE esemenyek SET kep = :kep, cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID, szakID = :szakID WHERE id = :id');
             $this->db->bind(':id', $id);
             $this->db->bind(':kep', $kep);
             $this->db->bind(':cim', $cim);
             $this->db->bind(':leiras', $leiras);
             $this->db->bind(':datum', $datum);
             $this->db->bind(':tanteremID', $tanteremID);
+            $this->db->bind(':szakID', $szakID);
         }
         else{
-            $this->db->query('UPDATE esemenyek SET cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID WHERE id = :id');
+            $this->db->query('UPDATE esemenyek SET cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID, szakID = :szakID WHERE id = :id');
             $this->db->bind(':id', $id);
             $this->db->bind(':cim', $cim);
             $this->db->bind(':leiras', $leiras);
             $this->db->bind(':datum', $datum);
             $this->db->bind(':tanteremID', $tanteremID);
+            $this->db->bind(':szakID', $szakID);
         }
         
         if ($this->db->execute()) {

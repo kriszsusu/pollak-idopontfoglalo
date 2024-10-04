@@ -45,17 +45,24 @@
   <h2>Szűrők</h2>
 
     <div class="szures">
-        <select name="" onchange="szures(this)" id="idopontok">
+        <select name="" onchange="szures(this)" id="nap">
             <option value="0">Válassz időpontot!</option>
-            <?php foreach ($data['idopontok'] as $fajta): ?>
-                <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->datum; ?></option>
+            <?php foreach ($data['idopontokNap'] as $fajta): ?>
+                <option value="<?php echo $fajta->datum ?>"><?php echo $fajta->datum; ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <select name="" onchange="szures(this)" id="ora">
+            <option value="0">Válassz időpontot!</option>
+            <?php foreach ($data['idopontokOra'] as $fajta): ?>
+                <option value="<?php echo substr($fajta->datum, 0, 5); ?>"><?php echo substr($fajta->datum, 0, 5); ?></option>
             <?php endforeach; ?>
         </select>
 
         <select name="" onchange="szures(this)" id="szak">
-            <option value="0">Válassz Eseményt!</option>
+            <option value="0">Válassz Szakot!</option>
             <?php foreach ($data['szak'] as $fajta): ?>
-                <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->cim; ?></option>
+                <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->neve; ?></option>
             <?php endforeach; ?>
         </select>
 

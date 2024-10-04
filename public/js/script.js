@@ -29,9 +29,9 @@ window.onload = function () {
       window.location.replace(window.location.href.split("?")[0]);
     }, 2000);
   }
-  setInterval(()=>{
-    plusSlides(1)
-  },4000)
+  setInterval(() => {
+    plusSlides(1);
+  }, 4000);
 };
 
 // When the user clicks anywhere outside of the modal, close it
@@ -89,67 +89,80 @@ function showSlides(n) {
   }
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].className += " active";
-  dots[slideIndex+3 - 1].className += " active";
-  dots[slideIndex+6 - 1].className += " active";
+  dots[slideIndex + 3 - 1].className += " active";
+  dots[slideIndex + 6 - 1].className += " active";
 }
 
 function kereses() {
   var keresendo = $("#searchBox").val();
 
-  if(keresendo != '' && keresendo.length > 2){
-      $.ajax({
-          url: "./kereses/termekekkeresese",
-          method: "POST",
-          data: {
-              keresendo: keresendo
-          },
-          success: function(data){
-              document.getElementById("keresesiEredmenyek").innerHTML = data;
-              document.getElementById("torles").style.display = "none";
-          },
-          error: function(){
-              console.log("hiba történt a keresés során!");
-          }
-      });
-  }
-  else {
-      document.getElementById("keresesiEredmenyek").innerHTML = '';
-      document.getElementById("torles").style.display = "flex";
+  if (keresendo != "" && keresendo.length > 2) {
+    $.ajax({
+      url: "./kereses/termekekkeresese",
+      method: "POST",
+      data: {
+        keresendo: keresendo,
+      },
+      success: function (data) {
+        document.getElementById("keresesiEredmenyek").innerHTML = data;
+        document.getElementById("torles").style.display = "none";
+      },
+      error: function () {
+        console.log("hiba történt a keresés során!");
+      },
+    });
+  } else {
+    document.getElementById("keresesiEredmenyek").innerHTML = "";
+    document.getElementById("torles").style.display = "flex";
   }
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
   kereses();
 
-  $('#searchBox').keyup(function(){
-      kereses();
+  $("#searchBox").keyup(function () {
+    kereses();
   });
 });
 
-function szures(selectobject){
+var szuroObj = {
+  nap: "",
+  ora: "",
+  szak: "",
+  oktatok: "",
+  termek: "",
+};
 
-  var keresendo = selectobject.value
+function szures(selectobject) {
+  var keresendo = selectobject.value;
   var szuro = selectobject.id;
-  console.log(keresendo);
-  if(keresendo != 0){
-      $.ajax({
-          url: "./kereses/termekekszurese",
-          method: "POST",
-          data: {
-              keresendo: keresendo,
-              szuro: szuro
-          },
-          success: function(data){
-              document.getElementById("keresesiEredmenyek").innerHTML = data;
-              document.getElementById("torles").style.display = "none";
-          },
-          error: function(){
-              console.log("hiba történt a keresés során!");
-          }
-      });
+
+  if (keresendo != 0) {
+    szuroObj[szuro] = keresendo;
+  } else {
+    szuroObj[szuro] = "";
   }
-  else {
-      document.getElementById("keresesiEredmenyek").innerHTML = '';
-      document.getElementById("torles").style.display = "flex";
+
+  console.log(szuroObj);
+  if (keresendo != 0) {
+    $.ajax({
+      url: "./kereses/termekekszurese",
+      method: "POST",
+      data: {
+        // keresendo: keresendo,
+        // szuro: szuro,
+        szuroObj: szuroObj,
+      },
+      success: function (data) {
+        document.getElementById("keresesiEredmenyek").innerHTML = data;
+        document.getElementById("torles").style.display = "none";
+      },
+      error: function () {
+        console.log("hiba történt a keresés során!");
+      },
+    });
+  } else {
+    document.getElementById("keresesiEredmenyek").innerHTML = "";
+    document.getElementById("torles").style.display = "flex";
   }
 }

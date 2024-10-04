@@ -9,21 +9,41 @@ class MainModel {
 
     // Főoldal adatainak lekérdezése
     public function kartyaLekerdezes() {
-        $this->db->query('SELECT e.cim, e.leiras, e.kep, e.datum, e.id AS "esemeny_id", u.nev, t.neve, t.ferohely, count(j.email) as "jelentkezok"
-                        FROM esemenyek e
-                        INNER JOIN users u ON e.tanarID = u.id
-                        INNER JOIN tanterem t ON e.tanteremID = t.id
-                        LEFT JOIN jelentkezok j ON e.id = j.esemenyID
-                        WHERE e.torolt = 0
-                        GROUP BY e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely');
+        $this->db->query(
+            'SELECT
+                e.cim, e.leiras, e.kep, e.datum, e.id AS "esemeny_id", s.neve,
+                u.nev, t.neve, t.ferohely, count(j.email) as "jelentkezok"
+            FROM
+                esemenyek e
+            INNER JOIN
+                users u ON e.tanarID = u.id
+            INNER JOIN
+                tanterem t ON e.tanteremID = t.id
+            INNER JOIN
+                szakok s ON e.szakID = s.id
+            LEFT JOIN
+                jelentkezok j ON e.id = j.esemenyID
+            WHERE
+                e.torolt = 0
+            GROUP BY
+                e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely
+            ');
+
         $results = $this->db->resultSet();
         
         return $results;
     }
 
     // Időpontok lekérdezése
-    public function idopontokLekerdezes() {
-        $this->db->query('SELECT id, datum FROM esemenyek WHERE torolt = 0');
+    public function idopontokLekerdezesNap() {
+        $this->db->query('SELECT DATE(datum) AS datum FROM esemenyek WHERE torolt = 0 group by datum');
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
+    public function idopontokLekerdezesOra() {
+        $this->db->query('SELECT TIME(datum) AS datum FROM esemenyek WHERE torolt = 0 group by datum');
         $results = $this->db->resultSet();
         
         return $results;
@@ -31,7 +51,7 @@ class MainModel {
 
     // Szakok lekérdezése
     public function szakokLekerdezes() {
-        $this->db->query('SELECT id, cim FROM esemenyek WHERE torolt = 0');
+        $this->db->query('SELECT id, neve FROM szakok');
         $results = $this->db->resultSet();
         
         return $results;
@@ -69,8 +89,25 @@ class MainModel {
     public function termekekKeresese($keresendo) {
         $keresendo = $this->replaceHungarianAccents($keresendo);
 
-        $this->db->query("      
-          SELECT e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok' FROM esemenyek e INNER JOIN users u ON e.tanarID = u.id INNER JOIN tanterem t ON e.tanteremID = t.id LEFT JOIN jelentkezok j ON e.id = j.esemenyID WHERE e.torolt = 0 AND (e.cim LIKE :keresendo OR e.leiras LIKE :keresendo OR u.nev LIKE :keresendo) GROUP BY e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;     
+        $this->db->query(
+        "SELECT
+            e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', s.neve,
+            u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok'
+        FROM
+            esemenyek e
+        INNER JOIN
+            users u ON e.tanarID = u.id
+        INNER JOIN
+            tanterem t ON e.tanteremID = t.id
+        LEFT JOIN
+            jelentkezok j ON e.id = j.esemenyID
+        INNER JOIN
+            szakok s ON e.szakID = s.id
+        WHERE
+            e.torolt = 0
+            AND (e.cim LIKE :keresendo OR e.leiras LIKE :keresendo OR u.nev LIKE :keresendo)
+        GROUP BY
+            e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;     
         ");
 
         $this->db->bind(':keresendo', "%$keresendo%");
@@ -78,31 +115,37 @@ class MainModel {
     }
 
         // Termékek szűrése
-        public function termekekSzurese($keresendo, $szuro) {
-            $keresendo = $this->replaceHungarianAccents($keresendo);
+        public function termekekSzurese($szuroObj) {
+            $this->db->query(
+                "SELECT 
+                    e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', s.neve,
+                    u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok' 
+                FROM 
+                    esemenyek e 
+                INNER JOIN 
+                    users u ON e.tanarID = u.id 
+                INNER JOIN 
+                    tanterem t ON e.tanteremID = t.id
+                INNER JOIN
+                    szakok s ON e.szakID = s.id
+                LEFT JOIN 
+                    jelentkezok j ON e.id = j.esemenyID
+                WHERE 
+                    e.torolt = 0 
+                    AND (:szak = '' OR s.id = :szak)
+                    AND (:tanar = '' OR u.id = :tanar)
+                    AND (:terem = '' OR t.id = :terem)
+                    AND (:nap = '' OR DATE(e.datum) = :nap)
+                    AND (:ora = '' OR TIME_FORMAT(e.datum, '%H:%i') >= :ora)
+                GROUP BY 
+                    e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;
+            ");
 
-            if($szuro == "termek") {
-                    $this->db->query("      
-                SELECT e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok' FROM esemenyek e INNER JOIN users u ON e.tanarID = u.id INNER JOIN tanterem t ON e.tanteremID = t.id LEFT JOIN jelentkezok j ON e.id = j.esemenyID WHERE e.torolt = 0 AND t.id = :keresendo GROUP BY e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;
-                ");
-            }else if($szuro == "szak") {
-                $this->db->query("      
-                SELECT e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok' FROM esemenyek e INNER JOIN users u ON e.tanarID = u.id INNER JOIN tanterem t ON e.tanteremID = t.id LEFT JOIN jelentkezok j ON e.id = j.esemenyID WHERE e.torolt = 0 AND e.id = :keresendo GROUP BY e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;
-                ");
-
-            }else if($szuro == "oktatok") {
-                $this->db->query("      
-                SELECT e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok' FROM esemenyek e INNER JOIN users u ON e.tanarID = u.id INNER JOIN tanterem t ON e.tanteremID = t.id LEFT JOIN jelentkezok j ON e.id = j.esemenyID WHERE e.torolt = 0 AND u.id = :keresendo GROUP BY e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;
-                ");
-            }else if($szuro == "idopontok") {
-                $this->db->query("      
-                SELECT e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok' FROM esemenyek e INNER JOIN users u ON e.tanarID = u.id INNER JOIN tanterem t ON e.tanteremID = t.id LEFT JOIN jelentkezok j ON e.id = j.esemenyID WHERE e.torolt = 0 AND e.id = :keresendo GROUP BY e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;
-                ");
-            }
-    
-            
-    
-            $this->db->bind(':keresendo', "$keresendo");
+            $this->db->bind(':nap', $szuroObj['nap']);
+            $this->db->bind(':ora', $szuroObj['ora']);
+            $this->db->bind(':tanar', $szuroObj['oktatok']);
+            $this->db->bind(':szak', $szuroObj['szak']);
+            $this->db->bind(':terem', $szuroObj['termek']);
             return $this->db->resultSet();
         }
 
