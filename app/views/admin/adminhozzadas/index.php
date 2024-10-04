@@ -26,6 +26,11 @@
                     <input type="password" name="jelszo" placeholder="jelszó:" maxlength="500" required>
                </div>
 
+               <div class="text-input">
+                    <i class='bx bxs-photo-album'></i>
+                    <input type="password" name="jelszo-re" placeholder="jelszó újra:" maxlength="500" required>
+               </div>
+
                <button type="submit" class="login-btn">Hozzáadás</button>
           </div>
      </div>
