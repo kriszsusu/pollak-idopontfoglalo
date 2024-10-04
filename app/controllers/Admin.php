@@ -21,6 +21,19 @@ class Admin extends Controller {
         $this->view('admin/index', $data);
     }
 
+    public function adminhozzadas() {
+        
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
+
+        $data = [
+            //'main' => $this->adminModel->kartyaLekerdezes()
+        ];
+
+        $this->view('admin/adminhozzadas/index', $data);
+    }
+
     // Esemény hozzáadása
     public function hozzaadas() {
         if (isLoggedIn()) {
