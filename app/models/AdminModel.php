@@ -7,6 +7,7 @@ class AdminModel {
         $this->db = new Database;
     }
 
+    // Kártyák lekérdezése
     public function kartyaLekerdezes() {
         $this->db->query('SELECT *, esemenyek.id AS "esemeny_id" FROM esemenyek INNER JOIN users ON esemenyek.tanarID = users.id WHERE esemenyek.torolt = 0 AND users.id = :id');
         $this->db->bind(':id', $_SESSION['user_id']);
@@ -15,6 +16,7 @@ class AdminModel {
         return $results;
     }
 
+    // Tanárok lekérdezése
     public function tanarok() {
         $this->db->query('SELECT id,nev FROM users WHERE torolt = 0');
         $results = $this->db->resultSet();
@@ -22,6 +24,7 @@ class AdminModel {
         return $results;
     }
 
+    // Tanterem lekérdezése
     public function terem() {
         $this->db->query('SELECT * FROM tanterem WHERE torolt = 0');
         $results = $this->db->resultSet();
@@ -36,6 +39,30 @@ class AdminModel {
         $result = $this->db->single();
         
         return $result;
+    }
+
+    // Jelentkezők lekérdezése
+    public function jelentkezokLekerzdezese($id) {
+        $this->db->query('SELECT j.email FROM jelentkezok j INNER JOIN esemenyek e ON j.esemenyID = e.id WHERE e.torolt = 0 AND e.id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
+    // Egy adott esemény részleteinek lekérdezése
+    public function egyAdottEsemenyReszletei($id) {
+        $this->db->query('SELECT e.cim, e.leiras, e.kep, e.datum, e.id AS "esemeny_id", u.nev, t.neve, t.ferohely, count(j.email) as "jelentkezok"
+                          FROM esemenyek e
+                          INNER JOIN users u ON e.tanarID = u.id
+                          INNER JOIN tanterem t ON e.tanteremID = t.id
+                          LEFT JOIN jelentkezok j ON e.id = j.esemenyID
+                          WHERE e.id = :id AND e.torolt = 0'
+                        );
+        $this->db->bind(':id', $id);
+        $results = $this->db->single();
+        
+        return $results;
     }
 
     // Új esemény hozzáadása
@@ -56,6 +83,7 @@ class AdminModel {
         }
     }
 
+    // Esemény szerkesztése
     public function esemenySzerkesztese($id, $kep, $cim, $leiras, $datum, $tanteremID) {
         if ($kep) {
             $this->db->query('UPDATE esemenyek SET kep = :kep, cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID WHERE id = :id');
@@ -82,6 +110,7 @@ class AdminModel {
         }
     }
 
+    // Esemény törlése
     public function torles($id) {
         $this->db->query('UPDATE esemenyek SET torolt = 1 WHERE id = :id');
         $this->db->bind(':id', $id);

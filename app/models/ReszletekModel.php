@@ -21,6 +21,7 @@ class ReszletekModel {
         
         return $results;
     }
+    
     //Tiltott email ellenőrzés
     public function emailHozzadas($esemenyID, $email){
 
