@@ -133,4 +133,19 @@ class AdminModel {
             return false;
         }
     }
+
+    // Admin hozzáadása
+    public function adminHozzadas($felhasznalonev, $jelszo, $nev) {
+        $this->db->query('INSERT INTO users (felhasznalonev, nev, jelszo) VALUES (:felhasznalonev, :nev, :jelszo)');
+        $this->db->bind(':felhasznalonev', $felhasznalonev);
+        $this->db->bind(':nev', $nev);
+        $this->db->bind(':jelszo', password_hash($jelszo, PASSWORD_BCRYPT));
+        
+        if ($this->db->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

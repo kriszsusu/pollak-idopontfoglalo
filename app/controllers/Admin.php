@@ -40,6 +40,36 @@ class Admin extends Controller {
             header('location:' . URLROOT . '/user/login');
         }
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+            $felhasznalonev = trim($_POST['felhasznalonev']);
+            $nev = trim($_POST['nev']);
+            $jelszo = trim($_POST['jelszo']);
+            $jelszoUjra = trim($_POST['jelszo-ujra']);
+
+            if ($jelszo == $jelszoUjra) {
+                if ($this->adminModel->adminHozzadas($felhasznalonev, $jelszo, $nev)) {
+                    // Az adatbázisba mentés sikerült
+                    header('location:' . URLROOT . '/admin');
+                }
+                else {
+                    echo "Az adatbázisba mentés nem sikerült.";
+                    die;
+                }
+            }
+            else {
+                echo "A két jelszó nem egyezik meg.";
+                die;
+            }
+        }
+        else {
+            $data = [
+            ];
+
+            $this->view('admin/adminhozzadas/index', $data);
+        }
+
         $data = [
             //'main' => $this->adminModel->kartyaLekerdezes()
         ];
@@ -96,6 +126,7 @@ class Admin extends Controller {
         }    
     }
 
+    // Esemény szerkesztése
     public function szerkesztes($id) {
         if (isLoggedIn()) {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
