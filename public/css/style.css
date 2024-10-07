@@ -150,6 +150,14 @@ img {
         width: 300px;
     }
 }
+
+@media screen and (max-width: 1200px) {
+    .szures{
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+}
 /* Slideshow container */
 .slideshow-container {
     width: 75%;

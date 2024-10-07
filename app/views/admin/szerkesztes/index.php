@@ -40,6 +40,15 @@
                     </select>
                </div>
 
+
+               <div>
+                    <select name="tanar" id="id-tanar">
+                        <?php foreach ($data['tanarok'] as $fajta): ?>
+                            <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->nev; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+               </div>
+
                <div>
                     <select name="szak" id="id-tanterem">
                         <?php foreach ($data['szak'] as $fajta): ?>
