@@ -137,6 +137,7 @@ class Admin extends Controller {
                 $leiras = trim($_POST['leiras']);
                 $datum = trim($_POST['datum']);
                 $tanteremID = trim($_POST['tanteremID']);
+                $szakID = trim($_POST['szak']);
                 $tanarID = trim($_POST['tanar']);
 
                 // Feltölés...
