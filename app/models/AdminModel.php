@@ -75,7 +75,7 @@ class AdminModel {
 
     // Új esemény hozzáadása
     public function ujEsemenyHozzadasa($data, $kep) {
-        $this->db->query('INSERT INTO esemenyek (kep, cim, leiras, datum, tanteremID, tanarID, szakID) VALUES (:kep, :cim, :leiras, :datum, :tanteremID, :tanar, :szakID)');
+        $this->db->query('INSERT INTO esemenyek (kep, cim, leiras, datum, tanteremID, tanarID, szakID) VALUES (:kep, :cim, :leiras, :datum, :tanteremID, :tanarID, :szakID)');
         $this->db->bind(':kep', $kep);
         $this->db->bind(':cim', $data['cim']);
         $this->db->bind(':leiras', $data['leiras']);
