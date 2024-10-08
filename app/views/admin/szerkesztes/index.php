@@ -35,7 +35,7 @@
                <div>
                     <select name="tanteremID" id="id-tanterem">
                         <?php foreach ($data['terem'] as $fajta): ?>
-                            <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->neve; ?></option>
+                            <option class="marka" value="<?php echo $fajta->id; ?>" <?php $data['esemeny']->tanteremID == $fajta->id ? echo 'selected' : echo '' ?> ><?php echo $fajta->neve; ?></option>
                         <?php endforeach; ?>
                     </select>
                </div>
@@ -44,7 +44,7 @@
                <div>
                     <select name="tanar" id="id-tanar">
                         <?php foreach ($data['tanarok'] as $fajta): ?>
-                            <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->nev; ?></option>
+                            <option class="marka" value="<?php echo $fajta->id; ?>" <?php $data['esemeny']->tanarID == $fajta->id ? echo 'selected' : echo '' ?> ><?php echo $fajta->nev; ?></option>
                         <?php endforeach; ?>
                     </select>
                </div>
@@ -52,7 +52,7 @@
                <div>
                     <select name="szak" id="id-tanterem">
                         <?php foreach ($data['szak'] as $fajta): ?>
-                            <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->neve; ?></option>
+                            <option class="marka" value="<?php echo $fajta->id; ?>" <?php $data['esemeny']->szakID == $fajta->id ? echo 'selected' : echo '' ?> ><?php echo $fajta->neve; ?></option>
                         <?php endforeach; ?>
                     </select>
                </div>
