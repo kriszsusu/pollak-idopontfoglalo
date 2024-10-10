@@ -69,7 +69,7 @@ class AdminModel {
 
     // Jelentkezők lekérdezése
     public function jelentkezokLekerzdezese($id) {
-        $this->db->query('SELECT j.email FROM jelentkezok j INNER JOIN esemenyek e ON j.esemenyID = e.id WHERE e.torolt = 0 AND e.id = :id');
+        $this->db->query('SELECT j.email, j.neve FROM jelentkezok j INNER JOIN esemenyek e ON j.esemenyID = e.id WHERE e.torolt = 0 AND e.id = :id');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         

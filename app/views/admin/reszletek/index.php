@@ -25,17 +25,7 @@
                 <h3 class="idopont"><?php echo $data["reszletek"]->datum; ?></h3>
                 <br><br><br>
                 <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["reszletek"]->leiras));  ?></p>
-                <?php if($data["reszletek"]->ferohely - $data["reszletek"]->jelentkezok > 0) {?>
-                <form  class="jelentkezes" id="teszt" method="post">
-                    <input type="hidden" name="esemenyID" value="<?php echo $data['reszletek']->esemeny_id ?>">
-                    <input type="email" class="input" onkeyup="validate()" id="input" name="email" placeholder="példa@példa.com">
-                    <button type="submit" disabled id="myBtn" class="buttony buttony-disabled">Jelentkezés</button>
-                </form><?php 
-                }else{?>
-                    <div class="jelentkezes" id="teszt">
-                        <h3>NINCS HELY!</h3>
-                    </div>
-               <?php } ?>
+            
             </div>
             
         </div>
@@ -47,7 +37,7 @@
     <?php if (count($data["jelentkezok"]) > 0) : ?>
             <?php foreach ($data["jelentkezok"] as $sor): ?>
                 <div class="lista">
-                <h3 ><?php echo $sor->email?></h3>
+                <h3 >Neve: <?php echo $sor->neve?>, Email címe: <?php echo $sor->email?></h3>
                 <hr>
                 </div>
             <?php endforeach; ?>

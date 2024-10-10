@@ -49,9 +49,10 @@ class ReszletekModel {
             return false;
         }
 
-        $this->db->query('INSERT INTO jelentkezok (esemenyID, email) VALUES (:esemenyID, :email)');
+        $this->db->query('INSERT INTO jelentkezok (esemenyID, email, neve) VALUES (:esemenyID, :email, :neve)');
         $this->db->bind(':esemenyID', $esemenyID);
         $this->db->bind(':email', $email);
+        $this->db->bind(':neve', $neve);
 
 
         if ($this->db->execute()) {

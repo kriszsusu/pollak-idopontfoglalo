@@ -22,8 +22,9 @@ class Reszletek extends Controller {
 
             $esemenyID = (int)trim($_POST['esemenyID']);
             $email = trim($_POST['email']);
-            
-                if ($this->reszletekModel->emailHozzadas($esemenyID, $email)) {
+            $neve = trim($_POST['neve']);
+
+                if ($this->reszletekModel->emailHozzadas($esemenyID, $email, $neve)) {
                     // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
                     header('location:' . URLROOT . '/reszletek/' . $esemenyID . '?msg=0');
                 }
