@@ -48,7 +48,7 @@
         <select name="" onchange="szures(this)" id="nap">
             <option value="0">Válassz időpontot!</option>
             <?php foreach ($data['idopontokNap'] as $fajta): ?>
-                <option value="<?php echo $fajta->datum ?>"><?php echo $fajta->datum; ?></option>
+                <option value="<?php echo $fajta->datum ?>"><?php echo str_replace('-', '.', $fajta->datum); ?></option>
             <?php endforeach; ?>
         </select>
 
@@ -60,23 +60,19 @@
         </select>
 
         <select name="" onchange="szures(this)" id="szak">
-            <option value="0">Válassz Szakot!</option>
+            <option value="0">Válassz szakot!</option>
             <?php foreach ($data['szak'] as $fajta): ?>
                 <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->neve; ?></option>
             <?php endforeach; ?>
         </select>
 
-
-
         <select name="" onchange="szures(this)" id="oktatok">
-            <option value="0">Válassz Oktatót!</option>
+            <option value="0">Válassz oktatót!</option>
             <?php foreach ($data['oktatok'] as $fajta): ?>
                 <option value="<?php echo $fajta->id; ?>"><?php echo $fajta->nev; ?></option>
             <?php endforeach; ?>
         </select>
 
-
-   
         <select name="" onchange="szures(this)" id="termek">
             <option value="0">Válassz termet!</option>
             <?php foreach ($data['termek'] as $fajta): ?>
@@ -104,12 +100,15 @@
                           <br>
                           <p class="oktato">Oktató neve: <b><?php echo $sor->nev?></b></p>
                           <br>
-                          <p class="tanterem">Helyszin neve: <b><?php echo $sor->neve?></b></p>
+                          <p class="tanterem">Helyszín neve: <b><?php echo $sor->neve?></b></p>
                           <br>
-                          <p class="helyek">Hátralévő helyek szama: <b><?php echo $sor->ferohely - $sor->jelentkezok?></b></p>
+                          <p class="helyek">Hátralévő helyek száma: <b><?php echo $sor->ferohely - $sor->jelentkezok?></b></p>
                           <br>
-                          <p class="idopont">Esemény időpontja: <br> <?php echo str_replace("-", " ", $sor->datum)?></p>
+                          <p class="helyek">Téma: <b><?php echo $sor->tema?></b></p>
+                          <br>
+                          <p class="idopont">Esemény időpontja: <br> <?php $datum = new DateTime($sor->datum); echo $datum->format('Y.m.d H:i');?></p>
                           <a class="tovabb"  href="<?php echo URLROOT . "/reszletek/" . $sor->esemeny_id; ?>">Tovább</a>
+                          
                       </div>
                   </div>
               <?php endforeach; ?>

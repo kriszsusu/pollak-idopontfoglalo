@@ -11,7 +11,7 @@ class MainModel {
     public function kartyaLekerdezes() {
         $this->db->query(
             'SELECT
-                e.cim, e.leiras, e.kep, e.datum, e.id AS "esemeny_id", s.neve,
+                e.tema, e.cim, e.leiras, e.kep, e.datum, e.id AS "esemeny_id", s.neve,
                 u.nev, t.neve, t.ferohely, count(j.email) as "jelentkezok"
             FROM
                 esemenyek e
@@ -91,7 +91,7 @@ class MainModel {
 
         $this->db->query(
         "SELECT
-            e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', s.neve,
+           e.tema, e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', s.neve,
             u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok'
         FROM
             esemenyek e
@@ -118,7 +118,7 @@ class MainModel {
         public function termekekSzurese($szuroObj) {
             $this->db->query(
                 "SELECT 
-                    e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', s.neve,
+                   e.tema, e.cim, e.leiras, e.kep, e.datum, e.id AS 'esemeny_id', s.neve,
                     u.nev, t.neve, t.ferohely, count(j.email) as 'jelentkezok' 
                 FROM 
                     esemenyek e 

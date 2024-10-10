@@ -9,7 +9,26 @@ class AdminModel {
 
     // Kártyák lekérdezése
     public function kartyaLekerdezes() {
-        $this->db->query('SELECT *, esemenyek.id AS "esemeny_id" FROM esemenyek INNER JOIN users ON esemenyek.tanarID = users.id WHERE esemenyek.torolt = 0 ');
+        $this->db->query(
+            'SELECT
+                e.tema, e.cim, e.leiras, e.kep, e.datum, e.id AS "esemeny_id", s.neve,
+                u.nev, t.neve, t.ferohely, count(j.email) as "jelentkezok"
+            FROM
+                esemenyek e
+            INNER JOIN
+                users u ON e.tanarID = u.id
+            INNER JOIN
+                tanterem t ON e.tanteremID = t.id
+            INNER JOIN
+                szakok s ON e.szakID = s.id
+            LEFT JOIN
+                jelentkezok j ON e.id = j.esemenyID
+            WHERE
+                e.torolt = 0
+            GROUP BY
+                e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely
+            ');
+
         $results = $this->db->resultSet();
         
         return $results;
@@ -75,7 +94,7 @@ class AdminModel {
 
     // Új esemény hozzáadása
     public function ujEsemenyHozzadasa($data, $kep) {
-        $this->db->query('INSERT INTO esemenyek (kep, cim, leiras, datum, tanteremID, tanarID, szakID) VALUES (:kep, :cim, :leiras, :datum, :tanteremID, :tanarID, :szakID)');
+        $this->db->query('INSERT INTO esemenyek (kep, cim, leiras, datum, tanteremID, tanarID, szakID, tema) VALUES (:kep, :cim, :leiras, :datum, :tanteremID, :tanarID, :szakID, :tema)');
         $this->db->bind(':kep', $kep);
         $this->db->bind(':cim', $data['cim']);
         $this->db->bind(':leiras', $data['leiras']);
@@ -83,6 +102,7 @@ class AdminModel {
         $this->db->bind(':tanteremID', $data['terem']);
         $this->db->bind(':szakID', $data['szak']);
         $this->db->bind(':tanarID',  $data['tanar']);
+        $this->db->bind(':tema', $data['tema']);
         
         if ($this->db->execute()) {
             return true;
@@ -93,9 +113,9 @@ class AdminModel {
     }
 
     // Esemény szerkesztése
-    public function esemenySzerkesztese($id, $kep, $cim, $leiras, $datum, $tanteremID, $szakID, $tanarID) {
+    public function esemenySzerkesztese($id, $kep, $cim, $leiras, $datum, $tanteremID, $szakID, $tanarID, $tema) {
         if ($kep) {
-            $this->db->query('UPDATE esemenyek SET kep = :kep, cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID, szakID = :szakID, tanarID = :tanar  WHERE id = :id');
+            $this->db->query('UPDATE esemenyek SET kep = :kep, cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID, szakID = :szakID, tanarID = :tanar, tema = :tema  WHERE id = :id');
             $this->db->bind(':id', $id);
             $this->db->bind(':kep', $kep);
             $this->db->bind(':cim', $cim);
@@ -104,9 +124,10 @@ class AdminModel {
             $this->db->bind(':tanteremID', $tanteremID);
             $this->db->bind(':szakID', $szakID);
             $this->db->bind(':tanar', $tanarID);
+            $this->db->bind(':tema', $tema);
         }
         else{
-            $this->db->query('UPDATE esemenyek SET cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID, szakID = :szakID, tanarID = :tanar WHERE id = :id');
+            $this->db->query('UPDATE esemenyek SET cim = :cim, leiras = :leiras, datum = :datum, tanteremID = :tanteremID, szakID = :szakID, tanarID = :tanar, tema = :tema WHERE id = :id');
             $this->db->bind(':id', $id);
             $this->db->bind(':cim', $cim);
             $this->db->bind(':leiras', $leiras);
@@ -114,6 +135,7 @@ class AdminModel {
             $this->db->bind(':tanteremID', $tanteremID);
             $this->db->bind(':szakID', $szakID);
             $this->db->bind(':tanar', $tanarID);
+            $this->db->bind(':tema', $tema);
         }
         
         if ($this->db->execute()) {
@@ -141,6 +163,30 @@ class AdminModel {
         $this->db->bind(':felhasznalonev', $felhasznalonev);
         $this->db->bind(':nev', $nev);
         $this->db->bind(':jelszo', password_hash($jelszo, PASSWORD_BCRYPT));
+        
+        if ($this->db->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // esemény duplikálása
+    public function duplikalasModel($id) {
+        $this->db->query('SELECT * FROM esemenyek WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $result = $this->db->single();
+
+        $this->db->query('INSERT INTO esemenyek (kep, cim, leiras, datum, tanteremID, tanarID, szakID, tema) VALUES (:kep, :cim, :leiras, :datum, :tanteremID, :tanarID, :szakID, :tema)');
+        $this->db->bind(':kep', $result->kep);
+        $this->db->bind(':cim', $result->cim);
+        $this->db->bind(':leiras', $result->leiras);
+        $this->db->bind(':datum', $result->datum);
+        $this->db->bind(':tanteremID', $result->tanteremID);
+        $this->db->bind(':szakID', $result->szakID);
+        $this->db->bind(':tanarID', $result->tanarID);
+        $this->db->bind(':tema', $result->tema);
         
         if ($this->db->execute()) {
             return true;

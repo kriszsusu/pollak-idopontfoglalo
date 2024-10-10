@@ -57,7 +57,8 @@
                </div>
 
                <div>
-                    <textarea name="leiras" cols="40" rows="8" required><?php echo htmlspecialchars($data['esemeny']->leiras); ?></textarea>
+                    <textarea name="leiras" cols="40" rows="4" required><?php echo htmlspecialchars($data['esemeny']->leiras); ?></textarea>
+                    <textarea name="tema" cols="40" rows="4" required><?php echo htmlspecialchars($data['esemeny']->tema); ?></textarea>
                </div>
 
                <button type="submit" class="login-btn">Feltöltés</button>

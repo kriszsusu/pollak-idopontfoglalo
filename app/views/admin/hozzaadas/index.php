@@ -59,7 +59,11 @@
                </div>
 
                <div>
-                    <textarea name="leiras" id="" cols="40" rows="8" placeholder="Leírás" required></textarea>
+                    <textarea name="leiras" id="" cols="40" rows="4" placeholder="Leírás" required></textarea>
+               </div>
+
+               <div>
+                    <textarea name="tema" id="" cols="40" rows="4" placeholder="Téma" required></textarea>
                </div>
 
                <button type="submit" class="login-btn">Feltöltés</button>

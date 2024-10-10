@@ -19,6 +19,8 @@ class Admin extends Controller {
         ];
 
         $this->view('admin/index', $data);
+
+
     }
 
     public function reszletek($id){
@@ -139,6 +141,7 @@ class Admin extends Controller {
                 $tanteremID = trim($_POST['tanteremID']);
                 $szakID = trim($_POST['szak']);
                 $tanarID = trim($_POST['tanar']);
+                $tema = trim($_POST['tema']);
 
                 // Feltölés...
                 if ( $_FILES['kep']['tmp_name'] ) {
@@ -149,7 +152,7 @@ class Admin extends Controller {
                         echo "A feltöltés sikerült, a fájl neve: " . $eredmeny;
 
                         // Adatbázisba mentés: a FORM összes adata a $_POST tömbben van, a kép neve pedig az $eredmeny változóban.
-                        if ($this->adminModel->esemenySzerkesztese($id, $eredmeny, $cim, $leiras, $datum, $tanteremID, $szakID, $tanarID)) {
+                        if ($this->adminModel->esemenySzerkesztese($id, $eredmeny, $cim, $leiras, $datum, $tanteremID, $szakID, $tanarID, $tema)) {
                             // Az adatbázisba mentés sikerült
                             header('location:' . URLROOT . '/admin');
                         }
@@ -163,7 +166,7 @@ class Admin extends Controller {
                     }
                 }
                 else{
-                    if ($this->adminModel->esemenySzerkesztese($id, false, $cim, $leiras, $datum, $tanteremID, $szakID, $tanarID)) {
+                    if ($this->adminModel->esemenySzerkesztese($id, false, $cim, $leiras, $datum, $tanteremID, $szakID, $tanarID, $tema)) {
                         // Az adatbázisba mentés sikerült
                         header('location:' . URLROOT . '/admin');
                     }
@@ -213,6 +216,28 @@ class Admin extends Controller {
             $this->view('user/login');
         }
     }
+
+    public function duplikalas($id) {
+        if (isLoggedIn()) {
+
+            if ( $this->adminModel->duplikalasModel($id) ) {
+                // A duplikálás sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin');
+            }
+            else {
+                // A törlés nem sikerült
+                header('location:' . URLROOT . '/admin');
+            }
+        }
+        else {
+            $data = [
+
+            ];
+            $this->view('user/login');
+        }
+    }
+
+
 }
 
 

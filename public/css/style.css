@@ -269,7 +269,7 @@ img {
 }
 
 .container .box {
-    height: 550px;
+    width: 320px;
     margin: 20px;
     box-sizing: border-box;
     background-color: var(--main);
@@ -277,6 +277,7 @@ img {
     outline: none;
     border-radius: 8px;
     min-width: 320px;
+    max-height: 700px;
 }
 
 .box {
@@ -726,6 +727,25 @@ a {
 }
 
 .tovabb:hover {
+    background-color: #456472;
+    transition: 0.2s;
+}
+
+.duplikalas{
+    border-radius: 8px;
+    background-color: #6a9ab0;
+    color: var(--feher) !important;
+    padding: 6px;
+    text-align: center;
+    font-size: 15px !important;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    transition: 0.2s;
+}
+
+.duplikalas:hover{
     background-color: #456472;
     transition: 0.2s;
 }
