@@ -23,7 +23,7 @@ class ReszletekModel {
     }
     
     //Tiltott email ellenőrzés
-    public function emailHozzadas($esemenyID, $email){
+    public function emailHozzadas($esemenyID, $email, $neve){
 
         //Tiltott email ellenőrzés
         $emailprovider = explode("@", $email)[1];

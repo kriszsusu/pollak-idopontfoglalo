@@ -28,7 +28,7 @@
                         <a class="edit" href="<?php echo URLROOT ?>/admin/szerkesztes/<?php echo $sor->esemeny_id ?>" ><i class='bx bxs-edit-alt'></i></a>
                         <a class="delete" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/torles/<?php echo $sor->esemeny_id ?>"><i class='bx bxs-trash' ></i></a>
                         <a class="tovabb"  href="<?php echo URLROOT . "/admin/reszletek/" . $sor->esemeny_id; ?>">Tovább</a>
-                        <a class="duplikalas" onclick="return confirm('Biztos duplikálni szeretnéd?')" href="<?php echo URLROOT ?>/admin/duplikalas/<?php echo $sor->esemeny_id ?>">Duplikálás</a>
+                        <a class="duplikalas" href="<?php echo URLROOT ?>/admin/duplikalas/<?php echo $sor->esemeny_id ?>">Duplikálás</a>
                     </div>
                 </div>
             <?php endforeach; ?>
