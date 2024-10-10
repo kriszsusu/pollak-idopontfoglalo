@@ -106,7 +106,7 @@
                           <br>
                           <p class="helyek">Téma: <b><?php echo $sor->tema?></b></p>
                           <br>
-                          <p class="idopont">Esemény időpontja: <br> <?php $datum = new DateTime($sor->datum); echo $datum->format('Y.m.d H:i');?></p>
+                          <p class="idopont">Esemény időpontja: <br> <?php $datum = new DateTime($sor->datum); echo $datum->format('Y.m.d. H:i');?></p>
                           <a class="tovabb"  href="<?php echo URLROOT . "/reszletek/" . $sor->esemeny_id; ?>">Tovább</a>
                           
                       </div>
