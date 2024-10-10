@@ -48,7 +48,7 @@
         <select name="" onchange="szures(this)" id="nap">
             <option value="0">Válassz időpontot!</option>
             <?php foreach ($data['idopontokNap'] as $fajta): ?>
-                <option value="<?php echo $fajta->datum ?>"><?php echo str_replace('-', '.', $fajta->datum); ?></option>
+                <option value="<?php echo $fajta->datum ?>"><?php echo str_replace('-', '.', $fajta->datum) . "."; ?></option>
             <?php endforeach; ?>
         </select>
 
