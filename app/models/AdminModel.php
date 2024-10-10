@@ -179,7 +179,7 @@ class AdminModel {
         $result = $this->db->single();
 
         // Check if a duplicate already exists
-        $this->db->query('SELECT COUNT(*) as count FROM esemenyek WHERE kep = :kep AND cim = :cim AND datum = :datum');
+        $this->db->query('SELECT COUNT(*) as count FROM esemenyek WHERE kep = :kep AND cim = :cim AND datum = :datum AND torolt = 0');
         $this->db->bind(':kep', $result->kep);
         $this->db->bind(':cim', $result->cim);
         $this->db->bind(':datum', $result->datum);
