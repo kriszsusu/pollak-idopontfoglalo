@@ -178,6 +178,18 @@ class AdminModel {
         $this->db->bind(':id', $id);
         $result = $this->db->single();
 
+        // Check if a duplicate already exists
+        $this->db->query('SELECT COUNT(*) as count FROM esemenyek WHERE kep = :kep AND cim = :cim AND datum = :datum');
+        $this->db->bind(':kep', $result->kep);
+        $this->db->bind(':cim', $result->cim);
+        $this->db->bind(':datum', $result->datum);
+        $count = $this->db->single()->count;
+
+        // If the event already exists, do not insert
+        if ($count > 1) {
+            return false; // 2 Duplicates found
+        }
+
         $this->db->query('INSERT INTO esemenyek (kep, cim, leiras, datum, tanteremID, tanarID, szakID, tema) VALUES (:kep, :cim, :leiras, :datum, :tanteremID, :tanarID, :szakID, :tema)');
         $this->db->bind(':kep', $result->kep);
         $this->db->bind(':cim', $result->cim);
