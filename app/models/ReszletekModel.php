@@ -34,6 +34,14 @@ class ReszletekModel {
         if (count($tiltasrow) > 0) {
             return false;
         }
+
+        $this->db->query('SELECT nev from tiltottnevek where nev = :tiltottnev');
+        $this->db->bind('%:tiltottnev%', $neve);
+        $tiltott = $this->db->resultSet();
+
+        if (count($tiltott) > 0) {
+            return false;
+        }
         
         // Kis segítség a validáláshoz
         // Lekérdezzük, hogy az adott email cím már szerepel-e az adatbázisban
