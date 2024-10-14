@@ -37,7 +37,7 @@ class ReszletekModel {
 
         $this->db->query('SELECT nev from tiltottnevek where nev = :tiltottnev');
         $this->db->bind(':tiltottnev', "%$neve%");
-        $tiltott = $this->db->resultSet();
+        $tiltott = $this->db->single();
 
         if (count($tiltott) > 0) {
             return false;
