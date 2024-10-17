@@ -37,7 +37,7 @@
     <?php if (count($data["jelentkezok"]) > 0) : ?>
             <?php foreach ($data["jelentkezok"] as $sor): ?>
                 <div class="lista">
-                <h3 >Neve: <?php echo $sor->neve?>, Email címe: <?php echo $sor->email?></h3>
+                <h3 >Neve: <?php echo $sor->neve?>, Email címe: <?php echo $sor->email?>  <a class="jelentkezoTorles" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/felhasznaloTorles/<?php echo $sor->jelentkezoID ?>"><i class='bx bxs-trash' ></i></a></h3>
                 <hr>
                 </div>
             <?php endforeach; ?>
