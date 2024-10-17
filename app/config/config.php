@@ -9,6 +9,10 @@
         define('DB_NAME', getenv('DB_NAME'));
 
         define('URLROOT', 'https://foglalas.pollak.info');
+
+        define('EMAIL_USER', getenv('EMAIL_USER'));
+        define('EMAIL_PASS', getenv('EMAIL_PASS'));
+        define('EMAIL_ADDRESS', getenv('EMAIL_ADDRESS'));
     } else {
         define('DB_HOST', 'localhost');
         define('DB_USER', 'root');
@@ -16,6 +20,7 @@
         define('DB_NAME', 'pollakidopontfoglalas');
 
         define('URLROOT', 'http://localhost/pollak-idopontfoglalo');
+
     }      
 
     //Sitename

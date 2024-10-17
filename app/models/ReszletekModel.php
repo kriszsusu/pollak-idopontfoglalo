@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require APPROOT .  '/helpers/phpmailer/PHPMailer.php';
+require APPROOT .  '/helpers/phpmailer/Exception.php';
+require APPROOT .  '/helpers/phpmailer/SMTP.php';
 
 class ReszletekModel {
     private $db;
@@ -56,6 +62,32 @@ class ReszletekModel {
         if (count($row) > 0) {
             return false;
         }
+
+        $mail = new PHPMailer();
+        $mail->IsSMTP(); // SMTP-n keresztuli kuldes
+        $mail->Host = "smtp-mail.outlook.com"; // SMTP szerverek
+        $mail->SMTPAuth = true; // SMTP
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SMTP titkosítás
+        $mail->Port = 587; // SMTP port
+
+        $mail->Username = EMAIL_USER; // SMTP felhasználo
+        $mail->Password = EMAIL_PASS; // SMTP jelszo
+
+        $mail->From = EMAIL_ADDRESS; // Felado e-mail cime
+        $mail->FromName = 'Pollák Antal'; // Felado neve
+        $mail->AddAddress($email, $neve); // Cimzett es neve
+
+        $mail->WordWrap = 80; // Sortores allitasa
+        $mail->IsHTML(true); // Kuldes HTML-kent
+
+        $mail->Subject = 'Esemény jelentkezés visszaigazolás'; // A level targya
+        $mail->Body = 'Szövegtörzs <b>HTML-el formázva</b>'; // A level tartalma
+
+        if (!$mail->Send()) {
+        echo 'A levél nem került elküldésre';
+        echo 'A felmerült hiba: ' . $mail->ErrorInfo;
+        exit;
+}
 
         $this->db->query('INSERT INTO jelentkezok (esemenyID, email, neve) VALUES (:esemenyID, :email, :neve)');
         $this->db->bind(':esemenyID', $esemenyID);
