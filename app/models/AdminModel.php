@@ -69,7 +69,7 @@ class AdminModel {
 
     // Jelentkezők lekérdezése
     public function jelentkezokLekerzdezese($id) {
-        $this->db->query('SELECT j.email, j.neve FROM jelentkezok j INNER JOIN esemenyek e ON j.esemenyID = e.id WHERE e.torolt = 0 AND e.id = :id');
+        $this->db->query('SELECT j.email, j.neve , j.id as "jelentkezoID" FROM jelentkezok j INNER JOIN esemenyek e ON j.esemenyID = e.id WHERE j.torolt = 0 AND e.id = :id');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         
@@ -148,6 +148,17 @@ class AdminModel {
     // Esemény törlése
     public function torles($id) {
         $this->db->query('UPDATE esemenyek SET torolt = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function felhasznaloTorles($id) {
+        $this->db->query('UPDATE jelentkezok SET torolt = 1 WHERE id = :id');
         $this->db->bind(':id', $id);
 
         if ($this->db->execute()) {

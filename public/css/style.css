@@ -755,6 +755,16 @@ a {
     align-items: center;
 }
 
+.jelentkezoTorles{
+    border-radius: 50px;
+    background-color: #6a9ab0;
+    color: var(--feher) !important;
+    padding: 6px;
+    text-align: center;
+    font-size: 15px !important;
+    margin-top: 10px;
+}
+
 /* reszletek oldal */
 .main {
     width: 100dvw;
