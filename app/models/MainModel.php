@@ -24,7 +24,7 @@ class MainModel {
             LEFT JOIN
                 jelentkezok j ON e.id = j.esemenyID
             WHERE
-                e.torolt = 0 AND j.torolt = 0
+                e.torolt = 0
             GROUP BY
                 e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely
             ');
@@ -106,7 +106,6 @@ class MainModel {
         WHERE
             e.torolt = 0
             AND (e.cim LIKE :keresendo OR e.leiras LIKE :keresendo OR u.nev LIKE :keresendo)
-            AND j.torolt = 0
         GROUP BY
             e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;     
         ");
@@ -138,7 +137,6 @@ class MainModel {
                     AND (:terem = '' OR t.id = :terem)
                     AND (:nap IS NULL OR DATE(e.datum) = :nap)
                     AND (:ora = '' OR TIME_FORMAT(e.datum, '%H:%i') >= :ora)
-                    AND j.torolt = 0
                 GROUP BY 
                     e.cim, e.leiras, e.kep, e.datum, e.id, u.nev, t.neve, t.ferohely;
             ");
