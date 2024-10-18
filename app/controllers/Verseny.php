@@ -3,7 +3,7 @@
 
 class Verseny extends Controller {
     public function __construct() {
-        $this->versenyModel = $this->model('versenyModel');
+        $this->versenyModel = $this->model('VersenyModel');
     }
 
     // A főoldal megjelenítése

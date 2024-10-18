@@ -7,7 +7,7 @@ class VersenyModel {
         $this->db = new Database;
     }
 
-    // Főoldal adatainak lekérdezése
+    // Versenyek adatainak lekérdezése
     public function kartyaLekerdezes() {
         $this->db->query(
             'SELECT

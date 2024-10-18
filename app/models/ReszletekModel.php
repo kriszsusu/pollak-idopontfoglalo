@@ -49,7 +49,6 @@ class ReszletekModel {
             return false;
         }
         
-        // Kis segítség a validáláshoz
         // Lekérdezzük, hogy az adott email cím már szerepel-e az adatbázisban
         // Ha igen, akkor nem engedjük hozzáadni
         // Ha nem, akkor hozzáadjuk
@@ -64,30 +63,31 @@ class ReszletekModel {
         }
 
         $mail = new PHPMailer();
-        $mail->IsSMTP(); // SMTP-n keresztuli kuldes
-        $mail->Host = "smtp-mail.outlook.com"; // SMTP szerverek
-        $mail->SMTPAuth = true; // SMTP
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // SMTP titkosítás
-        $mail->Port = 587; // SMTP port
+        $mail->CharSet = 'UTF-8';
+        $mail->IsSMTP();
+        $mail->Host = "smtp-mail.outlook.com";
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-        $mail->Username = EMAIL_USER; // SMTP felhasználo
-        $mail->Password = EMAIL_PASS; // SMTP jelszo
+        $mail->Username = EMAIL_USER;
+        $mail->Password = EMAIL_PASS;
 
-        $mail->From = EMAIL_ADDRESS; // Felado e-mail cime
-        $mail->FromName = 'Pollák Antal'; // Felado neve
-        $mail->AddAddress($email, $neve); // Cimzett es neve
+        $mail->From = EMAIL_ADDRESS;
+        $mail->FromName = 'Pollák Antal';
+        $mail->AddAddress($email, $neve);
 
-        $mail->WordWrap = 80; // Sortores allitasa
-        $mail->IsHTML(true); // Kuldes HTML-kent
+        $mail->WordWrap = 80;
+        $mail->IsHTML(true);
 
-        $mail->Subject = 'Esemény jelentkezés visszaigazolás'; // A level targya
-        $mail->Body = 'Szövegtörzs <b>HTML-el formázva</b>'; // A level tartalma
+        $mail->Subject = 'Esemény jelentkezés visszaigazolás';
+        $mail->Body = 'Szövegtörzs <b>HTML-el formázva</b>';
 
         if (!$mail->Send()) {
-        echo 'A levél nem került elküldésre';
-        echo 'A felmerült hiba: ' . $mail->ErrorInfo;
-        exit;
-}
+            echo 'A levél nem került elküldésre';
+            echo 'A felmerült hiba: ' . $mail->ErrorInfo;
+            exit;
+        }
 
         $this->db->query('INSERT INTO jelentkezok (esemenyID, email, neve) VALUES (:esemenyID, :email, :neve)');
         $this->db->bind(':esemenyID', $esemenyID);
