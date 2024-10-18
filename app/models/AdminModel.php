@@ -22,7 +22,7 @@ class AdminModel {
             INNER JOIN
                 szakok s ON e.szakID = s.id
             LEFT JOIN
-                jelentkezok j ON e.id = j.esemenyID
+                jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
             WHERE
                 e.torolt = 0
             GROUP BY
@@ -69,7 +69,7 @@ class AdminModel {
 
     // Jelentkezők lekérdezése
     public function jelentkezokLekerzdezese($id) {
-        $this->db->query('SELECT j.email, j.neve FROM jelentkezok j INNER JOIN esemenyek e ON j.esemenyID = e.id WHERE e.torolt = 0 AND e.id = :id');
+        $this->db->query('SELECT j.email, j.neve , j.id as "jelentkezoID" FROM jelentkezok j INNER JOIN esemenyek e ON j.esemenyID = e.id WHERE j.torolt = 0 AND e.id = :id');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         
@@ -83,7 +83,7 @@ class AdminModel {
                           INNER JOIN users u ON e.tanarID = u.id
                           INNER JOIN tanterem t ON e.tanteremID = t.id
                           INNER JOIN szakok s ON e.szakID = s.id
-                          LEFT JOIN jelentkezok j ON e.id = j.esemenyID
+                          LEFT JOIN jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
                           WHERE e.id = :id AND e.torolt = 0'
                         );
         $this->db->bind(':id', $id);
@@ -148,6 +148,17 @@ class AdminModel {
     // Esemény törlése
     public function torles($id) {
         $this->db->query('UPDATE esemenyek SET torolt = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function felhasznaloTorles($id) {
+        $this->db->query('UPDATE jelentkezok SET torolt = 1 WHERE id = :id');
         $this->db->bind(':id', $id);
 
         if ($this->db->execute()) {

@@ -217,6 +217,25 @@ class Admin extends Controller {
         }
     }
 
+    public function felhasznaloTorles($id){
+        if (isLoggedIn()){
+            if ( $this->adminModel->felhasznaloTorles($id) ) {
+                // A törlés sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin');
+            }
+            else {
+                // A törlés nem sikerült
+                header('location:' . URLROOT . '/admin');
+            }
+        }
+        else{
+            $data = [
+            ];
+    
+            $this->view('user/login');
+        }
+    }
+
     public function duplikalas($id) {
         if (isLoggedIn()) {
 

@@ -22,7 +22,7 @@ class MainModel {
             INNER JOIN
                 szakok s ON e.szakID = s.id
             LEFT JOIN
-                jelentkezok j ON e.id = j.esemenyID
+                jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
             WHERE
                 e.torolt = 0
             GROUP BY
@@ -100,7 +100,7 @@ class MainModel {
         INNER JOIN
             tanterem t ON e.tanteremID = t.id
         LEFT JOIN
-            jelentkezok j ON e.id = j.esemenyID
+            jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
         INNER JOIN
             szakok s ON e.szakID = s.id
         WHERE
@@ -129,7 +129,7 @@ class MainModel {
                 INNER JOIN
                     szakok s ON e.szakID = s.id
                 LEFT JOIN 
-                    jelentkezok j ON e.id = j.esemenyID
+                    jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
                 WHERE 
                     e.torolt = 0 
                     AND (:szak = '' OR s.id = :szak)
