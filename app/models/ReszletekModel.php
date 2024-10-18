@@ -67,7 +67,7 @@ class ReszletekModel {
         $mail->IsSMTP(); // SMTP-n keresztuli kuldes
         $mail->Host = "smtp-mail.outlook.com"; // SMTP szerverek
         $mail->SMTPAuth = true; // SMTP
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SMTP titkosítás
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // SMTP titkosítás
         $mail->Port = 587; // SMTP port
 
         $mail->Username = EMAIL_USER; // SMTP felhasználo
