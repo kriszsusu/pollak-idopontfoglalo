@@ -22,7 +22,7 @@ class AdminModel {
             INNER JOIN
                 szakok s ON e.szakID = s.id
             LEFT JOIN
-                jelentkezok j ON e.id = j.esemenyID
+                jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
             WHERE
                 e.torolt = 0
             GROUP BY
@@ -83,7 +83,7 @@ class AdminModel {
                           INNER JOIN users u ON e.tanarID = u.id
                           INNER JOIN tanterem t ON e.tanteremID = t.id
                           INNER JOIN szakok s ON e.szakID = s.id
-                          LEFT JOIN jelentkezok j ON e.id = j.esemenyID
+                          LEFT JOIN jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
                           WHERE e.id = :id AND e.torolt = 0'
                         );
         $this->db->bind(':id', $id);

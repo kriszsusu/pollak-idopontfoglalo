@@ -19,7 +19,7 @@ class ReszletekModel {
                           FROM esemenyek e
                           INNER JOIN users u ON e.tanarID = u.id
                           INNER JOIN tanterem t ON e.tanteremID = t.id
-                          LEFT JOIN jelentkezok j ON e.id = j.esemenyID
+                          LEFT JOIN jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
                           WHERE e.id = :id AND e.torolt = 0'
                         );
         $this->db->bind(':id', $id);
