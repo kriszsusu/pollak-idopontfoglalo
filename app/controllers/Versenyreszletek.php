@@ -10,7 +10,9 @@ class Versenyreszletek extends Controller {
     public function index($id) {
 
         $data = [
-            'Versenyreszletek' => $this->VersenyreszletekModel->egyAdottEsemenyReszletei($id)
+            'Versenyreszletek' => $this->VersenyreszletekModel->egyAdottEsemenyReszletei($id),
+            'iskolak' => $this->VersenyreszletekModel->iskolakLekerdezes(),
+            'evfolyamok' => $this->VersenyreszletekModel->evfolyamLekerdezes()
         ];
 
         $this->view('versenyreszletek/index', $data);

@@ -29,7 +29,6 @@
                 <form  class="jelentkezes" id="teszt" method="post">
                     <input type="hidden" name="esemenyID" value="<?php echo $data['reszletek']->esemeny_id ?>">
                     <input type="text" class="input" name="neve" placeholder="Név">
-                    <br>
                     <input type="email" class="input" onkeyup="validate()" id="input" name="email" placeholder="példa@példa.com">
                     <button type="submit" disabled id="myBtn" class="buttony buttony-disabled">Jelentkezés</button>
                 </form><?php 

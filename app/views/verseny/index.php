@@ -10,6 +10,9 @@
       <?php if (count($data["verseny"]) > 0) : ?>
               <?php foreach ($data["verseny"] as $sor): ?>
                   <div class="box">
+                      <div class="kep-box">
+                          <img src="<?php echo URLROOT ?>/public/img/PAJIV_2024_jelentkezes.png" alt="" class="kep">
+                      </div>
                       <br>
                       <div class="adatok">
                           <h1 class="cim"><?php echo $sor->versenynev?></h1>

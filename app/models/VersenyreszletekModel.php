@@ -19,6 +19,20 @@ class VersenyreszletekModel {
         
         return $results;
     }
+
+    public function iskolakLekerdezes() {
+        $this->db->query('SELECT id, nev FROM iskolak');
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
+    public function evfolyamLekerdezes() {
+        $this->db->query('SELECT id, nev FROM evfolyam');
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
     
     //Tiltott email ellenőrzés
     public function emailHozzadas($versenyID, $email, $tanuloNeve){
