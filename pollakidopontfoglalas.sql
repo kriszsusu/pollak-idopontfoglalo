@@ -58,28 +58,10 @@ INSERT INTO `esemenyek` (`id`, `cim`, `leiras`, `kep`, `datum`, `feltoltesDatuma
 --
 
 CREATE TABLE `jelentkezok` (
-  `id` int(11) NOT NULL,
+  `id` varchar(36) NOT NULL DEFAULT UUID(),
   `esemenyID` int(11) NOT NULL,
   `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- A tábla adatainak kiíratása `jelentkezok`
---
-
-INSERT INTO `jelentkezok` (`id`, `esemenyID`, `email`) VALUES
-(7, 5, 'teszt@elek.hu'),
-(8, 5, 'asd@asd.asd'),
-(9, 5, 'hadrian@pollak.hu'),
-(10, 5, 'mirkomarkovics2009@gmail.com'),
-(11, 7, 'hadrian@pollak.hu'),
-(12, 8, 'asd@asd.asd'),
-(13, 8, 'hadrian@pollak.hu'),
-(14, 8, 'test@asd.asd'),
-(15, 8, 'teszt@gmai.col'),
-(16, 8, 'teszt@gmail.com'),
-(17, 9, '2w@gmail.com'),
-(18, 9, '2@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -395,12 +377,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `esemenyek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT a táblához `jelentkezok`
---
-ALTER TABLE `jelentkezok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT a táblához `tanterem`
