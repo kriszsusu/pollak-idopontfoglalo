@@ -279,7 +279,8 @@ img {
   outline: none;
   border-radius: 8px;
   min-width: 320px;
-  max-height: 700px;
+  /* max-height: 700px; */
+  height: fit-content;
 }
 
 .box {
