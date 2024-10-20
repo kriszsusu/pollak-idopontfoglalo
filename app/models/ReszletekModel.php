@@ -27,6 +27,16 @@ class ReszletekModel {
         
         return $results;
     }
+
+    public function visszaigazol($id) {
+        $this->db->query('UPDATE jelentkezok SET visszaigazolt = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $this->db->execute();
+        
+        $this->db->query('SELECT esemenyID FROM jelentkezok WHERE id = :id');
+        $this->db->bind(':id', $id);
+        return $this->db->single()->esemenyID;
+    }
     
     //Tiltott email ellenőrzés
     public function emailHozzadas($esemenyID, $email, $neve){
@@ -52,7 +62,7 @@ class ReszletekModel {
         // Lekérdezzük, hogy az adott email cím már szerepel-e az adatbázisban
         // Ha igen, akkor nem engedjük hozzáadni
         // Ha nem, akkor hozzáadjuk
-        $this->db->query('SELECT * FROM jelentkezok WHERE email = :email AND esemenyID = :esemenyID');
+        $this->db->query('SELECT * FROM jelentkezok WHERE email = :email AND esemenyID = :esemenyID AND torolt = 0');
         $this->db->bind(':email', $email);
         $this->db->bind(':esemenyID', $esemenyID);
 
@@ -61,6 +71,16 @@ class ReszletekModel {
         if (count($row) > 0) {
             return false;
         }
+
+        $this->db->query('INSERT INTO jelentkezok (esemenyID, email, neve) VALUES (:esemenyID, :email, :neve)');
+        $this->db->bind(':esemenyID', $esemenyID);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':neve', $neve);
+        $this->db->execute();
+        $this->db->query('SELECT id FROM jelentkezok WHERE email = :email AND esemenyID = :esemenyID');
+        $this->db->bind(':email', $email);
+        $this->db->bind(':esemenyID', $esemenyID);
+        $insertedId = $this->db->single()->id;
 
         $mail = new PHPMailer();
         $mail->CharSet = 'UTF-8';
@@ -80,8 +100,8 @@ class ReszletekModel {
         $mail->WordWrap = 80;
         $mail->IsHTML(true);
 
-        $mail->Subject = 'Esemény jelentkezés visszaigazolás';
-        $mail->Body = 'Szövegtörzs <b>HTML-el formázva</b>';
+        $mail->Subject = 'Esemény jelentkezés megerősítése';
+        $mail->Body = 'Kedves ' . $neve . '!<br><br>Az alábbi linkre kattintva megerősítheti jelentkezését az eseményre:<br><br><a href="' . URLROOT . '/reszletek/jelentkezes/' . $insertedId . '">Jelentkezés megerősítése</a>';
 
         if (!$mail->Send()) {
             echo 'A levél nem került elküldésre';
@@ -89,13 +109,7 @@ class ReszletekModel {
             exit;
         }
 
-        $this->db->query('INSERT INTO jelentkezok (esemenyID, email, neve) VALUES (:esemenyID, :email, :neve)');
-        $this->db->bind(':esemenyID', $esemenyID);
-        $this->db->bind(':email', $email);
-        $this->db->bind(':neve', $neve);
-
-
-        if ($this->db->execute()) {
+        if ($insertedId) {
             return true;
         }
         else {

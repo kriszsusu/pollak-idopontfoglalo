@@ -34,7 +34,21 @@ class Reszletek extends Controller {
                 }
             }
         }
-        
+
+    public function jelentkezes($id) {
+
+        $this->view('reszletek/jelentkezes/index');
+
+        $esemenyID = $this->reszletekModel->visszaigazol($id);
+
+        if($esemenyID) {
+            header('location:' . URLROOT . '/reszletek/' . $esemenyID . '?msg=2');
+        }
+        else {
+            header('location:' . URLROOT . '/reszletek/' . $esemenyID . '?msg=3');
+        }
     }
+        
+}
 
 

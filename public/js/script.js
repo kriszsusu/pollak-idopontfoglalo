@@ -28,11 +28,35 @@ window.onload = function () {
       modal.style.display = "none";
       window.location.replace(window.location.href.split("?")[0]);
     }, 2000);
+  } else if (window.location.search === "?msg=2") {
+    modal.children[0].children[0].innerHTML =
+      "A jelentkezés sikeresen visszaigazolva!";
+    modal.style.display = "block";
+    setTimeout(() => {
+      modal.style.display = "none";
+      window.location.replace(window.location.href.split("?")[0]);
+    }, 1000);
+  } else if (window.location.search === "?msg=3") {
+    modal.children[0].children[0].innerHTML = "A visszaigazolása sikertelen!";
+    modal.style.display = "block";
+    setTimeout(() => {
+      modal.style.display = "none";
+      window.location.replace(window.location.href.split("?")[0]);
+    }, 1000);
   }
   setInterval(() => {
     plusSlides(1);
   }, 4000);
 };
+
+function changeDisplayTestForModal(text, time) {
+  modal.children[0].children[0].innerHTML = text;
+  modal.style.display = "block";
+  setTimeout(() => {
+    modal.style.display = "none";
+    window.location.replace(window.location.href.split("?")[0]);
+  }, time);
+}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
