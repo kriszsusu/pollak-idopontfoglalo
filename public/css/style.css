@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
 }
+
 /* Színek*/
 :root {
   --background: #e9e5db;
@@ -13,6 +14,9 @@
   --hover: #bbe4e9;
   --input: #e6e6e6;
   --elso-w-opacity: #5585b5af;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
 }
 
 body {
