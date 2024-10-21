@@ -33,9 +33,18 @@ class VersenyreszletekModel {
         
         return $results;
     }
+
+    // Versenyjelentkezők lekérdezése
+    public function versenyJelentkezokLekerzdezese($id) {
+        $this->db->query('SELECT j.tanuloNeve , j.id as "jelentkezoID", j.kod, j.pontszam FROM versenyjelentkezok j INNER JOIN versenyek e ON j.versenyID = e.id WHERE j.torolt = 0 AND e.id = :id ORDER BY j.pontszam DESC');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
     
     //Tiltott email ellenőrzés
-    public function emailHozzadas($versenyID, $email, $tanuloNeve){
+    public function emailHozzadas($versenyID, $email, $tanarNeve, $tanuloNeve, $iskola, $evfolyam){
 
         //Tiltott email ellenőrzés
         $emailprovider = explode("@", $email)[1];
@@ -47,7 +56,7 @@ class VersenyreszletekModel {
             return false;
         }
 
-        $this->db->query('SELECT tanuloNeve from tiltottnevek where tanuloNeve like :tiltottnev');
+        $this->db->query('SELECT nev from tiltottnevek where nev like :tiltottnev');
         $this->db->bind(':tiltottnev', "%$tanuloNeve%");
         $tiltott = $this->db->resultSet();
 
@@ -61,7 +70,7 @@ class VersenyreszletekModel {
         // Ha nem, akkor hozzáadjuk
         $this->db->query('SELECT * FROM versenyjelentkezok WHERE email = :email AND versenyID = :versenyID');
         $this->db->bind(':email', $email);
-        $this->db->bind(':esemenyID', $versenyID);
+        $this->db->bind(':versenyID', $versenyID);
 
         $row = $this->db->resultSet();
 
@@ -69,10 +78,13 @@ class VersenyreszletekModel {
             return false;
         }
 
-        $this->db->query('INSERT INTO versenyjelentkezok (versenyID, email, tanuloNeve) VALUES (:versenyID, :email, :tanuloNeve)');
-        $this->db->bind(':esemenyID', $versenyID);
+        $this->db->query('INSERT INTO versenyjelentkezok (versenyID, email, tanarNeve, tanuloNeve, iskolaID, evfolyamID) VALUES (:versenyID, :email, :tanarNeve, :tanuloNeve, :iskolaID, :evfolyamID)');
+        $this->db->bind(':versenyID', $versenyID);
         $this->db->bind(':email', $email);
-        $this->db->bind(':neve', $tanuloNeve);
+        $this->db->bind(':tanuloNeve', $tanuloNeve);
+        $this->db->bind(':tanarNeve', $tanarNeve);
+        $this->db->bind(':iskolaID', $iskola);
+        $this->db->bind(':evfolyamID', $evfolyam);
 
 
         if ($this->db->execute()) {
