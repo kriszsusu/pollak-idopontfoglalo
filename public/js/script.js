@@ -190,3 +190,13 @@ function szures(selectobject) {
     document.getElementById("torles").style.display = "flex";
   }
 }
+
+function iskolak(element) {
+  console.log(element.value);
+
+  if (element.value === "egyeb") {
+    document.getElementById("iskolaNeve").style.display = "block";
+  } else {
+    document.getElementById("iskolaNeve").style.display = "none";
+  }
+}

@@ -27,12 +27,14 @@
                     <input type="text" class="input" name="tanuloNeve" placeholder="Név">
                     <input type="email" class="input" onkeyup="validate()" id="input" name="email" placeholder="E-mail cím">
                     <input type="text" class="input" name="tanarNeve" placeholder="Felkészítő tanár neve">
-                    <select name="iskola" id="id-iskolak" class="input" style="height: 35px; width: 360px;">
+                    <select name="iskola" id="id-iskolak" class="input" style="height: 35px; width: 360px;" onchange="iskolak(this)">
                         <option value="-1">Válassz Iskolát!</option>
                         <?php foreach ($data['iskolak'] as $fajta): ?>
                             <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->nev; ?></option>
                         <?php endforeach; ?>
+                        <option value="egyeb">Egyéb</option>
                     </select>
+                    <input type="text" class="input" name="iskolaNeve" id="iskolaNeve" placeholder="Iskola megnevezése" style="display: none;">
 
                     <select name="evfolyamok" id="id-evfolyamok" class="input" style="height: 35px; width: 360px;">
                         <option value="-1">Válassz Évfolyamot!</option>

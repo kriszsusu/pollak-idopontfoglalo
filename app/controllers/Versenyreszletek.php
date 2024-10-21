@@ -24,17 +24,23 @@ class Versenyreszletek extends Controller {
 
             $versenyID = (int)trim($_POST['versenyID']);
             $email = trim($_POST['email']);
-            $neve = trim($_POST['neve']);
+            $tanarNeve = trim($_POST['neve']);
+            $iskola = trim($_POST['iskola']);
 
-                if ($this->VersenyreszletekModel->emailHozzadas($versenyID, $email, $neve)) {
-                    // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
-                    header('location:' . URLROOT . '/reszletek/' . $versenyID . '?msg=0');
-                }
-                else {
-                    // A hozzáadás nem sikerült ezért beállítjuk az üzenetet 1-re
-                    header('location:' . URLROOT . '/reszletek/' . $versenyID . '?msg=1');
-                }
+            if($iskola == 'egyeb') {
+                $iskola = trim($_POST['iskolaNeve']);
+            }
+            $evfolyam = trim($_POST['evfolyamok']);
+
+            if ($this->VersenyreszletekModel->emailHozzadas($versenyID, $email, $tanarNeve, $iskola, $evfolyam)) {
+                // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
+                header('location:' . URLROOT . '/reszletek/' . $versenyID . '?msg=0');
+            }
+            else {
+                // A hozzáadás nem sikerült ezért beállítjuk az üzenetet 1-re
+                header('location:' . URLROOT . '/reszletek/' . $versenyID . '?msg=1');
             }
         }
-        
     }
+        
+}
