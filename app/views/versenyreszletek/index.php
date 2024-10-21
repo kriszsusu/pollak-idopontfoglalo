@@ -9,7 +9,7 @@
     <div class="minimain">
         <div class="miniimage">
             
-            <h1>Jelentkezők:</h1>
+            <h1>Jelentkezők: <b><?php echo count($data["versenyJelentkezok"]) ?></b> </h1>
             <hr>
             <?php if (count($data["versenyJelentkezok"]) > 0) : ?>
                 <?php $i = 0; ?>
