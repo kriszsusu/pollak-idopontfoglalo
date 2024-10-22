@@ -23,4 +23,9 @@
 .history
 .ionide
 
+config.php
+.htaccess
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,dotenv
+app/config/config.php
+public/.htaccess
