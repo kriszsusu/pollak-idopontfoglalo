@@ -78,6 +78,18 @@ class VersenyreszletekModel {
             return false;
         }
 
+        // Ha az iskola változó szöveg, akkor azt hozzáadjuk az iskolak táblához
+        if(!is_numeric($iskola)) {
+            $this->db->query('INSERT INTO iskolak (nev) VALUES (:iskolaNeve)');
+            $this->db->bind(':iskolaNeve', $iskola);
+            $this->db->execute();
+            $this->db->query('SELECT id FROM iskolak WHERE nev = :iskolaNeve');
+            $this->db->bind(':iskolaNeve', $iskola);
+            $results = $this->db->single();
+            $iskola = $results->id;
+        }
+        
+
         $this->db->query('INSERT INTO versenyjelentkezok (versenyID, email, tanarNeve, tanuloNeve, iskolaID, evfolyamID) VALUES (:versenyID, :email, :tanarNeve, :tanuloNeve, :iskolaID, :evfolyamID)');
         $this->db->bind(':versenyID', $versenyID);
         $this->db->bind(':email', $email);
