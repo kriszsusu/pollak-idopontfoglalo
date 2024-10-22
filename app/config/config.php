@@ -24,6 +24,6 @@
     }      
 
     //Sitename
-    define('SITENAME', 'Pollák Idopőntfoglaló');
+    define('SITENAME', 'Pollák Időpontfoglaló');
 
     error_reporting(E_ALL ^ E_DEPRECATED);
