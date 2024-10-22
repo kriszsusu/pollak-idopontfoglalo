@@ -6,11 +6,31 @@
 <!-- A reszletek oldal tartalma -->
 <div class="main">
 
-        <div class="kismain">
-            <div class="image">
-               
+    <div class="minimain">
+        <div class="miniimage">
+            
+            <h1>Jelentkezők: <b><?php echo count($data["versenyJelentkezok"]) ?></b> </h1>
+            <hr>
+            <?php if (count($data["versenyJelentkezok"]) > 0) : ?>
+                <?php $i = 0; ?>
+                    <?php foreach ($data["versenyJelentkezok"] as $sor): ?>
+                        <div class="versenylista">
+                            <div class="helyezet">
+                                <?php $i++; echo $i; ?>.
+                            </div>
+                            <div class="nev">
+                                <h3 ><?php echo $sor->tanuloNeve?></h3>
+                            </div>
+                            <div class="pontszam">
+                                <h3><?php echo $sor->pontszam?></h3>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    <?php else:?>
+                        <h3>Még nincsenek jelentkezők!</h3>
+            <?php endif; ?>
 
-            </div>
+        </div>
 
             <div class="text">
                 <div class="kepBoxVersenyek">
@@ -19,7 +39,7 @@
 
                 <h2 class="esemeny"><?php echo $data["Versenyreszletek"]->versenynev; ?></h2>
                 <hr>
-                <h3 class="idopont"><?php echo $data["Versenyreszletek"]->idopont; ?></h3>
+                <h3 class="idopont">Verseny időpontja: <?php $datum = new DateTime($data["Versenyreszletek"]->idopont); echo $datum->format('Y.m.d. H:i');?></h3>
                 <br><br><br>
                 <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["Versenyreszletek"]->tema));  ?></p>
                 <form  class="jelentkezes" id="teszt" method="post">
@@ -45,7 +65,6 @@
                     <button type="submit" disabled id="myBtn" class="buttony buttony-disabled">Jelentkezés</button>
                 </form>
             </div>
-            
         </div>
     </div>
     <div id="myModal" class="modal">

@@ -12,7 +12,8 @@ class Versenyreszletek extends Controller {
         $data = [
             'Versenyreszletek' => $this->VersenyreszletekModel->egyAdottEsemenyReszletei($id),
             'iskolak' => $this->VersenyreszletekModel->iskolakLekerdezes(),
-            'evfolyamok' => $this->VersenyreszletekModel->evfolyamLekerdezes()
+            'evfolyamok' => $this->VersenyreszletekModel->evfolyamLekerdezes(),
+            'versenyJelentkezok' => $this->VersenyreszletekModel->versenyJelentkezokLekerzdezese($id)
         ];
 
         $this->view('versenyreszletek/index', $data);
@@ -24,7 +25,8 @@ class Versenyreszletek extends Controller {
 
             $versenyID = (int)trim($_POST['versenyID']);
             $email = trim($_POST['email']);
-            $tanarNeve = trim($_POST['neve']);
+            $tanarNeve = trim($_POST['tanarNeve']);
+            $tanuloNeve = trim($_POST['tanuloNeve']);
             $iskola = trim($_POST['iskola']);
 
             if($iskola == 'egyeb') {
@@ -32,13 +34,13 @@ class Versenyreszletek extends Controller {
             }
             $evfolyam = trim($_POST['evfolyamok']);
 
-            if ($this->VersenyreszletekModel->emailHozzadas($versenyID, $email, $tanarNeve, $iskola, $evfolyam)) {
+            if ($this->VersenyreszletekModel->emailHozzadas($versenyID, $email, $tanarNeve, $tanuloNeve, $iskola, $evfolyam)) {
                 // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
-                header('location:' . URLROOT . '/reszletek/' . $versenyID . '?msg=0');
+                header('location:' . URLROOT . '/versenyreszletek/' . $versenyID . '?msg=0');
             }
             else {
                 // A hozzáadás nem sikerült ezért beállítjuk az üzenetet 1-re
-                header('location:' . URLROOT . '/reszletek/' . $versenyID . '?msg=1');
+                header('location:' . URLROOT . '/versenyreszletek/' . $versenyID . '?msg=1');
             }
         }
     }
