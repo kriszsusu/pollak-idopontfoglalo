@@ -769,6 +769,11 @@ a {
   margin-top: 10px;
 }
 
+.versenyido{
+  width: 310px;
+  font-size:smaller;
+}
+
 /* reszletek oldal */
 .main {
   width: 100dvw;

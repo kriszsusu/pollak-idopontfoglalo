@@ -23,6 +23,7 @@ class Admin extends Controller {
 
     }
 
+    // Egy adott esemény részleteinek megjelenítése
     public function reszletek($id){
         if (!isLoggedIn()) {
             header('location:' . URLROOT . '/user/login');
@@ -34,49 +35,6 @@ class Admin extends Controller {
         ];
 
         $this->view('admin/reszletek/index', $data);
-    }
-
-    public function adminhozzadas() {
-        
-        if (!isLoggedIn()) {
-            header('location:' . URLROOT . '/user/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
-
-            $felhasznalonev = trim($_POST['felhasznalonev']);
-            $nev = trim($_POST['nev']);
-            $jelszo = trim($_POST['jelszo']);
-            $jelszoUjra = trim($_POST['jelszo-ujra']);
-
-            if ($jelszo == $jelszoUjra) {
-                if ($this->adminModel->adminHozzadas($felhasznalonev, $jelszo, $nev)) {
-                    // Az adatbázisba mentés sikerült
-                    header('location:' . URLROOT . '/admin');
-                }
-                else {
-                    echo "Az adatbázisba mentés nem sikerült.";
-                    die;
-                }
-            }
-            else {
-                echo "A két jelszó nem egyezik meg.";
-                die;
-            }
-        }
-        else {
-            $data = [
-            ];
-
-            $this->view('admin/adminhozzadas/index', $data);
-        }
-
-        $data = [
-            //'main' => $this->adminModel->kartyaLekerdezes()
-        ];
-
-        $this->view('admin/adminhozzadas/index', $data);
     }
 
     // Esemény hozzáadása
@@ -198,6 +156,28 @@ class Admin extends Controller {
         }    
     }
 
+    // Esemény duplikálása
+    public function duplikalas($id) {
+        if (isLoggedIn()) {
+
+            if ( $this->adminModel->duplikalasModel($id) ) {
+                // A duplikálás sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin');
+            }
+            else {
+                // A törlés nem sikerült
+                header('location:' . URLROOT . '/admin');
+            }
+        }
+        else {
+            $data = [
+
+            ];
+            $this->view('user/login');
+        }
+    }
+
+    // Esemény törlése
     public function torles($id){
         if (isLoggedIn()){
             if ( $this->adminModel->torles($id) ) {
@@ -217,6 +197,51 @@ class Admin extends Controller {
         }
     }
 
+    // Admin hozzáadása
+    public function adminhozzadas() {
+        
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+            $felhasznalonev = trim($_POST['felhasznalonev']);
+            $nev = trim($_POST['nev']);
+            $jelszo = trim($_POST['jelszo']);
+            $jelszoUjra = trim($_POST['jelszo-ujra']);
+
+            if ($jelszo == $jelszoUjra) {
+                if ($this->adminModel->adminHozzadas($felhasznalonev, $jelszo, $nev)) {
+                    // Az adatbázisba mentés sikerült
+                    header('location:' . URLROOT . '/admin');
+                }
+                else {
+                    echo "Az adatbázisba mentés nem sikerült.";
+                    die;
+                }
+            }
+            else {
+                echo "A két jelszó nem egyezik meg.";
+                die;
+            }
+        }
+        else {
+            $data = [
+            ];
+
+            $this->view('admin/adminhozzadas/index', $data);
+        }
+
+        $data = [
+            //'main' => $this->adminModel->kartyaLekerdezes()
+        ];
+
+        $this->view('admin/adminhozzadas/index', $data);
+    }
+
+    // Felhasználók törlése
     public function felhasznaloTorles($id){
         if (isLoggedIn()){
             if ( $this->adminModel->felhasznaloTorles($id) ) {
@@ -236,22 +261,152 @@ class Admin extends Controller {
         }
     }
 
-    public function duplikalas($id) {
-        if (isLoggedIn()) {
+    // Versenyek oldal megjelenítése
+    public function verseny() {
+        
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
 
-            if ( $this->adminModel->duplikalasModel($id) ) {
-                // A duplikálás sikerült, átirányítjuk a felhasználót az adminfőoldalra
-                header('location:' . URLROOT . '/admin');
+        $data = [
+            'verseny' => $this->adminModel->versenyLekerdezes()
+        ];
+
+        $this->view('admin/verseny/index', $data);
+    }
+
+    // Verseny hozzáadása
+    public function versenyhozzaadas() {
+        if (isLoggedIn()) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+                // Feltölés...
+                if ( $_FILES['kep']['tmp_name'] ) {
+                    // Feltöltjük a képfájlt a szerverre (public/img mappába), és visszakapjuk a fájl nevét (vagy false-t, ha nem sikerült a feltöltés).
+                    $eredmeny = $this->filefeltoltesModel->imgUpload($_FILES['kep']['name']);
+                    
+                    if($eredmeny != false) {
+                        echo "A feltöltés sikerült, a fájl neve: " . $eredmeny;
+
+                        // Adatbázisba mentés: a FORM összes adata a $_POST tömbben van, a kép neve pedig az $eredmeny változóban.
+                        if ($this->adminModel->ujVersenyHozzadasa($_POST, $eredmeny)) {
+                            // Az adatbázisba mentés sikerült
+                            header('location:' . URLROOT . '/admin/verseny');
+                        }
+                        else {
+                            echo "Az adatbázisba mentés nem sikerült.";
+                            die;
+                        }
+                    }
+                    else {
+                        echo "A feltöltés nem sikerült.";
+                    }
+                }
+            }
+            else {
+                // Ha nem POST metódussal érkezik a kérés, akkor az admin hozzáadása oldalra irányítjuk a felhasználót.
+
+                $data = [
+
+                ];
+
+                $this->view('admin/versenyhozzaadas/index', $data);
+            }  
+        }  
+
+        else {
+            $data = [
+            ];
+
+            $this->view('user/login');
+        }    
+    }
+
+    // Verseny szerkesztése
+    public function versenyszerkesztes($id) {
+        if (isLoggedIn()) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+                $versenynev = trim($_POST['versenynev']);
+                $tema = trim($_POST['tema']);
+                $idopont = trim($_POST['idopont']);
+                $jelentkezesiHatarido = trim($_POST['jelentkezesiHatarido']);
+                $leiras = trim($_POST['leiras']);
+
+                // Feltölés...
+                if ( $_FILES['kep']['tmp_name'] ) {
+                    // Feltöltjük a képfájlt a szerverre (public/img mappába), és visszakapjuk a fájl nevét (vagy false-t, ha nem sikerült a feltöltés).
+                    $eredmeny = $this->filefeltoltesModel->imgUpload($_FILES['kep']['name']);
+                    
+                    if($eredmeny != false) {
+                        echo "A feltöltés sikerült, a fájl neve: " . $eredmeny;
+
+                        // Adatbázisba mentés: a FORM összes adata a $_POST tömbben van, a kép neve pedig az $eredmeny változóban.
+                        if ($this->adminModel->versenySzerkesztese($id, $eredmeny, $versenynev, $tema, $idopont, $jelentkezesiHatarido, $leiras)) {
+                            // Az adatbázisba mentés sikerült
+                            header('location:' . URLROOT . '/admin/verseny');
+                        }
+                        else {
+                            echo "Az adatbázisba mentés nem sikerült.";
+                            die;
+                        }
+                    }
+                    else {
+                        echo "A feltöltés nem sikerült.";
+                    }
+                }
+                else{
+                    if ($this->adminModel->versenySzerkesztese($id, false, $versenynev, $tema, $idopont, $jelentkezesiHatarido, $leiras)) {
+                        // Az adatbázisba mentés sikerült
+                        header('location:' . URLROOT . '/admin/verseny');
+                    }
+                    else {
+                        echo "Az adatbázisba mentés nem sikerült.";
+                        die;
+                    }
+                }
+            }
+            else {
+                // Ha nem POST metódussal érkezik a kérés, akkor az admin hozzáadása oldalra irányítjuk a felhasználót.
+
+                $data = [
+                    'verseny' => $this->adminModel->verseny($id),
+                ];
+
+                $this->view('admin/versenyszerkesztes/index', $data);
+            }  
+        }  
+
+        else {
+            $data = [
+            ];
+
+            $this->view('user/login');
+        }    
+    }
+
+
+
+
+
+    // Verseny törlése
+    public function versenyTorles($id){
+        if (isLoggedIn()){
+            if ( $this->adminModel->versenyTorles($id) ) {
+                // A törlés sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin/verseny');
             }
             else {
                 // A törlés nem sikerült
-                header('location:' . URLROOT . '/admin');
+                header('location:' . URLROOT . '/admin/verseny');
             }
         }
-        else {
+        else{
             $data = [
-
             ];
+    
             $this->view('user/login');
         }
     }
