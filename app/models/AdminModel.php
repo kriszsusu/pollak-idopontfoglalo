@@ -168,21 +168,6 @@ class AdminModel {
         }
     }
 
-    // Admin hozzáadása
-    public function adminHozzadas($felhasznalonev, $jelszo, $nev) {
-        $this->db->query('INSERT INTO users (felhasznalonev, nev, jelszo) VALUES (:felhasznalonev, :nev, :jelszo)');
-        $this->db->bind(':felhasznalonev', $felhasznalonev);
-        $this->db->bind(':nev', $nev);
-        $this->db->bind(':jelszo', password_hash($jelszo, PASSWORD_BCRYPT));
-        
-        if ($this->db->execute()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     // esemény duplikálása
     public function duplikalasModel($id) {
         $this->db->query('SELECT * FROM esemenyek WHERE id = :id');
@@ -217,5 +202,138 @@ class AdminModel {
         else {
             return false;
         }
+    }
+
+    // Admin hozzáadása
+    public function adminHozzadas($felhasznalonev, $jelszo, $nev) {
+        $this->db->query('INSERT INTO users (felhasznalonev, nev, jelszo) VALUES (:felhasznalonev, :nev, :jelszo)');
+        $this->db->bind(':felhasznalonev', $felhasznalonev);
+        $this->db->bind(':nev', $nev);
+        $this->db->bind(':jelszo', password_hash($jelszo, PASSWORD_BCRYPT));
+        
+        if ($this->db->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Verseny lekérdezése
+    public function versenyLekerdezes() {
+        $this->db->query('SELECT * FROM versenyek WHERE torolt = 0');
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
+    // Verseny lekérdezése id alapján
+    public function verseny($id) {
+        $this->db->query('SELECT * FROM versenyek WHERE id = :id AND torolt = 0');
+        $this->db->bind(':id', $id);
+        $result = $this->db->single();
+        
+        return $result;
+    }
+
+    // Verseny hozzáadása
+    public function ujVersenyHozzadasa($data, $kep) {
+        $this->db->query('INSERT INTO versenyek (kep, versenynev, tema, idopont, jelentkezesiHatarido, leiras) VALUES (:kep, :versenynev, :tema, :idopont, :jelentkezesiHatarido, :leiras)');
+        $this->db->bind(':kep', $kep);
+        $this->db->bind(':versenynev', $data['versenynev']);
+        $this->db->bind(':tema', $data['tema']);
+        $this->db->bind(':idopont', $data['idopont']);
+        $this->db->bind(':jelentkezesiHatarido', $data['jelentkezesiHatarido']);
+        $this->db->bind(':leiras', $data['leiras']);
+
+        if ($this->db->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Verseny szerkesztése
+    public function versenySzerkesztese($id, $kep, $versenynev, $tema, $idopont, $jelentkezesiHatarido, $leiras) {
+        if ($kep) {
+            $this->db->query('UPDATE versenyek SET kep = :kep, versenynev = :versenynev, tema = :tema, idopont = :idopont, jelentkezesiHatarido = :jelentkezesiHatarido, leiras = :leiras WHERE id = :id');
+            $this->db->bind(':id', $id);
+            $this->db->bind(':kep', $kep);
+            $this->db->bind(':versenynev', $versenynev);
+            $this->db->bind(':tema', $tema);
+            $this->db->bind(':idopont', $idopont);
+            $this->db->bind(':jelentkezesiHatarido', $jelentkezesiHatarido);
+            $this->db->bind(':leiras', $leiras);
+        }
+        else{
+            $this->db->query('UPDATE versenyek SET versenynev = :versenynev, tema = :tema, idopont = :idopont, jelentkezesiHatarido = :jelentkezesiHatarido, leiras = :leiras WHERE id = :id');
+            $this->db->bind(':id', $id);
+            $this->db->bind(':versenynev', $versenynev);
+            $this->db->bind(':tema', $tema);
+            $this->db->bind(':idopont', $idopont);
+            $this->db->bind(':jelentkezesiHatarido', $jelentkezesiHatarido);
+            $this->db->bind(':leiras', $leiras);
+        }
+        
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Verseny törlése
+    public function versenyTorles($id) {
+        $this->db->query('UPDATE versenyek SET torolt = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Egy adott esemény részleteinek lekérdezése
+    public function egyAdottVersenyReszletei($id) {
+        $this->db->query('SELECT e.tema, e.leiras, e.versenynev, e.idopont, e.id AS "esemeny_id", count(j.email) as "jelentkezok"
+                          FROM versenyek e
+                          LEFT JOIN versenyjelentkezok j ON e.id = j.versenyID
+                          WHERE e.id = :id AND e.torolt = 0'
+                        );
+        $this->db->bind(':id', $id);
+        $results = $this->db->single();
+        
+        return $results;
+    }
+
+    // Verseny jelentkezők lekérdezése
+    public function versenyJelentkezokLekerdezes($id) {
+        $this->db->query('SELECT j.tanuloNeve , j.id as "jelentkezoID", j.kod, j.pontszam, j.latszodik FROM versenyjelentkezok j INNER JOIN versenyek e ON j.versenyID = e.id WHERE j.torolt = 0 AND e.id = :id ORDER BY j.pontszam DESC');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
+    // Reveal 
+    public function revealFunction($id) {
+        $this->db->query('UPDATE versenyjelentkezok SET latszodik = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Verseny jelentkezők lekérdezése
+    public function versenyJelentkezokLekerdzese() {
+        $this->db->query('SELECT id, kod, tanuloNeve, email, tanuloNeve, pontszam FROM versenyjelentkezok WHERE torolt = 0 ');
+        $results = $this->db->resultSet();
+        
+        return $results;
     }
 }
