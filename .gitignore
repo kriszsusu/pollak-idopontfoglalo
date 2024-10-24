@@ -29,3 +29,7 @@ config.php
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,dotenv
 app/config/config.php
 public/.htaccess
+.idea/dataSources.xml
+.idea/modules.xml
+.idea/pollak-idopontfoglalo.iml
+.idea/vcs.xml
