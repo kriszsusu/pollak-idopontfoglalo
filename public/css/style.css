@@ -769,9 +769,9 @@ a {
   margin-top: 10px;
 }
 
-.versenyido{
+.versenyido {
   width: 310px;
-  font-size:smaller;
+  font-size: smaller;
 }
 
 /* reszletek oldal */
@@ -835,9 +835,9 @@ a {
 
 .miniimage {
   justify-content: flex-start;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
-  align-content: flex-start;
+  align-content: center;
   overflow-y: auto;
   border-radius: 20px;
   gap: 20px;
@@ -1203,7 +1203,8 @@ li {
   gap: 30px;
 }
 
-.versenylista div, .versenylista a {
+.versenylista div,
+.versenylista a {
   border: black 2px solid;
   box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
   padding: 5px;
@@ -1214,27 +1215,29 @@ li {
   color: var(--fekete);
 }
 
-.versenylista .helyezet{
-
+.versenylista .helyezet {
+  filter: blur(15px);
   border-radius: 50%;
   width: 20px;
 }
 
-.versenylista .nev{
+.versenylista .nev {
   filter: blur(15px);
   border-radius: 20px;
   width: 225px;
+  text-align: center;
 }
 
-.versenylista .pontszam{
+.versenylista .pontszam {
   filter: blur(15px);
   border-radius: 20px;
   width: 50px;
 }
 
-.datetime{
+.datetime {
   text-align: center;
-}.kozepre{
+}
+.kozepre {
   display: block;
   margin-left: auto;
   margin-right: auto;

@@ -11,13 +11,13 @@
             
             <h1 class="kozepre">Jelentkezők</h1>
             <hr>
-            <!-- versenylista, helyzet, nev, pontszam -->
+            <!-- versenylista, helyezet, nev, pontszam -->
             <?php if (count($data["versenyJelentkezok"]) > 0) : ?>
                 <?php $i = 0; ?>
                 <table class="versenylista">
                     <?php foreach ($data["versenyJelentkezok"] as $sor): ?>
                        <tr>
-                        <td><h3 class="helyzet"> <?php $i++; echo  $sor->latszodik == 1 ? $i : 0;  ?></h3></td>
+                        <td><h3 class="helyezet"> <?php $i++; echo  $sor->latszodik == 1 ? $i : 0;  ?></h3></td>
                         <td><h3 class="nev"><?php echo $sor->latszodik == 1 ? $sor->kod : "Név"?></h3></td>
                         <td><h3 class="pontszam"><?php echo $sor->latszodik == 1 ?  $sor->pontszam : 0?></h3></td>
                        </tr>
