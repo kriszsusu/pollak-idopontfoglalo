@@ -830,8 +830,14 @@ a {
 
 .miniimage {
   justify-content: flex-start;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: flex-start;
   overflow-y: auto;
   border-radius: 20px;
+  gap: 20px;
+  max-height: 698px;
+  user-select: none;
 }
 
 .main .kismain .text hr {
@@ -1190,7 +1196,7 @@ li {
 .versenylista {
   display: flex;
   gap: 30px;
-  filter: blur(11px);
+  
 }
 
 .versenylista div {
@@ -1206,17 +1212,22 @@ li {
 .versenylista .helyezet{
   filter: blur(15px);
   border-radius: 50%;
-  width: 25px;
+  width: 20px;
 }
 
 .versenylista .nev{
   filter: blur(15px);
   border-radius: 20px;
-  width: 235px;
+  width: 225px;
 }
 
 .versenylista .pontszam{
   filter: blur(15px);
   border-radius: 20px;
-  width: 60px;
+  width: 50px;
+}
+.kozepre{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
