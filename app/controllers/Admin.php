@@ -387,10 +387,6 @@ class Admin extends Controller {
         }    
     }
 
-
-
-
-
     // Verseny törlése
     public function versenyTorles($id){
         if (isLoggedIn()){
@@ -409,6 +405,20 @@ class Admin extends Controller {
     
             $this->view('user/login');
         }
+    }
+
+    // Verseny részletek oldal megjelenítése
+    public function adminversenyreszletek($id) {
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
+
+        $data = [
+            'Versenyreszletek' => $this->adminModel->egyAdottVersenyReszletei($id),
+            'versenyJelentkezok' => $this->adminModel->versenyJelentkezokLekerdezes($id)
+        ];
+
+        $this->view('admin/adminversenyreszletek/index', $data);
     }
 
 

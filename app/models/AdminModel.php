@@ -294,4 +294,26 @@ class AdminModel {
             return false;
         }
     }
+
+    // Egy adott esemény részleteinek lekérdezése
+    public function egyAdottVersenyReszletei($id) {
+        $this->db->query('SELECT e.tema, e.leiras, e.versenynev, e.idopont, e.id AS "esemeny_id", count(j.email) as "jelentkezok"
+                          FROM versenyek e
+                          LEFT JOIN versenyjelentkezok j ON e.id = j.versenyID
+                          WHERE e.id = :id AND e.torolt = 0'
+                        );
+        $this->db->bind(':id', $id);
+        $results = $this->db->single();
+        
+        return $results;
+    }
+
+    // Verseny jelentkezők lekérdezése
+    public function versenyJelentkezokLekerdezes($id) {
+        $this->db->query('SELECT j.tanuloNeve , j.id as "jelentkezoID", j.kod, j.pontszam, j.latszodik FROM versenyjelentkezok j INNER JOIN versenyek e ON j.versenyID = e.id WHERE j.torolt = 0 AND e.id = :id ORDER BY j.pontszam DESC');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
 }

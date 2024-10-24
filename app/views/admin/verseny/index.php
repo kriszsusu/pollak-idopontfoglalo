@@ -22,7 +22,7 @@
                             <p class="idopont">Esemény időpontja: <br> <?php $datum = new DateTime($sor->idopont); echo $datum->format('Y.m.d.');?></p>
                             <a class="edit" href="<?php echo URLROOT ?>/admin/versenyszerkesztes/<?php echo $sor->id ?>" ><i class='bx bxs-edit-alt'></i></a>
                             <a class="delete" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/versenyTorles/<?php echo $sor->id ?>"><i class='bx bxs-trash' ></i></a>
-                            <a class="tovabb"  href="<?php echo URLROOT . "/versenyreszletek/" . $sor->esemeny_id; ?>">Tovább</a>
+                            <a class="tovabb"  href="<?php echo URLROOT . "/admin/adminversenyreszletek/" . $sor->id; ?>">Tovább</a>
                         
                       </div>
                   </div>
