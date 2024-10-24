@@ -9,7 +9,7 @@ class VersenyreszletekModel {
 
     // Egy adott esemény részleteinek lekérdezése
     public function egyAdottEsemenyReszletei($id) {
-        $this->db->query('SELECT e.tema, e.versenynev, e.idopont, e.id AS "esemeny_id", count(j.email) as "jelentkezok"
+        $this->db->query('SELECT e.tema, e.leiras, e.versenynev, e.idopont, e.id AS "esemeny_id", count(j.email) as "jelentkezok"
                           FROM versenyek e
                           LEFT JOIN versenyjelentkezok j ON e.id = j.versenyID
                           WHERE e.id = :id AND e.torolt = 0'

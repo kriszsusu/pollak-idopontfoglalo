@@ -41,7 +41,7 @@
                 <hr>
                 <h3 class="idopont">Verseny időpontja: <?php $datum = new DateTime($data["Versenyreszletek"]->idopont); echo $datum->format('Y.m.d. H:i');?></h3>
                 <br><br><br>
-                <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["Versenyreszletek"]->tema));  ?></p>
+                <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["Versenyreszletek"]->leiras));  ?></p>
                 <form  class="jelentkezes" id="teszt" method="post">
                     <input type="hidden" name="versenyID" value="<?php echo $data['Versenyreszletek']->esemeny_id ?>">
                     <input type="text" class="input" name="tanuloNeve" placeholder="Név">
