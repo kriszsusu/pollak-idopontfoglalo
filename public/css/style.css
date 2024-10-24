@@ -1225,3 +1225,7 @@ li {
   border-radius: 20px;
   width: 60px;
 }
+
+.datetime{
+  text-align: center;
+}

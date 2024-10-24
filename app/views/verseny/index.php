@@ -11,7 +11,7 @@
               <?php foreach ($data["verseny"] as $sor): ?>
                   <div class="box">
                       <div class="kep-box">
-                          <img src="<?php echo URLROOT ?>/public/img/PAJIV_2024_jelentkezes.png" alt="" class="kep">
+                          <img src="<?php echo URLROOT ?>/public/img/<?php echo $sor->kep; ?>" alt="kep" class="kep">
                       </div>
                       <br>
                       <div class="adatok">
@@ -19,7 +19,9 @@
                           <br>
                           <p class="helyek">Téma: <b><?php echo $sor->tema?></b></p>
                           <br>
-                          <p class="idopont">Esemény időpontja: <br> <?php $datum = new DateTime($sor->idopont); echo $datum->format('Y.m.d.');?></p>
+                          <p class="idopont">Verseny időpontja: <br> <?php $datum = new DateTime($sor->idopont); echo $datum->format('Y.m.d.');?></p>
+                          <br>
+                          <p class="idopont">Jelentkezés határideje:<br> <?php $datum = new DateTime($sor->jelentkezesiHatarido); echo $datum->format('Y.m.d. H:i');?></p>
                           <a class="tovabb"  href="<?php echo URLROOT . "/versenyreszletek/" . $sor->esemeny_id; ?>">Tovább</a>
                           
                       </div>

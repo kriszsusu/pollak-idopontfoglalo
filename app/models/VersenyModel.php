@@ -11,7 +11,7 @@ class VersenyModel {
     public function kartyaLekerdezes() {
         $this->db->query(
             'SELECT
-                e.tema, e.versenynev, e.idopont, e.id AS "esemeny_id",
+                e.tema, e.versenynev, e.idopont,e.jelentkezesiHatarido,e.kep, e.id AS "esemeny_id",
                 count(j.email) as "jelentkezok"
             FROM
                 versenyek e

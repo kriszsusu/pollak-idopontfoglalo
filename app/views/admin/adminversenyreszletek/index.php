@@ -33,7 +33,7 @@
 
             <div class="text">
                 <div class="kepBoxVersenyek">
-                    <img id="img" src="<?php echo URLROOT ?>/public/img/PAJIV_2024_jelentkezes.png" alt="">
+                    <img id="img" src="<?php echo URLROOT ?>/public/img/<?php echo $data["Versenyreszletek"]->kep; ?>" alt="">
                 </div>
 
                 <h2 class="esemeny"><?php echo $data["Versenyreszletek"]->versenynev; ?></h2>
