@@ -834,9 +834,9 @@ a {
 }
 
 .miniimage {
-  /* border: 2px solid black; */
   justify-content: flex-start;
-  user-select: none;
+  overflow-y: auto;
+  border-radius: 20px;
 }
 
 .main .kismain .text hr {
@@ -1208,17 +1208,20 @@ li {
   align-items: center;
 }
 
-.versenylista .helyezet {
+.versenylista .helyezet{
+  filter: blur(15px);
   border-radius: 50%;
-  width: 30px;
+  width: 25px;
 }
 
-.versenylista .nev {
+.versenylista .nev{
+  filter: blur(15px);
   border-radius: 20px;
-  width: 250px;
+  width: 235px;
 }
 
-.versenylista .pontszam {
+.versenylista .pontszam{
+  filter: blur(15px);
   border-radius: 20px;
-  width: 80px;
+  width: 60px;
 }
