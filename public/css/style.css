@@ -780,7 +780,8 @@ a {
   margin-top: 150px;
 }
 
-.kismain, .minimain {
+.kismain,
+.minimain {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
@@ -814,7 +815,8 @@ a {
   height: 100%;
 }
 
-.image, .miniimage {
+.image,
+.miniimage {
   width: 45%;
   border-radius: 50px;
   display: flex;
@@ -824,6 +826,12 @@ a {
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.miniimage {
+  /* border: 2px solid black; */
+  justify-content: flex-start;
+  user-select: none;
 }
 
 .main .kismain .text hr {
@@ -953,14 +961,15 @@ a {
 }
 
 @media only screen and (max-width: 1200px) {
-  .kismain, .minimain {
+  .kismain,
+  .minimain {
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 85%;
   }
 
-  .minimain{
+  .minimain {
     flex-direction: column-reverse !important;
   }
   body {
@@ -970,7 +979,8 @@ a {
   #img {
     width: 100%;
   }
-  .image, .miniimage {
+  .image,
+  .miniimage {
     width: 85%;
     display: flex;
     flex-direction: column-reverse;
@@ -979,7 +989,7 @@ a {
     gap: 10px;
   }
 
-  .miniimage{
+  .miniimage {
     flex-direction: column !important;
   }
 
@@ -1177,12 +1187,13 @@ li {
 
 /*Verseny oldal*/
 
-.versenylista{
+.versenylista {
   display: flex;
   gap: 30px;
+  filter: blur(11px);
 }
 
-.versenylista div{
+.versenylista div {
   border: black 2px solid;
   box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
   padding: 5px;
@@ -1192,17 +1203,17 @@ li {
   align-items: center;
 }
 
-.versenylista .helyezet{
+.versenylista .helyezet {
   border-radius: 50%;
   width: 30px;
 }
 
-.versenylista .nev{
+.versenylista .nev {
   border-radius: 20px;
   width: 250px;
 }
 
-.versenylista .pontszam{
+.versenylista .pontszam {
   border-radius: 20px;
   width: 80px;
 }
