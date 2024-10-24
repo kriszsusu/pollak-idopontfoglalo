@@ -826,6 +826,12 @@ a {
   gap: 10px;
 }
 
+.miniimage {
+  justify-content: flex-start;
+  overflow-y: auto;
+  border-radius: 20px;
+}
+
 .main .kismain .text hr {
   border: 2px solid black;
   margin-bottom: 10px;
@@ -1193,16 +1199,19 @@ li {
 }
 
 .versenylista .helyezet{
+  filter: blur(15px);
   border-radius: 50%;
-  width: 30px;
+  width: 25px;
 }
 
 .versenylista .nev{
+  filter: blur(15px);
   border-radius: 20px;
-  width: 250px;
+  width: 235px;
 }
 
 .versenylista .pontszam{
+  filter: blur(15px);
   border-radius: 20px;
-  width: 80px;
+  width: 60px;
 }
