@@ -9,23 +9,20 @@
     <div class="minimain">
         <div class="miniimage">
             
-            <h1>Jelentkezők</h1>
+            <h1 class="kozepre">Jelentkezők</h1>
             <hr>
+            <!-- versenylista, helyzet, nev, pontszam -->
             <?php if (count($data["versenyJelentkezok"]) > 0) : ?>
                 <?php $i = 0; ?>
+                <table class="versenylista">
                     <?php foreach ($data["versenyJelentkezok"] as $sor): ?>
-                        <div class="versenylista">
-                            <div class="helyezet">
-                                <?php $i++; echo $sor->latszodik == 1 ? $i : 0; ?>.
-                            </div>
-                            <div class="nev">
-                                <h3><?php echo $sor->latszodik == 1 ? $sor->kod : "Név"?></h3>
-                            </div>
-                            <div class="pontszam">
-                                <h3><?php echo $sor->latszodik == 1 ?  $sor->pontszam : 0?></h3>
-                            </div>
-                        </div>
+                       <tr>
+                        <td><h3 class="helyzet"> <?php $i++; echo  $sor->latszodik == 1 ? $i : 0;  ?></h3></td>
+                        <td><h3 class="nev"><?php echo $sor->latszodik == 1 ? $sor->kod : "Név"?></h3></td>
+                        <td><h3 class="pontszam"><?php echo $sor->latszodik == 1 ?  $sor->pontszam : 0?></h3></td>
+                       </tr>
                     <?php endforeach; ?>
+                    </table>
                     <?php else:?>
                         <h3>Még nincsenek jelentkezők!</h3>
             <?php endif; ?>
