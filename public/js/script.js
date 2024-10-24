@@ -200,3 +200,20 @@ function iskolak(element) {
     document.getElementById("iskolaNeve").style.display = "none";
   }
 }
+
+function reveal(id) {
+
+  $.ajax({
+    url: "./admin/reveal",
+    method: "POST",
+    data: {
+      jelentkezoID: id,
+    },
+    success: function (response) {
+      console.log("Látszódik értéke sikeresen átírva 1-re.");
+    },
+    error: function (err) {
+      console.log("Hiba történt az érték átírása során!");
+    }
+  });
+}

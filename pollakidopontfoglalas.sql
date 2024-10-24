@@ -26,10 +26,10 @@ DROP TABLE IF EXISTS `esemenyek`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `esemenyek` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `cim` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_hungarian_ci NOT NULL,
-  `tema` varchar(1000) CHARACTER SET utf8mb3 COLLATE utf8mb3_hungarian_ci NOT NULL,
-  `leiras` text CHARACTER SET utf8mb3 COLLATE utf8mb3_hungarian_ci NOT NULL,
-  `kep` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_hungarian_ci NOT NULL,
+  `cim` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `tema` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `leiras` text CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `kep` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci NOT NULL,
   `datum` datetime NOT NULL,
   `feltoltesDatuma` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tanarID` int NOT NULL,
@@ -167,7 +167,7 @@ DROP TABLE IF EXISTS `tanterem`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tanterem` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `neve` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_hungarian_ci NOT NULL,
+  `neve` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci NOT NULL,
   `ferohely` int NOT NULL,
   `torolt` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -243,9 +243,9 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nev` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_hungarian_ci NOT NULL,
-  `felhasznalonev` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_hungarian_ci DEFAULT NULL,
-  `jelszo` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_hungarian_ci DEFAULT NULL,
+  `nev` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `felhasznalonev` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci DEFAULT NULL,
+  `jelszo` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci DEFAULT NULL,
   `torolt` tinyint DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
