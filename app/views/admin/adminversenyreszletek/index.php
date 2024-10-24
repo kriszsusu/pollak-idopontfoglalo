@@ -3,7 +3,6 @@
   require APPROOT . '/views/includes/adminNavigation.php';
 ?>
 
-<!-- A reszletek oldal tartalma -->
 <div class="main">
 
     <div class="minimain">
@@ -15,9 +14,9 @@
                 <?php $i = 0; ?>
                     <?php foreach ($data["versenyJelentkezok"] as $sor): ?>
                         <div class="versenylista">
-                            <div class="helyezet">
+                            <a class="helyezet" onclick="reveal(<?php echo $sor ->jelentkezoID ?>)">
                                 <?php $i++; echo $i; ?>.
-                            </div>
+                            </a>
                             <div class="nev">
                                 <h3><?php echo $sor->kod?></h3>
                             </div>

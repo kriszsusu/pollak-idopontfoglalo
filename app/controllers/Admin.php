@@ -421,6 +421,37 @@ class Admin extends Controller {
         $this->view('admin/adminversenyreszletek/index', $data);
     }
 
+    // Reveal function
+    public function reveal() {
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = trim($_POST['jelentkezoID']);
+            // Frissítsük az adatbázist
+            if ($this->adminModel->revealFunction($id)) {
+                // Sikeres frissítés
+                echo "Sikeres frissítés";
+            } else {
+                // Sikertelen frissítés
+              echo "Sikertelen frissítés";
+            }
+        } 
+    }
+
+    // Pontozás oldal 
+    public function pontozas() {
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
+
+        $data = [
+            'pontozas' => $this->adminModel->versenyJelentkezokLekerdzese()
+        ];
+
+        $this->view('admin/pontozas/index', $data);
+    }
 
 }
 

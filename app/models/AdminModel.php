@@ -316,4 +316,24 @@ class AdminModel {
         
         return $results;
     }
+
+    // Reveal 
+    public function revealFunction($id) {
+        $this->db->query('UPDATE versenyjelentkezok SET latszodik = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Verseny jelentkezők lekérdezése
+    public function versenyJelentkezokLekerdzese() {
+        $this->db->query('SELECT id, kod, tanuloNeve, email, tanuloNeve, pontszam FROM versenyjelentkezok WHERE torolt = 0 ');
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
 }

@@ -4,6 +4,7 @@
   ?>
   <a href="<?php echo URLROOT?>/admin" class="<?php echo $current_page == '' || $current_page == 'admin' ? 'active' : ''; ?>">Események</a>
   <a href="<?php echo URLROOT?>/admin/verseny" class="<?php echo $current_page == 'verseny' ? 'active' : ''; ?>">Versenyek</a>
+  <a href="<?php echo URLROOT?>/admin/pontozas" class="<?php echo $current_page == 'pontozas' ? 'active' : ''; ?>">Pontozás</a>
   <a href="<?php echo URLROOT?>/admin/adminhozzadas" class="<?php echo $current_page == 'adminhozzadas' ? 'active' : ''; ?>">Admin hozzáadás</a>
   <a class="bejelentkezes" href="<?php echo URLROOT?>/user/logout">Kijelentkezés</a>
 
