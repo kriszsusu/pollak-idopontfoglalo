@@ -61,9 +61,6 @@
                 <br><br>
                 <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["Versenyreszletek"]->leiras));  ?></p>
                 <br><div class><h3 class="datetime">Jelentkezés</h3> </div>
-                <div>
-                    <p class="blur">A határidő lejárt!</p>
-                </div>
                 <form  class="jelentkezes <?php $datum = new DateTime($data["Versenyreszletek"]->jelentkezesiHatarido); if ($datum <= new DateTime()) {echo 'jelentkezes-blur';} ?>" id="teszt" method="post">
                     <input type="hidden" name="versenyID" value="<?php echo $data['Versenyreszletek']->esemeny_id ?>">
                     <input type="text" class="input" name="tanuloNeve" placeholder="Név" <?php $datum = new DateTime($data["Versenyreszletek"]->jelentkezesiHatarido); if ($datum <= new DateTime()) {echo 'disabled';} ?>>
