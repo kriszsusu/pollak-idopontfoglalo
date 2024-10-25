@@ -201,20 +201,20 @@ function iskolak(element) {
   }
 }
 
-function reveal(id) {
-
+function reveal(url, id) {
+  console.log(url);
   $.ajax({
-    url: "./admin/reveal",
+    url: `${url}/admin/reveal`,
     method: "POST",
     data: {
       jelentkezoID: id,
     },
     success: function (response) {
-      console.log("Látszódik értéke sikeresen átírva 1-re.");
+      console.log(response);
     },
     error: function (err) {
-      console.log("Hiba történt az érték átírása során!");
-    }
+      console.log(err);
+    },
   });
 }
 
@@ -226,8 +226,8 @@ function openCity(evt, cityName) {
   }
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tablinks[i].className = tablinks[i].className.replace(" activeTab", "");
   }
   document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+  evt.currentTarget.className += " activeTab";
 }

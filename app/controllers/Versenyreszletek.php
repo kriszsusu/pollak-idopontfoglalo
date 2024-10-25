@@ -1,20 +1,24 @@
 <?php
 #[AllowDynamicProperties]
 
-class Versenyreszletek extends Controller {
-    public function __construct() {
+class Versenyreszletek extends Controller
+{
+    public function __construct()
+    {
         $this->VersenyreszletekModel = $this->model('VersenyreszletekModel');
     }
 
     // Az esemény részleteinek megjelenítése
-    public function index($id) {
+    public function index($id)
+    {
 
         $data = [
             'Versenyreszletek' => $this->VersenyreszletekModel->egyAdottEsemenyReszletei($id),
             'iskolak' => $this->VersenyreszletekModel->iskolakLekerdezes(),
             'evfolyamok' => $this->VersenyreszletekModel->evfolyamLekerdezes(),
             'versenyJelentkezok56' => $this->VersenyreszletekModel->versenyJelentkezokLekerzdezese56($id),
-            'versenyJelentkezok78' => $this->VersenyreszletekModel->versenyJelentkezokLekerzdezese78($id)
+            'versenyJelentkezok78' => $this->VersenyreszletekModel->versenyJelentkezokLekerzdezese78($id),
+            'isTheDeadlinePassed' => $this->isTheDeadlinePassed($this->VersenyreszletekModel->egyAdottEsemenyReszletei($id)->jelentkezesiHatarido)
         ];
 
         $this->view('versenyreszletek/index', $data);
@@ -30,7 +34,7 @@ class Versenyreszletek extends Controller {
             $tanuloNeve = trim($_POST['tanuloNeve']);
             $iskola = trim($_POST['iskola']);
 
-            if($iskola == 'egyeb') {
+            if ($iskola == 'egyeb') {
                 $iskola = trim($_POST['iskolaNeve']);
             }
             $evfolyam = trim($_POST['evfolyamok']);
@@ -38,12 +42,16 @@ class Versenyreszletek extends Controller {
             if ($this->VersenyreszletekModel->emailHozzadas($versenyID, $email, $tanarNeve, $tanuloNeve, $iskola, $evfolyam)) {
                 // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
                 header('location:' . URLROOT . '/versenyreszletek/' . $versenyID . '?msg=0');
-            }
-            else {
+            } else {
                 // A hozzáadás nem sikerült ezért beállítjuk az üzenetet 1-re
                 header('location:' . URLROOT . '/versenyreszletek/' . $versenyID . '?msg=1');
             }
         }
     }
-        
+
+    function isTheDeadlinePassed($deadline)
+    {
+        $datum = new DateTime($deadline);
+        return $datum <= new DateTime();
+    }
 }

@@ -836,7 +836,7 @@ a {
 .miniimage {
   justify-content: flex-start;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   align-content: center;
   overflow-y: auto;
   border-radius: 20px;
@@ -1002,6 +1002,10 @@ a {
 
   .miniimage {
     flex-direction: column !important;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 0;
+    align-content: flex-start;
   }
 
   .text {
@@ -1023,23 +1027,21 @@ a {
 }
 
 @media screen and (max-width: 650px) {
-
   .buttony {
     width: 100px;
   }
-  .esemeny{
+  .esemeny {
     font-size: 30px;
   }
-  .eredmenytabla tbody{
+  .eredmenytabla tbody {
     padding: 5px;
   }
   .text .terem,
   .text .oktato,
   .text .idopont {
-    text-wrap:pretty;
+    text-wrap: pretty;
     text-align: center;
   }
-  
 }
 
 /*Kapcsolat oldal*/
@@ -1214,10 +1216,10 @@ li {
 
 /*Verseny oldal*/
 
-.versenylista {
+/* .versenylista {
   display: flex;
   gap: 30px;
-}
+} */
 
 .versenylista div,
 .versenylista a {
@@ -1250,6 +1252,10 @@ li {
   width: fit-content;
 }
 
+.text-blur {
+  filter: blur(8px);
+}
+
 .datetime {
   text-align: center;
 }
@@ -1258,7 +1264,7 @@ li {
   margin-left: auto;
   margin-right: auto;
 }
-.blur{
+.blur {
   transform: rotate(28deg) !important;
   position: absolute;
   top: 615px;
@@ -1266,35 +1272,60 @@ li {
   font-size: xx-large;
   font-weight: bold;
   z-index: 12;
-
 }
-.jelentkezes-blur{
+.jelentkezes-blur {
   filter: blur(4px);
+  backdrop-filter: blur(4px);
   user-select: none;
-  
-}.eredmenytabla{
+}
+
+.eredmenytabla {
   border-radius: 10px;
   border: solid 1px black;
   box-shadow: 2px 4px #b3a99a;
-  background-color:#d1c7b6;
+  background-color: #d1c7b6;
+  padding: 10px;
+  border-collapse: separate;
+  border-spacing: 0.5em;
 }
-.eredmenytabla tbody{
-  text-align: center;
+
+.eredmenytabla tbody tr td * {
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1450px) {
+  .eredmenytabla {
+    padding: 2px;
+    border-spacing: 0;
+  }
+}
+
+.activeTab {
+  background-color: var(--kek);
+}
+
+.fade {
+  position: relative;
+  animation: animatetop 0.4s;
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.tab {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px;
+  align-items: center;
 }
-.fade{
-  position:relative;
-  animation:animatetop 0.4s
-}
-  
-@keyframes animatetop{
-  from{top:-300px;opacity:0}
-   to{top:0;opacity:1}
-  }
-
 
 /* .tablazatbox{
   width: fit-content;
