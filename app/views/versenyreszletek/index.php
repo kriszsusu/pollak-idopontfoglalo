@@ -43,8 +43,8 @@
                 <form  class="jelentkezes" id="teszt" method="post">
                     <input type="hidden" name="versenyID" value="<?php echo $data['Versenyreszletek']->esemeny_id ?>">
                     <input type="text" class="input" name="tanuloNeve" placeholder="Név">
-                    <input type="email" class="input" onkeyup="validate()" id="input" name="email" placeholder="Felkészítő tanár e-mail címe">
                     <input type="text" class="input" name="tanarNeve" placeholder="Felkészítő tanár neve">
+                    <input type="email" class="input" onkeyup="validate()" id="input" name="email" placeholder="Felkészítő tanár e-mail címe">
                     <select name="iskola" id="id-iskolak" class="input" style="height: 35px; width: 360px;" onchange="iskolak(this)">
                         <option value="-1">Válassz Iskolát!</option>
                         <?php foreach ($data['iskolak'] as $fajta): ?>
