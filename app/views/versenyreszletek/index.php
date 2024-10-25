@@ -14,7 +14,7 @@
             <!-- versenylista, helyezet, nev, pontszam -->
             <?php if (count($data["versenyJelentkezok"]) > 0) : ?>
                 <?php $i = 0; ?>
-                <table class="versenylista">
+                <table class="versenylista eredmenytabla">
                     <?php foreach ($data["versenyJelentkezok"] as $sor): ?>
                        <tr>
                         <td><h3 class="helyezet"> <?php $i++; echo  $sor->latszodik == 1 ? $i : 0;  ?></h3></td>
