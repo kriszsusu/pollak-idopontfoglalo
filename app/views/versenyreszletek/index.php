@@ -19,7 +19,7 @@
             <div class="tablazatbox">
             <div class="tabcontent fade" id="56"><?php if (count($data["versenyJelentkezok56"]) > 0) : ?>
                 <?php $i = 0; ?>
-                <table class="versenylista">
+                <table class="versenylista eredmenytabla">
                     <?php foreach ($data["versenyJelentkezok56"] as $sor): ?>
                        <tr>
                         <td><h3 class="helyezet"> <?php $i++; echo  $sor->latszodik == 1 ? $i : 0;  ?></h3></td>
@@ -34,7 +34,7 @@
 
             <div class="tabcontent fade" id="78" style="display:none"><?php if (count($data["versenyJelentkezok78"]) > 0) : ?>
                 <?php $i = 0; ?>
-                <table class="versenylista">
+                <table class="versenylista eredmenytabla">
                     <?php foreach ($data["versenyJelentkezok78"] as $sor): ?>
                        <tr>
                         <td><h3 class="helyezet"> <?php $i++; echo  $sor->latszodik == 1 ? $i : 0;  ?></h3></td>

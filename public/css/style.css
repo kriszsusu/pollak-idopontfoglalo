@@ -1023,13 +1023,23 @@ a {
 }
 
 @media screen and (max-width: 650px) {
-  .input {
-    width: 140px;
-  }
 
   .buttony {
     width: 100px;
   }
+  .esemeny{
+    font-size: 30px;
+  }
+  .eredmenytabla tbody{
+    padding: 5px;
+  }
+  .text .terem,
+  .text .oktato,
+  .text .idopont {
+    text-wrap:pretty;
+    text-align: center;
+  }
+  
 }
 
 /*Kapcsolat oldal*/
@@ -1104,6 +1114,12 @@ a {
 
   .container .elerhetosegek .kapcsolatok h1 {
     margin-bottom: 30px;
+  }
+  .text .terem,
+  .text .oktato,
+  .text .idopont {
+    font-size: 20px !important ;
+    text-align: center;
   }
 }
 
@@ -1216,22 +1232,22 @@ li {
 }
 
 .versenylista .helyezet {
-  filter: blur(15px);
+  /* filter: blur(15px); */
   border-radius: 50%;
-  width: 20px;
+  width: fit-content;
 }
 
 .versenylista .nev {
-  filter: blur(15px);
+  /* filter: blur(15px); */
   border-radius: 20px;
   width: 225px;
   text-align: center;
 }
 
 .versenylista .pontszam {
-  filter: blur(15px);
+  /* filter: blur(15px); */
   border-radius: 20px;
-  width: 50px;
+  width: fit-content;
 }
 
 .datetime {
@@ -1242,7 +1258,19 @@ li {
   margin-left: auto;
   margin-right: auto;
 }
-
+.eredmenytabla{
+  border-radius: 10px;
+  border: solid 1px black;
+  box-shadow: 2px 4px #b3a99a;
+  background-color:#d1c7b6;
+}
+.eredmenytabla tbody{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
 .fade{
   position:relative;
   animation:animatetop 0.4s
