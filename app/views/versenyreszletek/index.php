@@ -8,14 +8,19 @@
 
     <div class="minimain">
         <div class="miniimage">
-            
-            <h1 class="kozepre">Jelentkezők</h1>
+        <div class="tab">
+            <h1 style="text-align: center">Jelentkezők</h1>
+
+            <button class="tablinks buttony " onclick="openCity(event, '56')">5-6. Évfolyam</button>
+            <button class="tablinks buttony" onclick="openCity(event, '78')">7-8. Évfolyam</button>
+        </div>
             <hr>
             <!-- versenylista, helyezet, nev, pontszam -->
-            <?php if (count($data["versenyJelentkezok"]) > 0) : ?>
+            <div class="tablazatbox">
+            <div class="tabcontent fade" id="56"><?php if (count($data["versenyJelentkezok56"]) > 0) : ?>
                 <?php $i = 0; ?>
                 <table class="versenylista">
-                    <?php foreach ($data["versenyJelentkezok"] as $sor): ?>
+                    <?php foreach ($data["versenyJelentkezok56"] as $sor): ?>
                        <tr>
                         <td><h3 class="helyezet"> <?php $i++; echo  $sor->latszodik == 1 ? $i : 0;  ?></h3></td>
                         <td><h3 class="nev"><?php echo $sor->latszodik == 1 ? $sor->kod : "Név"?></h3></td>
@@ -25,8 +30,24 @@
                     </table>
                     <?php else:?>
                         <h3>Még nincsenek jelentkezők!</h3>
-            <?php endif; ?>
+            <?php endif; ?></div>
 
+            <div class="tabcontent fade" id="78" style="display:none"><?php if (count($data["versenyJelentkezok78"]) > 0) : ?>
+                <?php $i = 0; ?>
+                <table class="versenylista">
+                    <?php foreach ($data["versenyJelentkezok78"] as $sor): ?>
+                       <tr>
+                        <td><h3 class="helyezet"> <?php $i++; echo  $sor->latszodik == 1 ? $i : 0;  ?></h3></td>
+                        <td><h3 class="nev"><?php echo $sor->latszodik == 1 ? $sor->kod : "Név"?></h3></td>
+                        <td><h3 class="pontszam"><?php echo $sor->latszodik == 1 ?  $sor->pontszam : 0?></h3></td>
+                       </tr>
+                    <?php endforeach; ?>
+                    </table>
+                    <?php else:?>
+                        <h3>Még nincsenek jelentkezők!</h3>
+            <?php endif; ?></div>
+
+        </div>
         </div>
 
             <div class="text">

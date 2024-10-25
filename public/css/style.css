@@ -1242,3 +1242,20 @@ li {
   margin-left: auto;
   margin-right: auto;
 }
+
+.fade{
+  position:relative;
+  animation:animatetop 0.4s
+}
+  
+@keyframes animatetop{
+  from{top:-300px;opacity:0}
+   to{top:0;opacity:1}
+  }
+
+
+/* .tablazatbox{
+  width: fit-content;
+  height: 200px;
+  overflow: hidden;
+} */
