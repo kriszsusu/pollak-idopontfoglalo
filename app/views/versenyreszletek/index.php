@@ -40,12 +40,15 @@
                 <br><br>
                 <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["Versenyreszletek"]->leiras));  ?></p>
                 <br><div class><h3 class="datetime">Jelentkezés</h3> </div>
-                <form  class="jelentkezes" id="teszt" method="post">
+                <div>
+                    <p class="blur">A határidő lejárt!</p>
+                </div>
+                <form  class="jelentkezes <?php $datum = new DateTime($data["Versenyreszletek"]->jelentkezesiHatarido); if ($datum <= new DateTime()) {echo 'jelentkezes-blur';} ?>" id="teszt" method="post">
                     <input type="hidden" name="versenyID" value="<?php echo $data['Versenyreszletek']->esemeny_id ?>">
-                    <input type="text" class="input" name="tanuloNeve" placeholder="Név">
-                    <input type="text" class="input" name="tanarNeve" placeholder="Felkészítő tanár neve">
-                    <input type="email" class="input" onkeyup="validate()" id="input" name="email" placeholder="Felkészítő tanár e-mail címe">
-                    <select name="iskola" id="id-iskolak" class="input" style="height: 35px; width: 360px;" onchange="iskolak(this)">
+                    <input type="text" class="input" name="tanuloNeve" placeholder="Név" <?php $datum = new DateTime($data["Versenyreszletek"]->jelentkezesiHatarido); if ($datum <= new DateTime()) {echo 'disabled';} ?>>
+                    <input type="text" class="input" name="tanarNeve" placeholder="Felkészítő tanár neve" <?php $datum = new DateTime($data["Versenyreszletek"]->jelentkezesiHatarido); if ($datum <= new DateTime()) {echo 'disabled';} ?>>
+                    <input type="email" class="input" onkeyup="validate()" id="input" name="email" placeholder="Felkészítő tanár e-mail címe" <?php $datum = new DateTime($data["Versenyreszletek"]->jelentkezesiHatarido); if ($datum <= new DateTime()) {echo 'disabled';} ?>>
+                    <select name="iskola" id="id-iskolak" class="input" style="height: 35px; width: 360px;" onchange="iskolak(this)" <?php $datum = new DateTime($data["Versenyreszletek"]->jelentkezesiHatarido); if ($datum <= new DateTime()) {echo 'disabled';} ?>>
                         <option value="-1">Válassz Iskolát!</option>
                         <?php foreach ($data['iskolak'] as $fajta): ?>
                             <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->nev; ?></option>
@@ -54,7 +57,7 @@
                     </select>
                     <input type="text" class="input" name="iskolaNeve" id="iskolaNeve" placeholder="Iskola megnevezése" style="display: none;">
 
-                    <select name="evfolyamok" id="id-evfolyamok" class="input" style="height: 35px; width: 360px;">
+                    <select name="evfolyamok" id="id-evfolyamok" class="input" style="height: 35px; width: 360px;" <?php $datum = new DateTime($data["Versenyreszletek"]->jelentkezesiHatarido); if ($datum <= new DateTime()) {echo 'disabled';} ?>>
                         <option value="-1">Válassz Évfolyamot!</option>
                         <?php foreach ($data['evfolyamok'] as $fajta): ?>
                             <option class="marka" value="<?php echo $fajta->id; ?>"><?php echo $fajta->nev; ?></option>

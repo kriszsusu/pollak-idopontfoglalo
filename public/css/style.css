@@ -1242,3 +1242,18 @@ li {
   margin-left: auto;
   margin-right: auto;
 }
+.blur{
+  transform: rotate(28deg) !important;
+  position: absolute;
+  top: 615px;
+  left: 520px;
+  font-size: xx-large;
+  font-weight: bold;
+  z-index: 12;
+
+}
+.jelentkezes-blur{
+  filter: blur(4px);
+  user-select: none;
+  
+}
