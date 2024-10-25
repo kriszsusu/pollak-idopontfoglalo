@@ -13,7 +13,8 @@ class Versenyreszletek extends Controller {
             'Versenyreszletek' => $this->VersenyreszletekModel->egyAdottEsemenyReszletei($id),
             'iskolak' => $this->VersenyreszletekModel->iskolakLekerdezes(),
             'evfolyamok' => $this->VersenyreszletekModel->evfolyamLekerdezes(),
-            'versenyJelentkezok' => $this->VersenyreszletekModel->versenyJelentkezokLekerzdezese($id)
+            'versenyJelentkezok56' => $this->VersenyreszletekModel->versenyJelentkezokLekerzdezese56($id),
+            'versenyJelentkezok78' => $this->VersenyreszletekModel->versenyJelentkezokLekerzdezese78($id)
         ];
 
         $this->view('versenyreszletek/index', $data);

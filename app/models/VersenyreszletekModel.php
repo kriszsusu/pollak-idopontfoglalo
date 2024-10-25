@@ -35,8 +35,25 @@ class VersenyreszletekModel {
     }
 
     // Versenyjelentkezők lekérdezése
-    public function versenyJelentkezokLekerzdezese($id) {
-        $this->db->query('SELECT j.tanuloNeve , j.id as "jelentkezoID", j.kod, j.pontszam, j.latszodik FROM versenyjelentkezok j INNER JOIN versenyek e ON j.versenyID = e.id WHERE j.torolt = 0 AND e.id = :id ORDER BY j.pontszam DESC');
+    public function versenyJelentkezokLekerzdezese56($id) {
+        $this->db->query('SELECT j.tanuloNeve , j.id as "jelentkezoID", j.kod, j.pontszam, j.latszodik
+FROM versenyjelentkezok j
+INNER JOIN versenyek e ON j.versenyID = e.id
+INNER JOIN evfolyam ev ON j.evfolyamID = ev.id
+WHERE j.torolt = 0 AND e.id = :id AND (ev.id = 1 OR ev.id = 2) 
+ORDER BY j.pontszam DESC');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+    public function versenyJelentkezokLekerzdezese78($id) {
+        $this->db->query('SELECT j.tanuloNeve , j.id as "jelentkezoID", j.kod, j.pontszam, j.latszodik
+FROM versenyjelentkezok j
+INNER JOIN versenyek e ON j.versenyID = e.id
+INNER JOIN evfolyam ev ON j.evfolyamID = ev.id
+WHERE j.torolt = 0 AND e.id = :id AND (ev.id = 3 OR ev.id = 4) 
+ORDER BY j.pontszam DESC');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         
