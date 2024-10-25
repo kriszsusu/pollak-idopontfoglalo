@@ -29,7 +29,7 @@
                     <?php endforeach; ?>
                     </table>
                     <?php else:?>
-                        <h3>Még nincsenek jelentkezők!</h3>
+                        <h3></h3>
             <?php endif; ?></div>
 
             <div class="tabcontent fade" id="78" style="display:none"><?php if (count($data["versenyJelentkezok78"]) > 0) : ?>
@@ -44,7 +44,7 @@
                     <?php endforeach; ?>
                     </table>
                     <?php else:?>
-                        <h3>Még nincsenek jelentkezők!</h3>
+                        <h3></h3>
             <?php endif; ?></div>
 
         </div>
