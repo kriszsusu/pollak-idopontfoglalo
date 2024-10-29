@@ -20,6 +20,10 @@ RUN chown -R www-data:www-data /var/www/html/public/img && \
 # Copy the apache configuration file to the sites-available directory
 # COPY ./app/my-site.conf /etc/apache2/sites-available/my-site.conf
 
+# Set PHP upload limits
+RUN echo "upload_max_filesize=256M" > /usr/local/etc/php/conf.d/01-uploads.ini \
+    && echo "post_max_size=256M" >> /usr/local/etc/php/conf.d/01-uploads.ini
+
 # Add the environment variables to the apache configuration
 RUN echo 'SetEnv DB_HOST ${DB_HOST}' >> /etc/apache2/conf-enabled/environment.conf
 RUN echo 'SetEnv DB_NAME ${DB_NAME}' >> /etc/apache2/conf-enabled/environment.conf

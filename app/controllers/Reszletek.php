@@ -48,6 +48,20 @@ class Reszletek extends Controller {
             header('location:' . URLROOT . '/reszletek/' . $esemenyID . '?msg=3');
         }
     }
+
+    public function jelentkezesTorles($id)
+    {
+
+        $this->view('reszletek/jelentkezesTorles/index');
+
+        $esemenyID = $this->reszletekModel->torol($id);
+
+        if ($esemenyID) {
+            header('location:' . URLROOT);
+        } else {
+            header('location:' . URLROOT);
+        }
+    }
         
 }
 
