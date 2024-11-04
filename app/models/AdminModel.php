@@ -169,16 +169,40 @@ class AdminModel
         }
     }
 
-    public function felhasznaloTorles($id)
+    // Felhasználó törölése
+    public function felhasznaloTorles($esemeny_id, $id)
     {
-        $this->db->query('UPDATE jelentkezok SET torolt = 1 WHERE id = :id');
+        $this->db->query('UPDATE jelentkezok SET torolt = 1 WHERE id = :id AND esemenyID = :esemeny_id');
         $this->db->bind(':id', $id);
+        $this->db->bind(':esemeny_id', $esemeny_id);
+
 
         if ($this->db->execute()) {
             return true;
         } else {
             return false;
         }
+    }
+
+    // Felhasználó engedélyezése
+    public function felhasznaloEngedelyezes($esemeny_id, $id)
+    {
+        $this->db->query('UPDATE jelentkezok SET megjelent = 1 WHERE id = :id AND esemenyID = :esemeny_id');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':esemeny_id', $esemeny_id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Felhasználók lekérdezése
+    public function getEligibleUsers()
+    {
+        $this->db->query("SELECT neve, email FROM jelentkezok WHERE megjelent = 1 AND torolt = 0");
+        return $this->db->resultSet();
     }
 
     // esemény duplikálása
@@ -375,4 +399,5 @@ class AdminModel
 
         return $results;
     }
+    
 }

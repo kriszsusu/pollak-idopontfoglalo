@@ -224,15 +224,15 @@ class Admin extends Controller
     }
 
     // Felhasználók törlése
-    public function felhasznaloTorles($id)
+    public function felhasznaloTorles($esemeny_id, $id)
     {
         if (isLoggedIn()) {
-            if ($this->adminModel->felhasznaloTorles($id)) {
+            if ($this->adminModel->felhasznaloTorles($esemeny_id, $id)) {
                 // A törlés sikerült, átirányítjuk a felhasználót az adminfőoldalra
-                header('location:' . URLROOT . '/admin');
+                header('location:' . URLROOT . '/admin/reszletek/' . $esemeny_id);
             } else {
                 // A törlés nem sikerült
-                header('location:' . URLROOT . '/admin');
+                header('location:' . URLROOT . '/admin/reszletek/' . $esemeny_id);
             }
         } else {
             $data = [];
@@ -240,6 +240,72 @@ class Admin extends Controller
             $this->view('user/login');
         }
     }
+
+    // Felhasználó engedélyezése 
+    public function felhasznaloEngedelyezes($esemeny_id, $id)
+    {
+        if (isLoggedIn()) {
+            if ($this->adminModel->felhasznaloEngedelyezes($esemeny_id, $id)) {
+                // Az engedélyezés sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin/reszletek/' . $esemeny_id);
+            } else {
+                // Az engedélyezés nem sikerült
+                header('location:' . URLROOT . '/admin/reszletek/' . $esemeny_id);
+            }
+        } else {
+            $data = [];
+
+            $this->view('user/login');
+        }
+    }
+
+    // Felhasználók inportálása
+    public function exportToPdf()
+    {
+        // Check if the user is logged in
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+            exit;
+        }
+
+        // Fetch users with jelentkezo = 1
+        $eligibleUsers = $this->adminModel->getEligibleUsers();
+
+        // Check if data exists
+        if (!$eligibleUsers) {
+            die("Nincsen felhasználó.");
+        }
+
+        // Load PDF library (e.g., TCPDF or FPDF)
+        require_once APPROOT . '/libraries/tcpdf/tcpdf.php'; // Adjust if using a different library
+        $pdf = new TCPDF();
+
+        // Configure PDF
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Admin');
+        $pdf->SetTitle('Megjelent tanulók lista');
+        $pdf->SetHeaderData('', 0, 'Megjelent tanulók', '');
+
+        // Add a page
+        $pdf->AddPage();
+
+        // Content to display
+        $content = "<table><tr><th>Név</th><th>Email</th></tr> <br>"; 
+
+        foreach ($eligibleUsers as $user) {
+            $content .= "<tr><td>{$user->neve}</td><td>{$user->email}</td></tr>";
+        }
+        $content .= "</table>";
+
+        // Output content to PDF
+        $pdf->writeHTML($content);
+
+        // Output the PDF as a download
+        ob_end_clean();
+        ob_start();
+        $pdf->Output('megjelentTanulok.pdf', 'D');
+    }
+
 
     // Versenyek oldal megjelenítése
     public function verseny()
@@ -415,4 +481,5 @@ class Admin extends Controller
 
         $this->view('admin/pontozas/index', $data);
     }
+
 }

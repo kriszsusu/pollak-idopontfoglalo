@@ -37,7 +37,7 @@
     <?php if (count($data["jelentkezok"]) > 0) : ?>
             <?php foreach ($data["jelentkezok"] as $sor): ?>
                 <div class="lista">
-                <h3 >Neve: <?php echo $sor->neve?>, Email címe: <?php echo $sor->email?>  <a class="jelentkezoTorles" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/felhasznaloTorles/<?php echo $sor->jelentkezoID ?>"><i class='bx bxs-trash' ></i></a></h3>
+                <h3 >Neve: <?php echo $sor->neve?>, Email címe: <?php echo $sor->email?> <a class="jelentkezoTorles" onclick="return confirm('Biztos engedélyezni szeretnéd?')" href="<?php echo URLROOT ?>/admin/felhasznaloEngedelyezes/<?php echo  $data["reszletek"]->esemeny_id ?>/<?php echo $sor->jelentkezoID ?>"><i class='bx bxs-user-check' ></i></a> <a class="jelentkezoTorles" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/felhasznaloTorles/<?php echo  $data["reszletek"]->esemeny_id ?>/<?php echo $sor->jelentkezoID ?>"><i class='bx bxs-trash' ></i></a></h3>
                 <hr>
                 </div>
             <?php endforeach; ?>
@@ -46,6 +46,12 @@
     <?php endif; ?>
 
  </div>
+
+ <!-- Export button -->
+<form action="<?= URLROOT; ?>/admin/exportToPdf" method="post">
+    <button type="submit" class="btn btn-primary">Felhasználók exportálása</button>
+</form>
+
     
     
     <div id="myModal" class="modal">
