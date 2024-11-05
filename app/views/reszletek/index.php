@@ -9,7 +9,7 @@
         <div class="kismain">
             <div class="image">
                 <div class="jelentkezok">
-                    <h3 class="jelentkezokszama"> Hátralévő helyek: <?php echo $data["reszletek"]->ferohely - $data["reszletek"]->jelentkezok; ?></h3>
+                    <h3 class="jelentkezokszama"> Szabad helyek száma: <?php echo $data["reszletek"]->ferohely - $data["reszletek"]->jelentkezok; ?></h3>
                 </div>
                 <div class="kepBox">
                     <img id="img" src="<?php echo URLROOT ?>/public/img/<?php echo $data["reszletek"]->kep; ?>" alt="">
@@ -22,7 +22,7 @@
                 <hr>
                 <h3 class="terem">Tanterem: <?php echo $data["reszletek"]->neve; ?></h3>
                 <h3 class="oktato">Oktató neve: <?php echo $data["reszletek"]->nev; ?></h3>
-                <h3 class="idopont"><?php echo $data["reszletek"]->datum; ?></h3>
+                <h3 class="idopont"><?php $datum = new DateTime($data['reszletek']->datum); echo $datum->format('Y.m.d. H:i'); ?></h3>
                 <br><br><br>
                 <p class="leiras"><?php echo nl2br(str_replace('&#13;&#10;', "\n", $data["reszletek"]->leiras));  ?></p>
                 <?php if($data["reszletek"]->ferohely - $data["reszletek"]->jelentkezok > 0) {?>

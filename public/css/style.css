@@ -648,7 +648,7 @@ a {
 .keret {
   margin-top: 30px;
   height: auto;
-  width: 30%;
+  width: 40%;
   box-sizing: border-box;
   background-color: var(--main);
   border: none;
@@ -659,7 +659,7 @@ a {
   display: block;
   box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
   margin-bottom: 50px;
-  transition: 0.2s;
+
   padding: 20px;
   padding-top: 10px !important;
 }
@@ -679,10 +679,6 @@ a {
   border-radius: 10px;
 }
 
-.keret:hover {
-  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
-  transition: 0.2s;
-}
 
 .keret h1 {
   text-align: center;
@@ -690,6 +686,34 @@ a {
 
 .keret .lista {
   text-align: center;
+}
+
+@media screen and (max-width: 1500px) {
+  .keret {
+    width: 90%;
+  }
+}
+
+.export{
+  width: 100%;
+  height: 100%;
+  
+}
+
+.export button{
+  border-radius: 50px;
+  background-color: #6a9ab0;
+  color: var(--feher) !important;
+  padding: 8px;
+  text-align: center;
+  font-size: 15px !important;
+  border: none;
+  transition: 0.2s;
+}
+
+.export button:hover{
+  background-color: #97b5c4;
+  transition: 0.2s;
 }
 
 .edit,
@@ -784,6 +808,12 @@ a {
   text-align: center;
   font-size: 15px !important;
   margin-top: 10px;
+  transition: 0.2s;
+}
+
+.jelentkezoTorles:hover{
+  background-color: #97b5c4;
+  transition: 0.2s;
 }
 
 .versenyido {

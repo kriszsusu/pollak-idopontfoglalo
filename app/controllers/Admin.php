@@ -36,6 +36,25 @@ class Admin extends Controller
             'jelentkezok' => $this->adminModel->jelentkezokLekerzdezese($id)
         ];
 
+        //Hozzáadás
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+            $esemenyID = (int)trim($_POST['esemenyID']);
+            $email = trim($_POST['email']);
+            $neve = trim($_POST['neve']);
+
+                if ($this->adminModel->emailHozzadas($esemenyID, $email, $neve)) {
+                    // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
+                    header('location:' . URLROOT . '/admin/reszletek/' . $esemenyID . '?msg=0');
+                }
+                else {
+                    // A hozzáadás nem sikerült ezért beállítjuk az üzenetet 1-re
+                    header('location:' . URLROOT . '/admin/reszletek/' . $esemenyID . '?msg=1');
+                }
+            }
+
         $this->view('admin/reszletek/index', $data);
     }
 
@@ -260,7 +279,7 @@ class Admin extends Controller
     }
 
     // Felhasználók inportálása
-    public function exportToPdf()
+    public function exportToPdf($id)
     {
         // Check if the user is logged in
         if (!isLoggedIn()) {
@@ -269,7 +288,7 @@ class Admin extends Controller
         }
 
         // Fetch users with jelentkezo = 1
-        $eligibleUsers = $this->adminModel->getEligibleUsers();
+        $eligibleUsers = $this->adminModel->getEligibleUsers($id);
 
         // Check if data exists
         if (!$eligibleUsers) {
@@ -305,7 +324,7 @@ class Admin extends Controller
         ob_start();
         $pdf->Output('megjelentTanulok.pdf', 'D');
     }
-
+ 
 
     // Versenyek oldal megjelenítése
     public function verseny()
