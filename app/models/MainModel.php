@@ -67,7 +67,7 @@ class MainModel
     // Oktatók lekérdezése
     public function oktatokLekerdezes()
     {
-        $this->db->query('SELECT id, nev FROM users WHERE torolt = 0');
+        $this->db->query('SELECT DISTINCT users.nev FROM users INNER JOIN esemenyek ON esemenyek.tanarID = users.id AND esemenyek.torolt = 0;');
         $results = $this->db->resultSet();
 
         return $results;
@@ -76,7 +76,7 @@ class MainModel
     // Tantermek lekérdezése
     public function teremLekerdezes()
     {
-        $this->db->query('SELECT id, neve FROM tanterem');
+        $this->db->query('SELECT DISTINCT tanterem.neve FROM tanterem INNER JOIN esemenyek ON esemenyek.tanteremID = tanterem.id AND tanterem.torolt = 0;');
         $results = $this->db->resultSet();
 
         return $results;
