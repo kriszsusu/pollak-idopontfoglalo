@@ -16,12 +16,17 @@ class Admin extends Controller
         if (!isLoggedIn()) {
             header('location:' . URLROOT . '/user/login');
         }
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->adminModel->emlekezteto();
+        }
+        
         $data = [
             'main' => $this->adminModel->kartyaLekerdezes()
         ];
 
         $this->view('admin/index', $data);
+        
+        
     }
 
     // Egy adott esemény részleteinek megjelenítése
@@ -390,7 +395,7 @@ class Admin extends Controller
                 //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
 
                 $versenynev = trim($_POST['versenynev']);
-                $tema = trim($_POST['tema']);
+                $tema = trim($_POST['tema']); 
                 $idopont = trim($_POST['idopont']);
                 $jelentkezesiHatarido = trim($_POST['jelentkezesiHatarido']);
                 $leiras = trim($_POST['leiras']);
@@ -500,5 +505,6 @@ class Admin extends Controller
 
         $this->view('admin/pontozas/index', $data);
     }
+    
 
 }

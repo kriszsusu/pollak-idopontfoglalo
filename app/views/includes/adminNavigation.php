@@ -7,8 +7,10 @@
   <a href="<?php echo URLROOT?>/admin/pontozas" class="<?php echo $current_page == 'pontozas' ? 'active' : ''; ?>">Pontozás</a>
   <a href="<?php echo URLROOT?>/admin/adminhozzadas" class="<?php echo $current_page == 'adminhozzadas' ? 'active' : ''; ?>">Admin hozzáadás</a>
   <a class="bejelentkezes" href="<?php echo URLROOT?>/user/logout">Kijelentkezés</a>
+  <a class="<?php echo $current_page == 'verseny' ? 'active' : ''; ?>"><form action="<?php echo URLROOT?>/admin" method="post"><button class="atlatszo">spam</button></form></a>
+  
 
   <a href="javascript:void(0);" class="icon" onclick="navbar()">
     <i class="fa fa-bars"></i>
   </a>
-</div>
+</div> 

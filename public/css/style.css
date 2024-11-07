@@ -1382,3 +1382,9 @@ li {
   height: 200px;
   overflow: hidden;
 } */
+.atlatszo {
+  background: none;
+  border: none;
+  color: white;
+  font-size: medium;
+}

@@ -516,5 +516,49 @@ class AdminModel
 
         return $results;
     }
+
+    public function emlekezteto(){
+        if (isLoggedIn()) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $this->db->query('select e.id, e.cim, e.tema, e.datum, e.leiras
+                from esemenyek e
+                where day(e.datum - interval 1 day) = day(NOW()) AND month(e.datum) = month(NOW()) AND year(e.datum) = year(NOW())');
+
+                $row = $this->db->resultSet();
+                for ($i=0; $i < count($row); $i++) {
+                    $this->db->query('select j.neve, j.email
+                    from jelentkezok j
+                    where j.esemenyID = :esemenyID');
+                    $this->db->bind(':esemenyID', $row[$i]->id);
+                    $row2 = $this->db->resultSet();
+           
+                    for ($j=0; $j < count($row2); $j++) {
+                        $subject = $row[$i]->cim . ' - Jelentkezés emlékeztető';
+                        $body = 'Kedves ' . $row2[$j]->neve . '!<br><br>
+                            <b>Ezúton értesítjuk, hogy a következő esemény: ' . $row[$i]->cim . ' holnap esedékes<b><br><br>
+                            <b>Téma:</b> ' . $row[$i]->tema . '<br>
+                            <b>Időpont:</b> ' . $row[$i]->datum . '<br>
+                            <b>Leírás:</b> ' . $row[$i]->leiras . '<br><br>
+                            Az alábbi linkre kattintva törölheti a jelentkezését:<br><br><a href="' . URLROOT . '/reszletek/jelentkezesTorles/' . $row[$i]->id. '">Jelentkezés törlése</a>
+                            <br><br>Üdvözlettel,<br>HSZC Pollák Antal Technikum!';
+
+                        $this->mailer->AddAddress($row2[$j]->email, $row2[$j]->neve);
+           
+                        $this->mailer->Subject = $subject;
+                        $this->mailer->Body = $body;
+                        $this->mailer->Send();
+                        $this->mailer->clearAllRecipients();
+                        
+                    }
+                }
+            } else {
+                
+            }
+        } else {
+            $data = [];
+
+            $this->view('user/login');
+        }
+    }
     
 }
