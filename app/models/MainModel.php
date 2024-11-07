@@ -41,7 +41,7 @@ class MainModel
     // Időpontok lekérdezése
     public function idopontokLekerdezesNap()
     {
-        $this->db->query('SELECT DATE(datum) AS datum FROM esemenyek WHERE torolt = 0 group by datum');
+        $this->db->query('SELECT distinct DATE(datum) AS datum FROM esemenyek WHERE torolt = 0');
         $results = $this->db->resultSet();
 
         return $results;
@@ -49,7 +49,7 @@ class MainModel
 
     public function idopontokLekerdezesOra()
     {
-        $this->db->query('SELECT TIME(datum) AS datum FROM esemenyek WHERE torolt = 0 group by datum');
+        $this->db->query('SELECT distinct TIME(datum) AS datum FROM esemenyek WHERE torolt = 0');
         $results = $this->db->resultSet();
 
         return $results;

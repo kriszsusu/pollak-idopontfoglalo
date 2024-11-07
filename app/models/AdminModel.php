@@ -521,17 +521,18 @@ class AdminModel
     // Jelentkezők lekérdezése
     public function jelentkezokLekerdezes()
     {
-        $this->db->query("SELECT ANY_VALUE(j.id) AS jelentkezo_id,  ANY_VALUE(j.megjelent) AS megjelent,  j.neve AS jelentkezo, GROUP_CONCAT(CONCAT(TIME(e.datum), ';', t.neve) ORDER BY e.datum) AS idopont_terem FROM jelentkezok_vt j
+        $this->db->query("SELECT ANY_VALUE(j.id) AS jelentkezo_id,  ANY_VALUE(j.megjelent) AS megjelent,  j.neve AS jelentkezo, j.email, GROUP_CONCAT(CONCAT(TIME(e.datum), ';', t.neve) ORDER BY e.datum) AS idopont_terem
+                                    FROM jelentkezok_vt j
                                     INNER JOIN 
                                         esemenyek e ON e.id = j.esemenyID
                                     INNER JOIN 
                                         tanterem t ON e.tanteremID = t.id
                                     WHERE 
-                                        j.torolt = 0 AND j.visszaigazolt = 1
+                                        j.torolt = 0 AND j.visszaigazolt = 1 
                                     GROUP BY 
-                                        j.neve
+                                        j.email, j.neve
                                     ORDER BY 
-                                        j.neve ASC ");
+                                        j.neve ASC");
 
         $results = $this->db->resultSet();
 
@@ -607,7 +608,8 @@ class AdminModel
         $keresendo = $this->replaceHungarianAccents($keresendo);
 
         $this->db->query(
-            "SELECT ANY_VALUE(j.id) AS jelentkezo_id,  ANY_VALUE(j.megjelent) AS megjelent,  j.neve AS jelentkezo, GROUP_CONCAT(CONCAT(TIME(e.datum), ';', t.neve) ORDER BY e.datum) AS idopont_terem FROM jelentkezok_vt j
+            "SELECT ANY_VALUE(j.id) AS jelentkezo_id,  ANY_VALUE(j.megjelent) AS megjelent,  j.neve AS jelentkezo, j.email, GROUP_CONCAT(CONCAT(TIME(e.datum), ';', t.neve) ORDER BY e.datum) AS idopont_terem
+                                    FROM jelentkezok_vt j
                                     INNER JOIN 
                                         esemenyek e ON e.id = j.esemenyID
                                     INNER JOIN 
@@ -615,7 +617,7 @@ class AdminModel
                                     WHERE 
                                         j.torolt = 0 AND j.visszaigazolt = 1 AND (j.neve LIKE :keresendo)
                                     GROUP BY 
-                                        j.neve
+                                        j.email, j.neve
                                     ORDER BY 
                                         j.neve ASC"
         );
