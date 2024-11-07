@@ -141,11 +141,43 @@ function kereses() {
   }
 }
 
+function keresesAdmin() {
+  var keresendo = $("#searchBoxAdmin").val();
+
+  if (keresendo != "" && keresendo.length > 2) {
+    console.log(keresendo);
+    $.ajax({
+      url: "./termekekkeresese",
+      method: "POST",
+      data: {
+        keresendo: keresendo,
+      },
+      success: function (data) {
+        document.getElementById("keresesiEredmenyek").innerHTML = data;
+        document.getElementById("torlesAdmin").style.display = "none";
+      },
+      error: function () {
+        console.log("hiba történt a keresés során!");
+      },
+    });
+  } else {
+    document.getElementById("keresesiEredmenyek").innerHTML = "";
+    document.getElementById("torlesAdmin").style.display = "table";
+  }
+}
+
 $(document).ready(function () {
   kereses();
+  keresesAdmin();
+
+  $("#searchBoxAdmin").keyup(function () {
+    keresesAdmin();
+    
+  });
 
   $("#searchBox").keyup(function () {
     kereses();
+    
   });
 });
 
