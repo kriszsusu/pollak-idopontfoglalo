@@ -14,7 +14,7 @@
                 <br>
                 <p class="tanterem">Helyszín neve: <b><?php echo $sor->neve?></b></p>
                 <br>
-                <p class="helyek">Hátralévő helyek száma: <b><?php echo $sor->ferohely - $sor->jelentkezok?></b></p>
+                <p class="helyek">Szabad helyek száma: <b><?php echo $sor->ferohely - $sor->jelentkezok?></b></p>
                 <br>
                 <p class="helyek">Téma: <b><?php echo $sor->tema?></b></p>
                 <br>

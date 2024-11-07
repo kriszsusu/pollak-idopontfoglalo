@@ -178,6 +178,9 @@ img {
   }
 }
 /* Slideshow container */
+.slide {
+  z-index: 1000;
+}
 .slideshow-container {
   width: 75%;
   height: 50%;

@@ -5,7 +5,7 @@ require APPROOT . '/views/includes/navigation.php';
 <main>
   <div class="slide">
     <div class="slideshow-container">
-      <div class="mySlides fadeForSlide">
+      <div class="mySlides">
         <div class="slideshow-img-box" style="background-image: url('<?php echo URLROOT ?>/public/img/slide1.jpg');"></div>
         <div class="slide_text">
           <span class="dot" onclick="currentSlide(1)"></span>
@@ -14,7 +14,7 @@ require APPROOT . '/views/includes/navigation.php';
         </div>
       </div>
 
-      <div class="mySlides fadeForSlide">
+      <div class="mySlides">
         <div class="slideshow-img-box" style="background-image: url('<?php echo URLROOT ?>/public/img/slide2.jpg');"></div>
         <div class="slide_text">
           <span class="dot" onclick="currentSlide(1)"></span>
@@ -23,7 +23,7 @@ require APPROOT . '/views/includes/navigation.php';
         </div>
       </div>
 
-      <div class="mySlides fadeForSlide">
+      <div class="mySlides">
         <div class="slideshow-img-box" style="background-image: url('<?php echo URLROOT ?>/public/img/slide3.jpg');"></div>
         <div class="slide_text">
           <span class="dot" onclick="currentSlide(1)"></span>
@@ -102,7 +102,7 @@ require APPROOT . '/views/includes/navigation.php';
             <br>
             <p class="tanterem">Helyszín neve: <b><?php echo $sor->neve ?></b></p>
             <br>
-            <p class="helyek">Hátralévő helyek száma: <b><?php echo $sor->ferohely - $sor->jelentkezok ?></b></p>
+            <p class="helyek">Szabad helyek száma: <b><?php echo $sor->ferohely - $sor->jelentkezok ?></b></p>
             <br>
             <p class="helyek">Téma: <b><?php echo $sor->tema ?></b></p>
             <br>
