@@ -19,14 +19,12 @@ class Admin extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->adminModel->emlekezteto();
         }
-        
+
         $data = [
             'main' => $this->adminModel->kartyaLekerdezes()
         ];
 
         $this->view('admin/index', $data);
-        
-        
     }
 
     // Egy adott esemény részleteinek megjelenítése
@@ -50,15 +48,14 @@ class Admin extends Controller
             $email = trim($_POST['email']);
             $neve = trim($_POST['neve']);
 
-                if ($this->adminModel->emailHozzadas($esemenyID, $email, $neve)) {
-                    // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
-                    header('location:' . URLROOT . '/admin/reszletek/' . $esemenyID . '?msg=0');
-                }
-                else {
-                    // A hozzáadás nem sikerült ezért beállítjuk az üzenetet 1-re
-                    header('location:' . URLROOT . '/admin/reszletek/' . $esemenyID . '?msg=1');
-                }
+            if ($this->adminModel->emailHozzadas($esemenyID, $email, $neve)) {
+                // A hozzáadás sikerült, ezért beállítjuk az üzenetet 0-ra
+                header('location:' . URLROOT . '/admin/reszletek/' . $esemenyID . '?msg=0');
+            } else {
+                // A hozzáadás nem sikerült ezért beállítjuk az üzenetet 1-re
+                header('location:' . URLROOT . '/admin/reszletek/' . $esemenyID . '?msg=1');
             }
+        }
 
         $this->view('admin/reszletek/index', $data);
     }
@@ -314,7 +311,7 @@ class Admin extends Controller
         $pdf->AddPage();
 
         // Content to display
-        $content = "<table><tr><th>Név</th><th>Email</th></tr> <br>"; 
+        $content = "<table><tr><th>Név</th><th>Email</th></tr> <br>";
 
         foreach ($eligibleUsers as $user) {
             $content .= "<tr><td>{$user->neve}</td><td>{$user->email}</td></tr>";
@@ -329,7 +326,7 @@ class Admin extends Controller
         ob_start();
         $pdf->Output('megjelentTanulok.pdf', 'D');
     }
- 
+
 
     // Versenyek oldal megjelenítése
     public function verseny()
@@ -395,7 +392,7 @@ class Admin extends Controller
                 //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
 
                 $versenynev = trim($_POST['versenynev']);
-                $tema = trim($_POST['tema']); 
+                $tema = trim($_POST['tema']);
                 $idopont = trim($_POST['idopont']);
                 $jelentkezesiHatarido = trim($_POST['jelentkezesiHatarido']);
                 $leiras = trim($_POST['leiras']);
@@ -505,7 +502,7 @@ class Admin extends Controller
 
         $this->view('admin/pontozas/index', $data);
     }
-    
+
 
     // Jelentkezők oldal
     public function jelentkezok()
@@ -517,7 +514,8 @@ class Admin extends Controller
 
         $data = [
             'jelentkezok' => $this->adminModel->jelentkezokLekerdezes(),
-            'idopontok' => $this->adminModel->idopontokLekerdezes()
+            'idopontok' => $this->adminModel->idopontokLekerdezes(),
+            'szam' => $this->adminModel->jelentkezokSzamaLekerdezes()
 
         ];
 
@@ -525,7 +523,7 @@ class Admin extends Controller
     }
 
     // Felhasználó engedélyezése 
-    public function felhasznaloEngedelyezese ($id)
+    public function felhasznaloEngedelyezese($id)
     {
         if (isLoggedIn()) {
             if ($this->adminModel->felhasznaloEngedelyezese($id)) {
@@ -590,7 +588,7 @@ class Admin extends Controller
         $pdf->AddPage();
 
         // Content to display
-        $content = "<table><tr><th>Név</th><th>Email</th></tr> <br>"; 
+        $content = "<table><tr><th>Név</th><th>Email</th></tr> <br>";
 
         foreach ($eligibleUsers as $user) {
             $content .= "<tr><td>{$user->neve}</td><td>{$user->email}</td></tr>";
@@ -607,13 +605,14 @@ class Admin extends Controller
     }
 
 
-     /* AJAX híváskor betölti a talált termékek listáját */
-     public function termekekkeresese() {
+    /* AJAX híváskor betölti a talált termékek listáját */
+    public function termekekkeresese()
+    {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $keresendo = $_POST['keresendo'];
 
         $termekek = $this->adminModel->termekekKeresese($keresendo);
-        
+
         $data = [
             'termekek' => $termekek,
             'idopontok' => $this->adminModel->idopontokLekerdezes(),

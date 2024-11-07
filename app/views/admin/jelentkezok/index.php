@@ -8,6 +8,7 @@
 <body>
 
 <div class="main">
+    <p style="align-self: flex-start; margin-left: 15%;">Jelentkezők Száma: <?php echo $data["szam"]->jelentkezok_szama ?></p>
     <div>
       <input id="searchBoxAdmin" type="text" class="kereses" placeholder="Keresés..." onkeyup="keresesAdmin()">
     </div>

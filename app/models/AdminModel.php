@@ -519,7 +519,8 @@ class AdminModel
     }
 
     // Jelentkezők lekérdezése
-    public function jelentkezokLekerdezes(){
+    public function jelentkezokLekerdezes()
+    {
         $this->db->query("SELECT ANY_VALUE(j.id) AS jelentkezo_id,  ANY_VALUE(j.megjelent) AS megjelent,  j.neve AS jelentkezo, GROUP_CONCAT(CONCAT(TIME(e.datum), ';', t.neve) ORDER BY e.datum) AS idopont_terem FROM jelentkezok_vt j
                                     INNER JOIN 
                                         esemenyek e ON e.id = j.esemenyID
@@ -538,11 +539,20 @@ class AdminModel
     }
 
     // Időpontok lekérdezése
-    public function idopontokLekerdezes(){
+    public function idopontokLekerdezes()
+    {
         $this->db->query('SELECT DISTINCT time(datum) as idopont FROM esemenyek WHERE torolt = 0 ORDER BY idopont ASC');
         $results = $this->db->resultSet();
 
         return $results;
+    }
+
+    public function jelentkezokSzamaLekerdezes()
+    {
+        $this->db->query('SELECT count(distinct email) as jelentkezok_szama from jelentkezok_vt where torolt = 0');
+        $result = $this->db->single();
+
+        return $result;
     }
 
     // Felhasználó engedélyezése
@@ -570,7 +580,7 @@ class AdminModel
             return false;
         }
     }
-    
+
     // Felhasználók lekérdezése
     public function engedelyezettFelhasznalok()
     {
@@ -607,12 +617,15 @@ class AdminModel
                                     GROUP BY 
                                         j.neve
                                     ORDER BY 
-                                        j.neve ASC");
+                                        j.neve ASC"
+        );
 
         $this->db->bind(':keresendo', "%$keresendo%");
         return $this->db->resultSet();
     }
-    public function emlekezteto(){
+
+    public function emlekezteto()
+    {
         if (isLoggedIn()) {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->db->query('select e.id, e.cim, e.tema, e.datum, e.leiras
@@ -620,39 +633,35 @@ class AdminModel
                 where day(e.datum - interval 1 day) = day(NOW()) AND month(e.datum) = month(NOW()) AND year(e.datum) = year(NOW())');
 
                 $row = $this->db->resultSet();
-                for ($i=0; $i < count($row); $i++) {
+                for ($i = 0; $i < count($row); $i++) {
                     $this->db->query('select j.neve, j.email
                     from jelentkezok j
                     where j.esemenyID = :esemenyID');
                     $this->db->bind(':esemenyID', $row[$i]->id);
                     $row2 = $this->db->resultSet();
-           
-                    for ($j=0; $j < count($row2); $j++) {
+
+                    for ($j = 0; $j < count($row2); $j++) {
                         $subject = $row[$i]->cim . ' - Jelentkezés emlékeztető';
                         $body = 'Kedves ' . $row2[$j]->neve . '!<br><br>
                             <b>Ezúton értesítjuk, hogy a következő esemény: ' . $row[$i]->cim . ' holnap esedékes<b><br><br>
                             <b>Téma:</b> ' . $row[$i]->tema . '<br>
                             <b>Időpont:</b> ' . $row[$i]->datum . '<br>
                             <b>Leírás:</b> ' . $row[$i]->leiras . '<br><br>
-                            Az alábbi linkre kattintva törölheti a jelentkezését:<br><br><a href="' . URLROOT . '/reszletek/jelentkezesTorles/' . $row[$i]->id. '">Jelentkezés törlése</a>
+                            Az alábbi linkre kattintva törölheti a jelentkezését:<br><br><a href="' . URLROOT . '/reszletek/jelentkezesTorles/' . $row[$i]->id . '">Jelentkezés törlése</a>
                             <br><br>Üdvözlettel,<br>HSZC Pollák Antal Technikum!';
 
                         $this->mailer->AddAddress($row2[$j]->email, $row2[$j]->neve);
-           
+
                         $this->mailer->Subject = $subject;
                         $this->mailer->Body = $body;
                         $this->mailer->Send();
                         $this->mailer->clearAllRecipients();
-                        
                     }
                 }
             } else {
-                
             }
         } else {
             $data = [];
-
-            $this->view('user/login');
         }
     }
 }
