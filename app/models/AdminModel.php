@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -50,7 +51,7 @@ class AdminModel
             INNER JOIN
                 szakok s ON e.szakID = s.id
             LEFT JOIN
-                jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0
+                jelentkezok j ON e.id = j.esemenyID AND j.torolt = 0 AND j.visszaigazolt = 1
             WHERE
                 e.torolt = 0
             GROUP BY
@@ -119,7 +120,7 @@ class AdminModel
                           INNER JOIN users u ON e.tanarID = u.id
                           INNER JOIN tanterem t ON e.tanteremID = t.id
                           INNER JOIN szakok s ON e.szakID = s.id
-                          LEFT JOIN jelentkezok_vt j ON e.id = j.esemenyID AND j.torolt = 0
+                          LEFT JOIN jelentkezok_vt j ON e.id = j.esemenyID AND j.torolt = 0 AND j.visszaigazolt = 1
                           WHERE e.id = :id AND e.torolt = 0'
         );
         $this->db->bind(':id', $id);
@@ -345,7 +346,7 @@ class AdminModel
                 <b>Oktató:</b> ' . $esemenyAdatok->tanar_neve . '<br>
                 <b>Helyszín:</b> ' . $esemenyAdatok->tanterem_neve . ' tanterem<br>
                 <b>Leírás:</b> ' . $esemenyAdatok->leiras . '<br><br>
-                Az alábbi linkre kattintva törölheti a jelentkezését:<br><br><a href="' . URLROOT . '/reszletek/jelentkezesTorles/' . $id . '">Jelentkezés törlése</a>
+                Az alábbi linkre kattintva törölheti a jelentkezését:<br><br><a href="' . URLROOT . '/reszletek/jelentkezesTorles/' . $esemenyAdatok->id . '">Jelentkezés törlése</a>
                 <br><br>Üdvözlettel,<br>HSZC Pollák Antal Technikum!';
 
         $this->sendEmail($jelentkezo->email, $jelentkezo->neve, $subject, $body);
@@ -358,7 +359,7 @@ class AdminModel
             return false;
         }
     }
-    
+
     private function sendEmail($toAddress, $toName, $subject, $body)
     {
         $this->mailer->AddAddress($toAddress, $toName);
@@ -516,5 +517,4 @@ class AdminModel
 
         return $results;
     }
-    
 }
