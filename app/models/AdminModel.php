@@ -527,7 +527,7 @@ class AdminModel
                                     INNER JOIN 
                                         tanterem t ON e.tanteremID = t.id
                                     WHERE 
-                                        j.torolt = 0
+                                        j.torolt = 0 AND j.visszaigazolt = 1
                                     GROUP BY 
                                         j.neve
                                     ORDER BY 
@@ -549,7 +549,7 @@ class AdminModel
 
     public function jelentkezokSzamaLekerdezes()
     {
-        $this->db->query('SELECT count(distinct email) as jelentkezok_szama from jelentkezok_vt where torolt = 0');
+        $this->db->query('SELECT count(distinct email) as jelentkezok_szama from jelentkezok_vt where torolt = 0 AND visszaigazolt = 1');
         $result = $this->db->single();
 
         return $result;
@@ -613,7 +613,7 @@ class AdminModel
                                     INNER JOIN 
                                         tanterem t ON e.tanteremID = t.id
                                     WHERE 
-                                        j.torolt = 0 AND (j.neve LIKE :keresendo)
+                                        j.torolt = 0 AND j.visszaigazolt = 1 AND (j.neve LIKE :keresendo)
                                     GROUP BY 
                                         j.neve
                                     ORDER BY 
