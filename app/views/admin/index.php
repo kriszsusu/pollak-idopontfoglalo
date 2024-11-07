@@ -3,8 +3,6 @@
   require APPROOT . '/views/includes/adminNavigation.php';
 ?>
 
-
-
 <div class="container">
     <?php if (count($data["main"]) > 0) : ?>
             <?php foreach ($data["main"] as $sor): ?>

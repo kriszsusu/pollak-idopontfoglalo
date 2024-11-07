@@ -1379,3 +1379,44 @@ li {
   height: 200px;
   overflow: hidden;
 } */
+
+.main{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.export2{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  margin-left: auto;
+    margin-right: auto;
+  
+    width: 80%;
+  margin-top: 100px;
+}
+
+.customers td, .customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.customers tr:nth-child(even){background-color: #f2f2f2;}
+
+.customers tr:hover {background-color: #ddd;}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #579bb1;
+  color: white;
+}

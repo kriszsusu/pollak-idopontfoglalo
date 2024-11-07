@@ -51,7 +51,7 @@
                 <div class="lista">
                 <h3 >Neve: <?php echo $sor->neve?>, Email címe: <?php echo $sor->email?>
                     <?php if ($sor->megjelent == 0) : ?>
-                        <a class="jelentkezoTorles" onclick="return confirm('Biztos engedélyezni szeretnéd?')" href="<?php echo URLROOT ?>/admin/felhasznaloEngedelyezes/<?php echo  $data["reszletek"]->esemeny_id ?>/<?php echo $sor->jelentkezoID ?>"><i class='bx bxs-user-check' ></i></a>
+                        <a class="jelentkezoTorles" onclick="return confirm('Biztos megjelent?')" href="<?php echo URLROOT ?>/admin/felhasznaloEngedelyezes/<?php echo  $data["reszletek"]->esemeny_id ?>/<?php echo $sor->jelentkezoID ?>"><i class='bx bxs-user-check' ></i></a>
                     <?php endif; ?>
                     
                     <a class="jelentkezoTorles" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/felhasznaloTorles/<?php echo  $data["reszletek"]->esemeny_id ?>/<?php echo $sor->jelentkezoID ?>"><i class='bx bxs-trash' ></i></a></h3>
@@ -66,8 +66,8 @@
             <!-- Export gomb -->
              <br>
             <form class="export" action="<?= URLROOT; ?>/admin/exportToPdf/<?php echo $data["reszletek"]->esemeny_id ?>" method="post">
-            <button type="submit" class="export_gomb">Felhasználók exportálása</button>
-        </form>
+                <button type="submit" class="export_gomb">Felhasználók exportálása</button>
+            </form>
 
  </div>
 

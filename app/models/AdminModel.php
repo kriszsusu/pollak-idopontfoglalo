@@ -516,5 +516,99 @@ class AdminModel
 
         return $results;
     }
+
+    // Jelentkezők lekérdezése
+    public function jelentkezokLekerdezes(){
+        $this->db->query("SELECT ANY_VALUE(j.id) AS jelentkezo_id,  ANY_VALUE(j.megjelent) AS megjelent,  j.neve AS jelentkezo, GROUP_CONCAT(CONCAT(TIME(e.datum), ';', t.neve) ORDER BY e.datum) AS idopont_terem FROM jelentkezok_vt j
+                                    INNER JOIN 
+                                        esemenyek e ON e.id = j.esemenyID
+                                    INNER JOIN 
+                                        tanterem t ON e.tanteremID = t.id
+                                    WHERE 
+                                        j.torolt = 0
+                                    GROUP BY 
+                                        j.neve
+                                    ORDER BY 
+                                        j.neve ASC ");
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+    // Időpontok lekérdezése
+    public function idopontokLekerdezes(){
+        $this->db->query('SELECT DISTINCT time(datum) as idopont FROM esemenyek WHERE torolt = 0 ORDER BY idopont ASC');
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+    // Felhasználó engedélyezése
+    public function felhasznaloEngedelyezese($id)
+    {
+        $this->db->query('UPDATE jelentkezok_vt SET megjelent = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Felhasználó törlése
+    public function felhasznaloTorlese($id)
+    {
+        $this->db->query('UPDATE jelentkezok SET torolt = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
+    // Felhasználók lekérdezése
+    public function engedelyezettFelhasznalok()
+    {
+        $this->db->query("SELECT neve, email FROM jelentkezok_vt WHERE megjelent = 1 AND torolt = 0 ");
+        return $this->db->resultSet();
+    }
+
+    /* Ékezetek helyett '_' jel */
+    private function replaceHungarianAccents($string)
+    {
+        // A HTML entitások visszacserélése ékezetekre
+        $string = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
+
+        // A magyar ékezetek cseréje '_'-re, hogy az ékezetmentes keresés is működjön
+        $accents = ['á', 'Á', 'é', 'É', 'í', 'Í', 'ó', 'Ó', 'ö', 'Ö', 'ő', 'Ő', 'ú', 'Ú', 'ü', 'Ü', 'ű', 'Ű'];
+        $replacement = '_';
+
+        return str_replace($accents, $replacement, $string);
+    }
+
+    /* Az adott szórészletet tartalmazó termékek lekérdezése */
+    public function termekekKeresese($keresendo)
+    {
+        $keresendo = $this->replaceHungarianAccents($keresendo);
+
+        $this->db->query(
+            "SELECT ANY_VALUE(j.id) AS jelentkezo_id,  ANY_VALUE(j.megjelent) AS megjelent,  j.neve AS jelentkezo, GROUP_CONCAT(CONCAT(TIME(e.datum), ';', t.neve) ORDER BY e.datum) AS idopont_terem FROM jelentkezok_vt j
+                                    INNER JOIN 
+                                        esemenyek e ON e.id = j.esemenyID
+                                    INNER JOIN 
+                                        tanterem t ON e.tanteremID = t.id
+                                    WHERE 
+                                        j.torolt = 0 AND (j.neve LIKE :keresendo)
+                                    GROUP BY 
+                                        j.neve
+                                    ORDER BY 
+                                        j.neve ASC");
+
+        $this->db->bind(':keresendo', "%$keresendo%");
+        return $this->db->resultSet();
+    }
 }

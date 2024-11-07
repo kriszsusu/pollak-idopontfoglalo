@@ -501,4 +501,118 @@ class Admin extends Controller
         $this->view('admin/pontozas/index', $data);
     }
 
+    // Jelentkezők oldal
+    public function jelentkezok()
+    {
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
+
+
+        $data = [
+            'jelentkezok' => $this->adminModel->jelentkezokLekerdezes(),
+            'idopontok' => $this->adminModel->idopontokLekerdezes()
+
+        ];
+
+        $this->view('admin/jelentkezok/index', $data);
+    }
+
+    // Felhasználó engedélyezése 
+    public function felhasznaloEngedelyezese ($id)
+    {
+        if (isLoggedIn()) {
+            if ($this->adminModel->felhasznaloEngedelyezese($id)) {
+                // Az engedélyezés sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin/jelentkezok/');
+            } else {
+                // Az engedélyezés nem sikerült
+                header('location:' . URLROOT . '/admin/jelentkezok/');
+            }
+        } else {
+            $data = [];
+
+            $this->view('user/login');
+        }
+    }
+
+    // Felhasználók törlése
+    public function felhasznaloTorlese($id)
+    {
+        if (isLoggedIn()) {
+            if ($this->adminModel->felhasznaloTorlese($id)) {
+                // A törlés sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin/jelentkezok/');
+            } else {
+                // A törlés nem sikerült
+                header('location:' . URLROOT . '/admin/jelentkezok/');
+            }
+        } else {
+            $data = [];
+
+            $this->view('user/login');
+        }
+    }
+
+    public function exportPDF()
+    {
+        // Check if the user is logged in
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+            exit;
+        }
+
+        // Fetch users with jelentkezo = 1
+        $eligibleUsers = $this->adminModel->engedelyezettFelhasznalok();
+
+        // Check if data exists
+        if (!$eligibleUsers) {
+            die("Nincsen felhasználó.");
+        }
+
+        // Load PDF library (e.g., TCPDF or FPDF)
+        require_once APPROOT . '/libraries/tcpdf/tcpdf.php'; // Adjust if using a different library
+        $pdf = new TCPDF();
+
+        // Configure PDF
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Admin');
+        $pdf->SetTitle('Megjelent tanulók lista');
+        $pdf->SetHeaderData('', 0, 'Megjelent tanulók', '');
+
+        // Add a page
+        $pdf->AddPage();
+
+        // Content to display
+        $content = "<table><tr><th>Név</th><th>Email</th></tr> <br>"; 
+
+        foreach ($eligibleUsers as $user) {
+            $content .= "<tr><td>{$user->neve}</td><td>{$user->email}</td></tr>";
+        }
+        $content .= "</table>";
+
+        // Output content to PDF
+        $pdf->writeHTML($content);
+
+        // Output the PDF as a download
+        ob_end_clean();
+        ob_start();
+        $pdf->Output('megjelentTanulok.pdf', 'D');
+    }
+
+
+     /* AJAX híváskor betölti a talált termékek listáját */
+     public function termekekkeresese() {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $keresendo = $_POST['keresendo'];
+
+        $termekek = $this->adminModel->termekekKeresese($keresendo);
+        
+        $data = [
+            'termekek' => $termekek,
+            'idopontok' => $this->adminModel->idopontokLekerdezes(),
+        ];
+
+        $this->view('admin/jelentkezok/termekek', $data);
+    }
 }
