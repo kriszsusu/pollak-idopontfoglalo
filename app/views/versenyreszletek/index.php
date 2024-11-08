@@ -19,39 +19,7 @@ require APPROOT . '/views/includes/navigation.php';
             <div class="tablazatbox">
                 <div class="tabcontent fade" id="56"><?php if (count($data["versenyJelentkezok56"]) > 0) : ?>
                         <?php $i = 0; ?>
-                        <table class="versenylista eredmenytabla">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <h3 class="helyezet">Helyezet</h3>
-                                    </th>
-                                    <th>
-                                        <h3 class="nev">Kód</h3>
-                                    </th>
-                                    <th>
-                                        <h3 class="pontszam">Pontszám</h3>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($data["versenyJelentkezok56"] as $sor): ?>
-                                    <tr>
-                                        <td>
-                                            <h3 class="helyezet">
-                                                <?php $i++; ?>
-                                                <?php echo $i; ?>.
-                                            </h3>
-                                        </td>
-                                        <td <?php echo $sor->latszodik == 1 ? '' : 'class="text-blur"'; ?>>
-                                            <h3 class="nev"><?php echo $sor->latszodik == 1 ? $sor->kod : 'Nice Try'; ?></h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="pontszam"><?php echo $sor->latszodik == 1 ? $sor->pontszam : 0; ?></h3>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+
                     <?php else: ?>
                         <h3></h3>
                     <?php endif; ?>
@@ -59,39 +27,7 @@ require APPROOT . '/views/includes/navigation.php';
 
                 <div class="tabcontent fade" id="78" style="display:none"><?php if (count($data["versenyJelentkezok78"]) > 0) : ?>
                         <?php $i = 0; ?>
-                        <table class="versenylista eredmenytabla">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <h3 class="helyezet">Helyezet</h3>
-                                    </th>
-                                    <th>
-                                        <h3 class="nev">Kód</h3>
-                                    </th>
-                                    <th>
-                                        <h3 class="pontszam">Pontszám</h3>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($data["versenyJelentkezok78"] as $sor): ?>
-                                    <tr>
-                                        <td>
-                                            <h3 class="helyezet">
-                                                <?php $i++; ?>
-                                                <?php echo $i; ?>.
-                                            </h3>
-                                        </td>
-                                        <td <?php echo $sor->latszodik == 1 ? '' : 'class="text-blur"'; ?>>
-                                            <h3 class="nev"><?php echo $sor->latszodik == 1 ? $sor->kod : 'Nice Try'; ?></h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="pontszam"><?php echo $sor->latszodik == 1 ? $sor->pontszam : 0; ?></h3>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+
                     <?php else: ?>
                         <h3></h3>
                     <?php endif; ?>
