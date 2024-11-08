@@ -50,8 +50,8 @@ require APPROOT . '/views/includes/adminNavigation.php';
                                     if (count($idopontTeremArray) > 1) {
                                         if ($idopontTeremArray[0] == $sor2->idopont) {
                                             echo htmlspecialchars($idopontTeremArray[1]);
+                                            echo "<br>";
                                             $matchFound = true;
-                                            break;
                                         }
                                     }
                                 }
