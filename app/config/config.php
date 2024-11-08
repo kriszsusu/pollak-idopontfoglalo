@@ -20,6 +20,10 @@ if (getenv('PRODUCTION')) {
     define('DB_NAME', 'pollakidopontfoglalas');
 
     define('URLROOT', 'http://localhost/pollak-idopontfoglalo');
+
+    define('EMAIL_USER', '');
+    define('EMAIL_PASS', '');
+    define('EMAIL_ADDRESS', '');
 }
 
 //Sitename

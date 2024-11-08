@@ -21,6 +21,7 @@ require APPROOT . '/views/includes/adminNavigation.php';
     <table class="customers" id="torlesAdmin">
         <tr>
             <th>Látogató neve</th>
+            <th>Látogató email címe</th>
             <?php if (count($data["idopontok"]) > 0) : ?>
                 <?php foreach ($data["idopontok"] as $sor): ?>
 
@@ -34,6 +35,7 @@ require APPROOT . '/views/includes/adminNavigation.php';
             <?php foreach ($data["jelentkezok"] as $sor): ?>
                 <tr>
                     <td><?php echo $sor->jelentkezo ?></td>
+                    <td><?php echo $sor->email ?></td>
                     <?php foreach ($data["idopontok"] as $sor2): ?>
                         <td>
                             <?php
