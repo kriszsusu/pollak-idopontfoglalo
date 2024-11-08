@@ -42,7 +42,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/12szf2/pollak_selfi_automata_frontend/app:latest
+          tags: ghcr.io/12szf2/pollak-idopontfoglalo/app:latest
 
   triggerUpdate:
     name: Trigger Update
