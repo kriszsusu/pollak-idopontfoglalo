@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
 
     steps:
       - name: Check out repository code 🛎️
@@ -39,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           file: ./Dockerfile
           push: true
           tags: ghcr.io/12szf2/pollak-idopontfoglalo/app:latest

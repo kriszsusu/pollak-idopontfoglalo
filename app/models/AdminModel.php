@@ -227,7 +227,7 @@ class AdminModel
     // Felhasználók lekérdezése
     public function getEligibleUsers($id)
     {
-        $this->db->query("SELECT neve, email FROM jelentkezok_vt WHERE megjelent = 1 AND torolt = 0 AND esemenyID = :id");
+        $this->db->query("SELECT neve, email, DATE(esemenyek.datum) as idopont FROM jelentkezok_vt INNER JOIN esemenyek on esemenyek.id = jelentkezok_vt.esemenyID WHERE megjelent = 1 AND jelentkezok_vt.torolt = 0 AND esemenyID = :id");
         $this->db->bind(':id', $id);
         return $this->db->resultSet();
     }

@@ -172,12 +172,10 @@ $(document).ready(function () {
 
   $("#searchBoxAdmin").keyup(function () {
     keresesAdmin();
-    
   });
 
   $("#searchBox").keyup(function () {
     kereses();
-    
   });
 });
 
@@ -234,6 +232,7 @@ function iskolak(element) {
 }
 
 function reveal(url, id) {
+  document.getElementById("blured-kod-" + id).classList.remove("text-blur");
   console.log(url);
   $.ajax({
     url: `${url}/admin/reveal`,

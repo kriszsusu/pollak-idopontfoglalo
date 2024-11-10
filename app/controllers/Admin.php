@@ -1,5 +1,9 @@
 <?php
+require_once APPROOT . '/libraries/dompdf/autoload.inc.php'; // Adjust if using a different library
+use Dompdf\Dompdf;
+
 #[AllowDynamicProperties]
+
 
 class Admin extends Controller
 {
@@ -16,9 +20,6 @@ class Admin extends Controller
         if (!isLoggedIn()) {
             header('location:' . URLROOT . '/user/login');
         }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->adminModel->emlekezteto();
-        }
 
         $data = [
             'main' => $this->adminModel->kartyaLekerdezes()
@@ -30,6 +31,7 @@ class Admin extends Controller
     // Egy adott esemény részleteinek megjelenítése
     public function reszletek($id)
     {
+
         if (!isLoggedIn()) {
             header('location:' . URLROOT . '/user/login');
         }
@@ -58,6 +60,25 @@ class Admin extends Controller
         }
 
         $this->view('admin/reszletek/index', $data);
+    }
+
+    public function esemenyemlekezteto()
+    {
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->adminModel->emlekezteto();
+        } else {
+            $data = [];
+
+            $this->view('admin/esemenyemlekezteto/index', $data);
+        }
+
+        $data = [];
+
+        $this->view('admin/esemenyemlekezteto/index', $data);
     }
 
     // Esemény hozzáadása
@@ -298,33 +319,67 @@ class Admin extends Controller
         }
 
         // Load PDF library (e.g., TCPDF or FPDF)
-        require_once APPROOT . '/libraries/tcpdf/tcpdf.php'; // Adjust if using a different library
-        $pdf = new TCPDF();
-
+        $pdf = new Dompdf();
         // Configure PDF
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Admin');
-        $pdf->SetTitle('Megjelent tanulók lista');
-        $pdf->SetHeaderData('', 0, 'Megjelent tanulók', '');
 
         // Add a page
-        $pdf->AddPage();
 
         // Content to display
-        $content = "<table><tr><th>Név</th><th>Email</th></tr> <br>";
+        $content = <<<EOF
+            <style>
+                .container {
+                    width: 98%;
+                    padding: 20px;
+                    border: 1px solid black;
+                }
+                #title {
+                    text-align: center;
+                }
+
+                .bottom {
+                    height: 100px;
+                }
+
+                #datum {
+                    float: left;
+                }
+
+                #alairas {
+                    float: right;
+                }
+
+                #alairas {
+                    margin-top: 30px;
+                    width: 300px;
+                    text-align: center;
+                    border-top: 1px solid black;
+                }
+            </style>
+        EOF;
 
         foreach ($eligibleUsers as $user) {
-            $content .= "<tr><td>{$user->neve}</td><td>{$user->email}</td></tr>";
+            $datum = new DateTime($user->idopont);
+            $content .= <<<EOF
+                <div class="container">
+                    <h2 id="title">Igazolás</h2>
+                    <h2 id="nev">Név: {$user->neve}</h2>
+                    <div class="bottom">
+                        <h3 id="datum">Dátum: {$datum->format('Y.m.d.')}</h3>
+                        <h3 id="alairas">Aláírás</h3>
+                    </div>
+                </div>
+            EOF;
         }
-        $content .= "</table>";
 
         // Output content to PDF
-        $pdf->writeHTML($content);
+        $pdf->loadHtml($content);
+        $pdf->setPaper('A4', 'landscape');
 
-        // Output the PDF as a download
-        ob_end_clean();
-        ob_start();
-        $pdf->Output('megjelentTanulok.pdf', 'D');
+        // Render the HTML as PDF
+        $pdf->render();
+
+        // Output the generated PDF to Browser
+        $pdf->stream();
     }
 
 
@@ -575,33 +630,64 @@ class Admin extends Controller
         }
 
         // Load PDF library (e.g., TCPDF or FPDF)
-        require_once APPROOT . '/libraries/tcpdf/tcpdf.php'; // Adjust if using a different library
-        $pdf = new TCPDF();
-
-        // Configure PDF
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Admin');
-        $pdf->SetTitle('Megjelent tanulók lista');
-        $pdf->SetHeaderData('', 0, 'Megjelent tanulók', '');
-
-        // Add a page
-        $pdf->AddPage();
+        $pdf = new Dompdf();
 
         // Content to display
-        $content = "<table><tr><th>Név</th><th>Email</th></tr> <br>";
+        $content = <<<EOF
+            <style>
+                .container {
+                    width: 98%;
+                    padding: 20px;
+                    border: 1px solid black;
+                }
+                #title {
+                    text-align: center;
+                }
+
+                .bottom {
+                    height: 100px;
+                }
+
+                #datum {
+                    float: left;
+                }
+
+                #alairas {
+                    float: right;
+                }
+
+                #alairas {
+                    margin-top: 30px;
+                    width: 300px;
+                    text-align: center;
+                    border-top: 1px solid black;
+                }
+            </style>
+        EOF;
 
         foreach ($eligibleUsers as $user) {
-            $content .= "<tr><td>{$user->neve}</td><td>{$user->email}</td></tr>";
+            $datum = new DateTime($user->idopont);
+            $content .= <<<EOF
+                <div class="container">
+                    <h2 id="title">Igazolás</h2>
+                    <h2 id="nev">Név: {$user->neve}</h2>
+                    <div class="bottom">
+                        <h3 id="datum">Dátum: {$datum->format('Y.m.d.')}</h3>
+                        <h3 id="alairas">Aláírás</h3>
+                    </div>
+                </div>
+            EOF;
         }
-        $content .= "</table>";
 
         // Output content to PDF
-        $pdf->writeHTML($content);
+        $pdf->loadHtml($content);
+        $pdf->setPaper('A4', 'landscape');
 
-        // Output the PDF as a download
-        ob_end_clean();
-        ob_start();
-        $pdf->Output('megjelentTanulok.pdf', 'D');
+        // Render the HTML as PDF
+        $pdf->render();
+
+        // Output the generated PDF to Browser
+        $pdf->stream();
     }
 
 

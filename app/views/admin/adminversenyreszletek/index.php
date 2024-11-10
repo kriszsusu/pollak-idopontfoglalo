@@ -43,8 +43,8 @@ require APPROOT . '/views/includes/adminNavigation.php';
                                                 </h3>
                                             </button>
                                         </td>
-                                        <td <?php echo $sor->latszodik == 1 ? '' : 'class="text-blur"'; ?>>
-                                            <h3 class="nev"><?php echo $sor->latszodik == 1 ? $sor->kod : 'Nice Try'; ?></h3>
+                                        <td id="blured-kod-<?php echo $sor->jelentkezoID; ?>" <?php echo $sor->latszodik == 1 ? '' : 'class="text-blur"'; ?>>
+                                            <h3 class="nev"><?php echo $sor->kod; ?></h3>
                                         </td>
                                         <td>
                                             <h3 class="pontszam"><?php echo $sor->latszodik == 1 ? $sor->pontszam : 0; ?></h3>
@@ -85,8 +85,8 @@ require APPROOT . '/views/includes/adminNavigation.php';
                                                 </h3>
                                             </button>
                                         </td>
-                                        <td <?php echo $sor->latszodik == 1 ? '' : 'class="text-blur"'; ?>>
-                                            <h3 class="nev"><?php echo $sor->latszodik == 1 ? $sor->kod : 'Nice Try'; ?></h3>
+                                        <td id="blured-kod-<?php echo $sor->jelentkezoID; ?>" <?php echo $sor->latszodik == 1 ? '' : 'class="text-blur"'; ?>>
+                                            <h3 class="nev"><?php echo $sor->kod; ?></h3>
                                         </td>
                                         <td>
                                             <h3 class="pontszam"><?php echo $sor->latszodik == 1 ? $sor->pontszam : 0; ?></h3>
