@@ -557,10 +557,10 @@ class AdminModel
     }
 
     // Felhasználó engedélyezése
-    public function felhasznaloEngedelyezese($id)
+    public function felhasznaloEngedelyezese($email)
     {
-        $this->db->query('UPDATE jelentkezok_vt SET megjelent = 1 WHERE id = :id');
-        $this->db->bind(':id', $id);
+        $this->db->query('UPDATE jelentkezok SET megjelent = 1 WHERE email = :email');
+        $this->db->bind(':email', $email);
 
         if ($this->db->execute()) {
             return true;
@@ -570,10 +570,10 @@ class AdminModel
     }
 
     // Felhasználó törlése
-    public function felhasznaloTorlese($id)
+    public function felhasznaloTorlese($email)
     {
-        $this->db->query('UPDATE jelentkezok SET torolt = 1 WHERE id = :id');
-        $this->db->bind(':id', $id);
+        $this->db->query('UPDATE jelentkezok SET torolt = 1 WHERE email = :email');
+        $this->db->bind(':email', $email);
 
         if ($this->db->execute()) {
             return true;
@@ -585,7 +585,7 @@ class AdminModel
     // Felhasználók lekérdezése
     public function engedelyezettFelhasznalok()
     {
-        $this->db->query("SELECT neve, email FROM jelentkezok_vt WHERE megjelent = 1 AND torolt = 0 ");
+        $this->db->query("SELECT neve, email, DATE(esemenyek.datum) as idopont FROM jelentkezok_vt INNER JOIN esemenyek on esemenyek.id = jelentkezok_vt.esemenyID WHERE megjelent = 1 AND jelentkezok_vt.torolt = 0 ");
         return $this->db->resultSet();
     }
 

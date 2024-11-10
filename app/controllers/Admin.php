@@ -578,10 +578,10 @@ class Admin extends Controller
     }
 
     // Felhasználó engedélyezése 
-    public function felhasznaloEngedelyezese($id)
+    public function felhasznaloEngedelyezese($email)
     {
         if (isLoggedIn()) {
-            if ($this->adminModel->felhasznaloEngedelyezese($id)) {
+            if ($this->adminModel->felhasznaloEngedelyezese($email)) {
                 // Az engedélyezés sikerült, átirányítjuk a felhasználót az adminfőoldalra
                 header('location:' . URLROOT . '/admin/jelentkezok/');
             } else {
@@ -596,10 +596,10 @@ class Admin extends Controller
     }
 
     // Felhasználók törlése
-    public function felhasznaloTorlese($id)
+    public function felhasznaloTorlese($email)
     {
         if (isLoggedIn()) {
-            if ($this->adminModel->felhasznaloTorlese($id)) {
+            if ($this->adminModel->felhasznaloTorlese($email)) {
                 // A törlés sikerült, átirányítjuk a felhasználót az adminfőoldalra
                 header('location:' . URLROOT . '/admin/jelentkezok/');
             } else {

@@ -67,10 +67,10 @@ require APPROOT . '/views/includes/adminNavigation.php';
 
                     <td>
                         <?php if ($sor->megjelent == 0) : ?>
-                            <a class="jelentkezoTorles" onclick="return confirm('Biztos megjelent?')" href="<?php echo URLROOT ?>/admin/felhasznaloEngedelyezese/<?php echo $sor->jelentkezo_id ?>"><i class='bx bxs-user-check'></i></a>
+                            <a class="jelentkezoTorles" onclick="return confirm('Biztos megjelent?')" href="<?php echo URLROOT ?>/admin/felhasznaloEngedelyezese/<?php echo $sor->email ?>"><i class='bx bxs-user-check'></i></a>
                         <?php endif; ?>
 
-                        <a class="jelentkezoTorles" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/felhasznaloTorlese/<?php echo $sor->jelentkezo_id ?>"><i class='bx bxs-trash'></i></a></h3>
+                        <a class="jelentkezoTorles" onclick="return confirm('Biztos törölni szeretnéd?')" href="<?php echo URLROOT ?>/admin/felhasznaloTorlese/<?php echo $sor->email ?>"><i class='bx bxs-trash'></i></a></h3>
                     </td>
 
                 </tr>
