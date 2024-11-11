@@ -337,40 +337,12 @@ class AdminModel
         $this->db->bind(':esemenyID', $esemenyID);
         $esemenyAdatok = $this->db->single();
 
-        $subject = $esemenyAdatok->cim . ' - Jelentkezés megerősítve';
-        $body = 'Kedves ' . $jelentkezo->neve . '!<br><br>
-                Köszönjük, hogy érdeklődik az alábbi esemény iránt:<br><br>
-                <b>Cím:</b> ' . $esemenyAdatok->cim . '<br>
-                <b>Téma:</b> ' . $esemenyAdatok->tema . '<br>
-                <b>Időpont:</b> ' . $esemenyAdatok->datum . '<br>
-                <b>Oktató:</b> ' . $esemenyAdatok->tanar_neve . '<br>
-                <b>Helyszín:</b> ' . $esemenyAdatok->tanterem_neve . ' tanterem<br>
-                <b>Leírás:</b> ' . $esemenyAdatok->leiras . '<br><br>
-                Az alábbi linkre kattintva törölheti a jelentkezését:<br><br><a href="' . URLROOT . '/reszletek/jelentkezesTorles/' . $esemenyAdatok->id . '">Jelentkezés törlése</a>
-                <br><br>Üdvözlettel,<br>HSZC Pollák Antal Technikum!';
-
-        $this->sendEmail($jelentkezo->email, $jelentkezo->neve, $subject, $body);
-
         return $jelentkezo->esemenyID;
 
         if ($jelentkezo->id) {
             return true;
         } else {
             return false;
-        }
-    }
-
-    private function sendEmail($toAddress, $toName, $subject, $body)
-    {
-        $this->mailer->AddAddress($toAddress, $toName);
-
-        $this->mailer->Subject = $subject;
-        $this->mailer->Body = $body;
-
-        if (!$this->mailer->Send()) {
-            echo 'A levél nem került elküldésre';
-            echo 'A felmerült hiba: ' . $this->mailer->ErrorInfo;
-            exit;
         }
     }
 
