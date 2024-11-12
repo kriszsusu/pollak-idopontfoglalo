@@ -501,10 +501,10 @@ class AdminModel
                                         tanterem t ON e.tanteremID = t.id
                                     WHERE 
                                         j.torolt = 0 AND j.visszaigazolt = 1 
-                                    GROUP BY 
-                                        j.email, j.neve
-                                    ORDER BY 
-                                        j.neve ASC");
+        GROUP BY 
+            j.email, j.neve
+        ORDER BY 
+            j.neve ASC");
 
         $results = $this->db->resultSet();
 
@@ -553,6 +553,16 @@ class AdminModel
             return false;
         }
     }
+
+    // Összes felhasználó törlése
+    public function osszesFelhasznaloTorlese()
+    {
+        $this->db->query('UPDATE jelentkezok SET torolt = 1');
+        $this->db->execute();
+
+        return true;
+    } 
+
 
     // Felhasználók lekérdezése
     public function engedelyezettFelhasznalok()

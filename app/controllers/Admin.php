@@ -613,6 +613,24 @@ class Admin extends Controller
         }
     }
 
+    // Összes felhasználó törlése
+    public function osszesFelhasznaloTorlese()
+    {
+        if (isLoggedIn()) {
+            if ($this->adminModel->osszesFelhasznaloTorlese()) {
+                // A törlés sikerült, átirányítjuk a felhasználót az adminfőoldalra
+                header('location:' . URLROOT . '/admin/jelentkezok/');
+            } else {
+                // A törlés nem sikerült
+                header('location:' . URLROOT . '/admin/jelentkezok/');
+            }
+        } else {
+            $data = [];
+
+            $this->view('user/login');
+        }
+    }
+
     public function exportPDF()
     {
         // Check if the user is logged in

@@ -79,10 +79,15 @@ require APPROOT . '/views/includes/adminNavigation.php';
         <?php endif; ?>
 
 
-    </table>
-
+    </table>    
+    <!--Felhasználók exportálása-->
     <form class="export" action="<?= URLROOT; ?>/admin/exportPDF/" method="post">
         <button type="submit" class="export_gomb export2">Felhasználók exportálása</button>
+    </form>
+
+    <!--Összes felhasználó törlése-->
+    <form class="export"  onclick="return confirm('Biztos törölni szeretnéd az összes felhasználót?')" action="<?= URLROOT; ?>/admin/osszesFelhasznaloTorlese/" method="post">
+        <button type="submit" class="export_gomb export2">Felhasználók törlése</button>
     </form>
 
     <script src="<?php echo URLROOT ?>/public/js/script.js"></script>
