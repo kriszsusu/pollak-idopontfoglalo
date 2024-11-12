@@ -82,7 +82,7 @@ require APPROOT . '/views/includes/adminNavigation.php';
     </table>
 
 
-    <form class="export" action="<?= URLROOT; ?>/admin/mindenkiexportPDF()/" method="post">
+    <form class="export" action="<?= URLROOT; ?>/admin/mindenkiexportPDF/" method="post">
         <button type="submit" class="export_gomb export2">Minden felhasználó exportálása</button>
     </form>
     <form class="export" action="<?= URLROOT; ?>/admin/exportPDF/" method="post">

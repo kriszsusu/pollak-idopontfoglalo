@@ -711,11 +711,13 @@ class Admin extends Controller
 
         // Content to display
         $content = <<<EOF
+            <head>
+               <meta charset="UTF-8">
+            </head>
             <style>
                 .container {
                     width: 98%;
                     padding: 20px;
-                    border: 1px solid black;
                 }
                 #title {
                     text-align: center;
@@ -745,8 +747,8 @@ class Admin extends Controller
         foreach ($eligibleUsers as $user) {
             $datum = new DateTime($user->idopont);
             $content .= <<<EOF
+            <meta charset="UTF-8">
                 <div class="container">
-                    <h2 id="title">Igazolás</h2>
                     <h2 id="nev">{$user->neve}, {$user->email}</h2>
                 </div>
             EOF;
