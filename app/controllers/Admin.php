@@ -690,6 +690,78 @@ class Admin extends Controller
         $pdf->stream();
     }
 
+    public function mindenkiexportPDF()
+    {
+        // Check if the user is logged in
+        if (!isLoggedIn()) {
+            header('location:' . URLROOT . '/user/login');
+            exit;
+        }
+
+        // Fetch users with jelentkezo = 1
+        $eligibleUsers = $this->adminModel->mindefelhasznalo();
+
+        // Check if data exists
+        if (!$eligibleUsers) {
+            die("Nincsen felhasználó.");
+        }
+
+        // Load PDF library (e.g., TCPDF or FPDF)
+        $pdf = new Dompdf();
+
+        // Content to display
+        $content = <<<EOF
+            <style>
+                .container {
+                    width: 98%;
+                    padding: 20px;
+                    border: 1px solid black;
+                }
+                #title {
+                    text-align: center;
+                }
+
+                .bottom {
+                    height: 100px;
+                }
+
+                #datum {
+                    float: left;
+                }
+
+                #alairas {
+                    float: right;
+                }
+
+                #alairas {
+                    margin-top: 30px;
+                    width: 300px;
+                    text-align: center;
+                    border-top: 1px solid black;
+                }
+            </style>
+        EOF;
+
+        foreach ($eligibleUsers as $user) {
+            $datum = new DateTime($user->idopont);
+            $content .= <<<EOF
+                <div class="container">
+                    <h2 id="title">Igazolás</h2>
+                    <h2 id="nev">{$user->neve}, {$user->email}</h2>
+                </div>
+            EOF;
+        }
+
+        // Output content to PDF
+        $pdf->loadHtml($content);
+        $pdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $pdf->render();
+
+        // Output the generated PDF to Browser
+        $pdf->stream();
+    }
 
     /* AJAX híváskor betölti a talált termékek listáját */
     public function termekekkeresese()

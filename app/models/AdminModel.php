@@ -560,6 +560,11 @@ class AdminModel
         $this->db->query("SELECT neve, email, DATE(esemenyek.datum) as idopont FROM jelentkezok_vt INNER JOIN esemenyek on esemenyek.id = jelentkezok_vt.esemenyID WHERE megjelent = 1 AND jelentkezok_vt.torolt = 0 ");
         return $this->db->resultSet();
     }
+    public function mindefelhasznalo()
+    {
+        $this->db->query("SELECT neve, email, DATE(esemenyek.datum) as idopont FROM jelentkezok_vt INNER JOIN esemenyek on esemenyek.id = jelentkezok_vt.esemenyID WHERE jelentkezok_vt.torolt = 0 ");
+        return $this->db->resultSet();
+    }
 
     /* Ékezetek helyett '_' jel */
     private function replaceHungarianAccents($string)
