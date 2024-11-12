@@ -604,13 +604,13 @@ class AdminModel
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->db->query('select e.id, e.cim, e.tema, e.datum, e.leiras
                 from esemenyek e
-                where day(e.datum - interval 1 day) = day(NOW()) AND month(e.datum) = month(NOW()) AND year(e.datum) = year(NOW())');
+                where day(e.datum - interval 1 day) = day(NOW()) AND month(e.datum) = month(NOW()) AND year(e.datum) = year(NOW()) AND torolt = 0');
 
                 $row = $this->db->resultSet();
                 for ($i = 0; $i < count($row); $i++) {
                     $this->db->query('select j.neve, j.email
                     from jelentkezok j
-                    where j.esemenyID = :esemenyID');
+                    where j.esemenyID = :esemenyID AND torolt = 0');
                     $this->db->bind(':esemenyID', $row[$i]->id);
                     $row2 = $this->db->resultSet();
 
