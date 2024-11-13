@@ -11,9 +11,11 @@
   --fekete: black;
   --feher: white;
   --kek: #579bb1;
-  --hover: #bbe4e9;
+  --nav: #c2a373;
+  --hover: #e6cca7;
+  --disabled: #64615c;
   --input: #e6e6e6;
-  --elso-w-opacity: #5585b5af;
+  --elso-w-opacity: rgba(138, 99, 44, 0.686);
 
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -44,7 +46,7 @@ body {
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: var(--kek);
+  background-color: var(--nav);
   overflow: hidden;
   border-left: none;
   border-right: none;
@@ -279,26 +281,26 @@ img {
 
 /*Kártyák*/
 .container {
-  width: 100%;
-  height: auto;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: 100px;
+  justify-content: center; /* Centers the flex items */
+  gap: 40px; /* Space between items */
+  max-width: 1200px; /* Adjust as needed */
+  margin: 100px auto 0 auto; /* Centers the container */
+  box-sizing: border-box;
 }
 
 .container .box {
-  width: 320px;
-  margin: 20px;
-  box-sizing: border-box;
   background-color: var(--main);
   border: none;
   outline: none;
   border-radius: 8px;
-  min-width: 320px;
-  /* max-height: 700px; */
-  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: 0.2s;
+  flex: 1 1 320px;
+  max-width: 320px;
 }
 
 .box {
@@ -324,29 +326,30 @@ img {
 
 .kep-box {
   width: 100%;
-  height: 30%;
+  height: 50%;
 }
 
 .kep-box .kep {
   width: 100%;
   height: 100%;
   border-radius: 8px 8px 0 0;
+  object-fit: cover;
 }
 
 .cim {
+  font-size: clamp(1rem, 0.6919rem + 0.9859vw, 1.875rem);
   text-align: center;
-  font-size: x-large;
 }
 
 .leiras {
   text-align: justify;
-  word-break: break-word;
 }
 
 .adatok {
   margin: 15px;
   margin-top: 0 !important;
   font-size: large;
+  word-wrap: break-word;
 }
 
 .idopont {
@@ -758,7 +761,7 @@ a {
 
 .tovabb {
   border-radius: 8px;
-  background-color: #6a9ab0;
+  background-color: var(--nav);
   color: var(--feher) !important;
   padding: 6px;
   text-align: center;
@@ -771,7 +774,8 @@ a {
 }
 
 .tovabb:hover {
-  background-color: #456472;
+  background-color: var(--hover);
+  color: var(--fekete) !important;
   transition: 0.2s;
 }
 
@@ -844,8 +848,10 @@ a {
   background-color: var(--main);
   border-radius: 25px;
   padding: 15px;
+  word-wrap: break-word;
 }
 
+/* szöveg */
 .text {
   width: 45%;
   border-radius: 50px;
@@ -861,11 +867,14 @@ a {
   width: 100%;
 }
 
+/* kép */
 #img {
   width: 100%;
   height: 100%;
+  border-radius: 1vw;
 }
 
+/* kép, minikép */
 .image,
 .miniimage {
   width: 45%;
@@ -879,6 +888,7 @@ a {
   gap: 10px;
 }
 
+/* minikép */
 .miniimage {
   justify-content: flex-start;
   flex-direction: column;
@@ -988,15 +998,16 @@ a {
   height: 35px;
   width: 120px;
   margin-top: 10px;
-  background-color: #c2a373;
+  background-color: var(--nav);
   border-radius: 30px;
   border: none;
-  color: var(--feher) !important;
+  color: var(--feher);
   margin-right: 20px;
 }
 
 .buttony-disabled {
-  background-color: var(--kek);
+  background-color: var(--disabled);
+  color: #fff5;
   cursor: not-allowed;
 }
 
