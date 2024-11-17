@@ -62,8 +62,9 @@ require APPROOT . '/views/includes/navigation.php';
             <div>
                 <form class="jelentkezes<?php echo $data['isTheDeadlinePassed'] ? ' jelentkezes-blur"' : '"method="post"'; ?> id=" teszt">
 
-                    <input type="hidden" name="versenyID" value="<?php echo $data['Versenyreszletek']->esemeny_id; ?>">
-
+                    <?php if (!$data['isTheDeadlinePassed']): ?>
+                        <input type="hidden" name="versenyID" value="<?php echo $data['Versenyreszletek']->esemeny_id; ?>">
+                    <?php endif; ?>
                     <input type="text" class="input" name="tanuloNeve" placeholder="Név" <?php echo $data['isTheDeadlinePassed'] ? 'disabled' : ''; ?>>
 
                     <input type="text" class="input" name="tanarNeve" placeholder="Felkészítő tanár neve"
