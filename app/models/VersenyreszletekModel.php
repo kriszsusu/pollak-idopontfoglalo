@@ -90,20 +90,6 @@ class VersenyreszletekModel
             return false;
         }
 
-        // Kis segítség a validáláshoz
-        // Lekérdezzük, hogy az adott email cím már szerepel-e az adatbázisban
-        // Ha igen, akkor nem engedjük hozzáadni
-        // Ha nem, akkor hozzáadjuk
-        $this->db->query('SELECT * FROM versenyjelentkezok WHERE email = :email AND versenyID = :versenyID');
-        $this->db->bind(':email', $email);
-        $this->db->bind(':versenyID', $versenyID);
-
-        $row = $this->db->resultSet();
-
-        if (count($row) > 0) {
-            return false;
-        }
-
         // Ha az iskola változó szöveg, akkor azt hozzáadjuk az iskolak táblához
         if (!is_numeric($iskola)) {
             $this->db->query('INSERT INTO iskolak (nev) VALUES (:iskolaNeve)');
