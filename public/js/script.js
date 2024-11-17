@@ -21,8 +21,7 @@ window.onload = function () {
       window.location.replace(window.location.href.split("?")[0]);
     }, 1000);
   } else if (window.location.search === "?msg=1") {
-    modal.children[0].children[0].innerHTML =
-      "A megadott email cím nem megfelelő vagy már regisztrálva van!";
+    modal.children[0].children[0].innerHTML = "A regisztráció sikertelen!";
     modal.style.display = "block";
     setTimeout(() => {
       modal.style.display = "none";
