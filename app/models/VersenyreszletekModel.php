@@ -76,9 +76,9 @@ class VersenyreszletekModel
         $emailprovider = explode("@", $email)[1];
         $this->db->query('SELECT email from tiltottemail where email = :emailprovider');
         $this->db->bind(':emailprovider', $emailprovider);
-        $tiltasrow = $this->db->resultSet();
+        $row = $this->db->resultSet();
 
-        if (count($tiltasrow) > 0) {
+        if (count($row) > 0) {
             return false;
         }
 
@@ -87,6 +87,20 @@ class VersenyreszletekModel
         $tiltott = $this->db->resultSet();
 
         if (count($tiltott) > 0) {
+            return false;
+        }
+
+        // Kis segítség a validáláshoz
+        // Lekérdezzük, hogy az adott email cím már szerepel-e az adatbázisban
+        // Ha igen, akkor nem engedjük hozzáadni
+        // Ha nem, akkor hozzáadjuk
+        $this->db->query('SELECT * FROM versenyjelentkezok WHERE email = :email AND versenyID = :versenyID');
+        $this->db->bind(':email', $email);
+        $this->db->bind(':versenyID', $versenyID);
+
+        $this->db->resultSet();
+
+        if (count($row) > 0) {
             return false;
         }
 
