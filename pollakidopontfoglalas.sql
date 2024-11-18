@@ -306,7 +306,6 @@ CREATE TABLE `versenyjelentkezok` (
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_hungarian_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `jelentkezok_vt` AS select `j`.`id` AS `id`,`j`.`esemenyID` AS `esemenyID`,`j`.`email` AS `email`,`j`.`neve` AS `neve`,`j`.`megjelent` AS `megjelent`,`j`.`visszaigazolt` AS `visszaigazolt`,if((((`e`.`datum` < (now() + interval 10 minute)) and (`j`.`megjelent` = 0)) or (`j`.`torolt` = 1)),1,0) AS `torolt` from (`jelentkezok` `j` join `esemenyek` `e` on((`j`.`esemenyID` = `e`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
